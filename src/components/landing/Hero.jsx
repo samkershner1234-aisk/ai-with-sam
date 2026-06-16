@@ -22,13 +22,13 @@ return (
 <p style={{color:" #64748B",fontSize:"13px",margin:0,fontStyle:"italic"}}>"Is the 20-minute call a sales pitch?" — No. It's a genuine working call. I tell you exactly what I'd build for you. If it doesn't feel right, we end the call. No pressure.</p>
 </div>
 </div>
-<div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
+<div className="hero-photo-col" style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
 <img src={SAM_PHOTO} alt="Sam Kershner" style={{width:"clamp(220px,30vw,380px)",height:"clamp(220px,30vw,380px)",borderRadius:"50%",objectFit:"cover",objectPosition:"center top",boxShadow:"0 20px 60px rgba(0,0,0,0.5)"}}/>
 <p style={{fontWeight:700,color:" #FFFFFF",fontSize:"16px",marginTop:"16px",marginBottom:"4px"}}>Sam Kershner</p>
 <p style={{color:" rgba(255,255,255,0.8)",fontSize:"13px",margin:0}}>I build working AI systems for professionals who've wasted months trying to figure it out themselves.</p>
 </div>
 </div>
-<style>{`@media(max-width:768px){.hgrid{grid-template-columns:1fr!important}.hgrid>div:last-child{order:1}.hgrid>div:first-child{order:2}}`}</style>
+<style>{`@media(max-width:768px){.hgrid{grid-template-columns:1fr!important}.hero-photo-col{display:none!important}}`}</style>
 </section>
 );
 }
