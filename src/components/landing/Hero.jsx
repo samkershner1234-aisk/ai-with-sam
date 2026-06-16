@@ -1,5 +1,5 @@
 import { SAM_PHOTO, CTA_URL } from "./constants";
-const badges=[{icon:"&#9201;",t:"Results in 1 session"},{icon:"&#128172;",t:"14 days of direct WhatsApp access to Sam"},{icon:"&#128737;",t:"5-Hour Guarantee or Free Follow-Up Session"}];
+const badges=[{icon:"⏱",t:"Results in 1 session"},{icon:"💬",t:"14 days of direct WhatsApp access to Sam"},{icon:"🛡",t:"5-Hour Guarantee or Free Follow-Up Session"}];
 export default function Hero() {
 return (
 <section style={{background:" #0F172A",minHeight:"100vh",display:"flex",alignItems:"center",padding:"80px 24px"}}>
