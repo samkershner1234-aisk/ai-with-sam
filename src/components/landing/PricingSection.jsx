@@ -140,7 +140,6 @@ export default function PricingSection() {
             <a href="https://www.paypal.com/ncp/payment/FJRZD966GUUWW" target="_blank" rel="noopener noreferrer" style={{background:" #F97316",color:" #FFFFFF",fontWeight:600,fontSize:"14px",padding:"10px 20px",borderRadius:"50px",textDecoration:"none",display:"inline-block"}}>Pay $135 USD</a>
             <a href="https://www.paypal.com/ncp/payment/YTA8589KBMZVS" target="_blank" rel="noopener noreferrer" style={{background:" #F97316",color:" #FFFFFF",fontWeight:600,fontSize:"14px",padding:"10px 20px",borderRadius:"50px",textDecoration:"none",display:"inline-block"}}>Pay &pound;100 GBP</a>
           </div>
-          <p style={{color:" #64748B",fontSize:"13px",textAlign:"center",margin:0}}>Free call. No credit card. No commitment.</p>
         </div>
       </div>
     </section>
