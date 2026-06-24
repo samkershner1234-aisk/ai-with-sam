@@ -15,17 +15,17 @@ export default function FAQSection() {
   return (
     <section id="faq" style={{background:" #FFFFFF",padding:"100px 24px"}}>
       <div style={{maxWidth:"720px",margin:"0 auto"}}>
-        <h2 style={{fontSize:"clamp(28px,4vw,40px)",fontWeight:800,color:" #1E293B",textAlign:"center",marginBottom:"48px"}}>Still on the Fence? Here's What Others Asked First.</h2>h2>
+        <h2 style={{fontSize:"clamp(28px,4vw,40px)",fontWeight:800,color:" #1E293B",textAlign:"center",marginBottom:"48px"}}>Still on the Fence? Here's What Others Asked First.</h2>
         {faqs.map((f,i)=>(
       <div key={i} style={{borderBottom:"1px solid #E2E8F0"}}>
         <button onClick={()=>setOpen(open===i?null:i)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center",padding:"24px 0",textAlign:"left"}}>
-          <span style={{fontSize:"17px",fontWeight:600,color:" #1E293B",paddingRight:"16px"}}>{f.q}</span>span>
-          <span style={{fontSize:"20px",color:" #F97316",flexShrink:0,transform:open===i?"rotate(45deg)":"none",transition:"transform 0.2s"}}>+</span>span>
-        </button>button>
-        {open===i&&<p style={{color:" #475569",fontSize:"15px",lineHeight:1.7,paddingBottom:"20px",margin:0}}>{f.a}</p>p>}
-      </div>div>
+          <span style={{fontSize:"17px",fontWeight:600,color:" #1E293B",paddingRight:"16px"}}>{f.q}</span>
+          <span style={{fontSize:"20px",color:" #F97316",flexShrink:0,transform:open===i?"rotate(45deg)":"none",transition:"transform 0.2s"}}>+</span>
+        </button>
+        {open===i&&<p style={{color:" #475569",fontSize:"15px",lineHeight:1.7,paddingBottom:"20px",margin:0}}>{f.a}</p>}
+      </div>
       ))}
-      </div>div>
-    </section>section>
+      </div>
+    </section>
     );
 }
