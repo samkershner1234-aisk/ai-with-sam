@@ -15,7 +15,6 @@ return (
 <p style={{color:" #475569",fontSize:"16px",lineHeight:1.7,marginBottom:"20px"}}>You don't sit through a course. You don't watch a tutorial. In 60 minutes, you walk away with a working AI system built for exactly how you do your job. No theory. No homework. Just results.</p>
 <a href="https://www.linkedin.com/in/sam-kershner/" target="_blank" rel="noopener noreferrer" style={{display:"block",color:" #F97316",fontSize:"15px",textDecoration:"underline",marginBottom:"28px"}}>View Sam's LinkedIn Profile &rarr;</a>
 <a href={CTA_URL} target="_blank" rel="noopener noreferrer" style={{display:"inline-block",background:" #F97316",color:" #FFFFFF",fontWeight:700,fontSize:"17px",padding:"18px 36px",borderRadius:"50px",textDecoration:"none",marginBottom:"12px"}}>Book Your Free 20-Minute Call</a>
-<p style={{fontSize:"15px",color:" #475569"}}>Prefer to message first? <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{color:" #F97316",textDecoration:"underline"}}>Message Sam on WhatsApp before booking.</a></p>
 </div>
 </div>
 <style>{`@media(max-width:768px){.bg{grid-template-columns:1fr!important}}`}</style>
