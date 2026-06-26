@@ -104,7 +104,7 @@ function ILSModal({ onClose }) {
 export default function PricingSection() {
   const [showModal, setShowModal] = useState(false);
   return (
-    <section id="offer" style={{background:" #F8FAFC",padding:"100px 24px"}}>
+    <section id="offer" style={{background:" #F8FAFC",padding:isMobile?"60px 24px":"100px 24px"}}>
       {showModal && <ILSModal onClose={()=>setShowModal(false)}/>}
       <div style={{maxWidth:"800px",margin:"0 auto"}}>
         <p style={{fontSize:"13px",fontWeight:600,letterSpacing:"0.1em",color:" #F97316",textTransform:"uppercase",textAlign:"center",marginBottom:"16px"}}>The Offer</p>
