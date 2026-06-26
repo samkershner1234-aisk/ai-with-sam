@@ -2,7 +2,13 @@ import { useState, useEffect } from "react";
 import { SAM_PHOTO, CTA_URL } from "./constants";
 const badges=[{icon:"⏱",t:"Results in 1 session"},{icon:"💬",t:"14 days of direct WhatsApp access to Sam"},{icon:"🛡",t:"5-Hour Guarantee or Free Follow-Up Session"}];
 export default function Hero() {
-  return (
+const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+useEffect(() => {
+const handleResize = () => setIsMobile(window.innerWidth <= 768);
+window.addEventListener("resize", handleResize);
+return () => window.removeEventListener("resize", handleResize);
+}, []);
+return (
     <section style={{background:" #0F172A",minHeight:"100vh",display:"flex",alignItems:"center",padding:isMobile?"50px 24px":"80px 24px"}} className="hero-section">
     <div style={{maxWidth:"1100px",margin:"0 auto",width:"100%",display:"grid",gridTemplateColumns:"55% 45%",gap:"48px",alignItems:"center"}} className="hgrid">
     <div>
