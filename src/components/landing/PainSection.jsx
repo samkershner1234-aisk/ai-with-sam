@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { CTA_URL } from "./constants";
 const cards=[
   {icon:<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke=" #F97316" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,title:"You're Wasting Hours Every Day",body:"You spend more time trying to figure out AI tools than actually using them. YouTube tutorials are generic and don't apply to your specific job or the way you actually work."},
@@ -5,7 +6,13 @@ const cards=[
   {icon:<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke=" #F97316" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>,title:"You're Falling Behind at Work",body:"Everyone around you is talking about AI. You're nodding along in meetings, but secretly you have no idea how to make it actually work for your specific role."},
   ];
 export default function PainSection() {
-  return (
+const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+useEffect(() => {
+const handleResize = () => setIsMobile(window.innerWidth <= 768);
+window.addEventListener("resize", handleResize);
+return () => window.removeEventListener("resize", handleResize);
+}, []);
+return (
     <section style={{background:" #F8FAFC",padding:isMobile?"60px 24px":"100px 24px"}}>
     <div style={{maxWidth:"1100px",margin:"0 auto"}}>
     <p style={{fontSize:"13px",fontWeight:600,letterSpacing:"0.1em",color:" #F97316",textTransform:"uppercase",textAlign:"center",marginBottom:"16px"}}>Sound Familiar?</p>
