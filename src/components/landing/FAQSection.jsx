@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CTA_URL } from "./constants";
 const faqs=[
   {q:"What if I've never used AI before?",a:"Even better. Clients who have never used AI before often get the most out of the session because we start completely fresh. I won't assume any prior knowledge. We build something from zero, together."},
@@ -13,7 +13,7 @@ const faqs=[
 export default function FAQSection() {
   const [open, setOpen] = useState(null);
   return (
-    <section id="faq" style={{background:" #FFFFFF",padding:"100px 24px"}}>
+    <section id="faq" style={{background:" #FFFFFF",padding:isMobile?"60px 24px":"100px 24px"}}>
       <div style={{maxWidth:"720px",margin:"0 auto"}}>
         <h2 style={{fontSize:"clamp(28px,4vw,40px)",fontWeight:800,color:" #1E293B",textAlign:"center",marginBottom:"48px"}}>Still on the Fence? Here's What Others Asked First.</h2>
         {faqs.map((f,i)=>(
