@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { CTA_URL } from "./constants";
 const steps=[
   {num:"01",title:"We Identify Exactly What AI Can Do For Your Job",body:"On a free 20-minute call, you describe how you work and I map out exactly what I'd build for you. Free. In 20 minutes.",tag:"20 minutes &middot; Free"},
@@ -7,7 +8,7 @@ const steps=[
 export default function HowItWorks() {
   return (
     <>
-    <section id="how-it-works" style={{background:" #F8FAFC",padding:"100px 24px"}}>
+    <section id="how-it-works" style={{background:" #F8FAFC",padding:isMobile?"60px 24px":"100px 24px"}}>
     <div style={{maxWidth:"1100px",margin:"0 auto"}}>
     <p style={{fontSize:"13px",fontWeight:600,letterSpacing:"0.1em",color:" #F97316",textTransform:"uppercase",textAlign:"center",marginBottom:"16px"}}>The Process</p>
     <h2 style={{fontSize:"clamp(28px,4vw,40px)",fontWeight:800,color:" #1E293B",textAlign:"center",marginBottom:"48px"}}>Here's Exactly What Happens</h2>
@@ -26,7 +27,7 @@ export default function HowItWorks() {
     </div>
     <style>{`@media(max-width:768px){.sg{grid-template-columns:1fr!important}}`}</style>
     </section>
-    <section style={{background:" #FFFFFF",padding:"80px 24px"}}>
+    <section style={{background:" #FFFFFF",padding:isMobile?"50px 24px":"80px 24px"}}>
     <div style={{maxWidth:"800px",margin:"0 auto",background:" #F8FAFC",border:"1px solid #E2E8F0",borderRadius:"20px",padding:"clamp(32px,5vw,56px)"}}>
     <p style={{fontSize:"13px",fontWeight:600,letterSpacing:"0.1em",color:" #F97316",textTransform:"uppercase",marginBottom:"16px"}}>Clarity</p>
     <h2 style={{fontSize:"clamp(24px,3vw,36px)",fontWeight:800,color:" #1E293B",marginBottom:"20px"}}>What This Is NOT</h2>
