@@ -1,7 +1,14 @@
+import { useState, useEffect } from "react";
 import { SAM_PHOTO, CTA_URL, WHATSAPP_URL } from "./constants";
 export default function BioSection() {
+const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+useEffect(() => {
+const handleResize = () => setIsMobile(window.innerWidth <= 768);
+window.addEventListener("resize", handleResize);
+return () => window.removeEventListener("resize", handleResize);
+}, []);
 return (
-<section style={{background:" #F8FAFC",padding:"100px 24px"}}>
+<section style={{background:" #F8FAFC",padding:isMobile?"60px 24px":"100px 24px"}}>
 <div style={{maxWidth:"1100px",margin:"0 auto",display:"grid",gridTemplateColumns:"40% 60%",gap:"64px",alignItems:"center"}} className="bg">
 <div style={{display:"flex",justifyContent:"center"}}>
 <img src={SAM_PHOTO} alt="Sam Kershner" style={{width:"clamp(200px,25vw,320px)",height:"clamp(200px,25vw,320px)",borderRadius:"50%",objectFit:"cover",objectPosition:"center top",boxShadow:"0 16px 48px rgba(0,0,0,0.15)"}}/>
