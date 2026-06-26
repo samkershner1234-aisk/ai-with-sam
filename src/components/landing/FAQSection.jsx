@@ -11,7 +11,13 @@ const faqs=[
   {q:"How do I book?",a:"Click any 'Book Your Free 20-Minute Call' button on this page. You'll land on a Calendly page where you can pick a time that works for you. Payment is confirmed after the discovery call, once you've decided you want to go ahead."},
   ];
 export default function FAQSection() {
-  const [open, setOpen] = useState(null);
+const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+useEffect(() => {
+const handleResize = () => setIsMobile(window.innerWidth <= 768);
+window.addEventListener("resize", handleResize);
+return () => window.removeEventListener("resize", handleResize);
+}, []);
+const [open, setOpen] = useState(null);
   return (
     <section id="faq" style={{background:" #FFFFFF",padding:isMobile?"60px 24px":"100px 24px"}}>
       <div style={{maxWidth:"720px",margin:"0 auto"}}>
