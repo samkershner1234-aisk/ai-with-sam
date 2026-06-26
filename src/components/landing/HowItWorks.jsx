@@ -16,7 +16,7 @@ export default function HowItWorks() {
       <div style={{fontSize:"48px",fontWeight:800,color:" #F97316",marginBottom:"16px",lineHeight:1}}>{s.num}</div>
       <h3 style={{fontWeight:700,color:" #1E293B",fontSize:"20px",marginBottom:"12px"}}>{s.title}</h3>
       <p style={{color:" #64748B",fontSize:"15px",lineHeight:1.7,marginBottom:"16px"}}>{s.body}</p>
-      <span style={{background:" #F1F5F9",color:" #64748B",fontSize:"13px",borderRadius:"50px",padding:"6px 14px"}} dangerouslySetInnerHTML={{__html:s.tag}}/>
+      <span style={{background:" #F1F5F9",color:" #64748B",fontSize:"13px",borderRadius:"50px",padding:"6px 14px"}} dangerouslySetInnerHTML={{__html:s.tag}}/>{s.tag2&&<span style={{background:" #FFF7ED",color:" #C2410C",fontSize:"13px",borderRadius:"50px",padding:"6px 14px",marginLeft:"8px",fontWeight:600}}>{s.tag2}</span>}
       </div>)}
     </div>
     <div style={{textAlign:"center"}}>
