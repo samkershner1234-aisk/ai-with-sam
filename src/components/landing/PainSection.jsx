@@ -6,7 +6,7 @@ const cards=[
   ];
 export default function PainSection() {
   return (
-    <section style={{background:" #F8FAFC",padding:"100px 24px"}}>
+    <section style={{background:" #F8FAFC",padding:isMobile?"60px 24px":"100px 24px"}}>
     <div style={{maxWidth:"1100px",margin:"0 auto"}}>
     <p style={{fontSize:"13px",fontWeight:600,letterSpacing:"0.1em",color:" #F97316",textTransform:"uppercase",textAlign:"center",marginBottom:"16px"}}>Sound Familiar?</p>
     <h2 style={{fontSize:"clamp(28px,4vw,40px)",fontWeight:800,color:" #1E293B",textAlign:"center",lineHeight:1.3,marginBottom:"16px"}}>You Know AI Could Help You.<br/>But Nothing Actually Works.</h2>
