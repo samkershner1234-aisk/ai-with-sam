@@ -6,7 +6,13 @@ const steps=[
   {num:"03",title:"You Use It Before You Close Your Laptop",body:"You leave with a working system, a full session recording, a written recap of every step, and 14 days of direct WhatsApp access to Sam. Start saving time immediately. The same day.",tag:"Same day &middot; No tech skills needed"},
   ];
 export default function HowItWorks() {
-  return (
+const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+useEffect(() => {
+const handleResize = () => setIsMobile(window.innerWidth <= 768);
+window.addEventListener("resize", handleResize);
+return () => window.removeEventListener("resize", handleResize);
+}, []);
+return (
     <>
     <section id="how-it-works" style={{background:" #F8FAFC",padding:isMobile?"60px 24px":"100px 24px"}}>
     <div style={{maxWidth:"1100px",margin:"0 auto"}}>
