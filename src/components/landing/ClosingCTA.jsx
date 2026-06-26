@@ -1,5 +1,12 @@
+import { useState, useEffect } from "react";
 export default function ClosingCTA() {
-  return (
+const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+useEffect(() => {
+const handleResize = () => setIsMobile(window.innerWidth <= 768);
+window.addEventListener("resize", handleResize);
+return () => window.removeEventListener("resize", handleResize);
+}, []);
+return (
     <section style={{background:"#0F172A",padding:isMobile?"60px 24px 0":"100px 24px 0",margin:0}}>
       <div style={{maxWidth:"700px",margin:"0 auto",textAlign:"center"}}>
         <h2 style={{fontSize:"clamp(28px,4vw,40px)",fontWeight:800,color:"#FFFFFF",maxWidth:"600px",margin:"0 auto 20px",lineHeight:1.3}}>You Could Have a Working AI System by This Time Tomorrow.</h2>
