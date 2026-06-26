@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { CTA_URL } from "./constants";
 const ts=[
   {init:"GK",bg:"#7C3AED",q:"I'm a marketing manager and I was drowning in repetitive tasks. In one session Sam built me a prompt system that now writes my first draft for every brief. I save at least 4 hours a week.",n:"Gideon K.",t:"Senior Growth Marketing Manager · Tel Aviv"},
@@ -7,7 +8,7 @@ const ts=[
 ];
 export default function Testimonials() {
   return (
-    <section style={{background:"#0F172A",padding:"100px 24px"}}>
+    <section style={{background:"#0F172A",padding:isMobile?"60px 24px":"100px 24px"}}>
       <div style={{maxWidth:"1100px",margin:"0 auto"}}>
         <p style={{fontSize:"13px",fontWeight:600,letterSpacing:"0.1em",color:"#F97316",textTransform:"uppercase",textAlign:"center",marginBottom:"16px"}}>Real Results From Real Sessions</p>
         <h2 style={{fontSize:"clamp(28px,4vw,40px)",fontWeight:800,color:"#FFFFFF",textAlign:"center",marginBottom:"12px"}}>Working Professionals Who Got Their Time Back</h2>
