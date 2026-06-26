@@ -1,8 +1,9 @@
+import { useState, useEffect } from "react";
 import { SAM_PHOTO, CTA_URL } from "./constants";
 const badges=[{icon:"⏱",t:"Results in 1 session"},{icon:"💬",t:"14 days of direct WhatsApp access to Sam"},{icon:"🛡",t:"5-Hour Guarantee or Free Follow-Up Session"}];
 export default function Hero() {
   return (
-    <section style={{background:" #0F172A",minHeight:"100vh",display:"flex",alignItems:"center",padding:"80px 24px"}} className="hero-section">
+    <section style={{background:" #0F172A",minHeight:"100vh",display:"flex",alignItems:"center",padding:isMobile?"50px 24px":"80px 24px"}} className="hero-section">
     <div style={{maxWidth:"1100px",margin:"0 auto",width:"100%",display:"grid",gridTemplateColumns:"55% 45%",gap:"48px",alignItems:"center"}} className="hgrid">
     <div>
     <p style={{fontSize:"13px",fontWeight:600,letterSpacing:"0.15em",color:" #F97316",textTransform:"uppercase",marginBottom:"20px"}} className="hero-eyebrow">For Working Professionals</p>
