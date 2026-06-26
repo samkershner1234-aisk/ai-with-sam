@@ -7,7 +7,13 @@ const ts=[
   {init:"NK",bg:"#DC2626",q:"Genuinely the most practical 60 minutes I've invested in my career this year. No fluff, no theory. Just a real working solution I could use before I even closed my laptop.",n:"Noa K.",t:"Freelance Operations Consultant · Tel Aviv"},
 ];
 export default function Testimonials() {
-  return (
+const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+useEffect(() => {
+const handleResize = () => setIsMobile(window.innerWidth <= 768);
+window.addEventListener("resize", handleResize);
+return () => window.removeEventListener("resize", handleResize);
+}, []);
+return (
     <section style={{background:"#0F172A",padding:isMobile?"60px 24px":"100px 24px"}}>
       <div style={{maxWidth:"1100px",margin:"0 auto"}}>
         <p style={{fontSize:"13px",fontWeight:600,letterSpacing:"0.1em",color:"#F97316",textTransform:"uppercase",textAlign:"center",marginBottom:"16px"}}>Real Results From Real Sessions</p>
