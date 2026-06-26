@@ -131,7 +131,7 @@ export default function PricingSection() {
           </div>
           <div style={{background:" #1E293B",borderRadius:"12px",padding:"20px",marginBottom:"32px"}}>
             <p style={{color:" #FFFFFF",fontWeight:700,margin:"0 0 8px"}}>&#128172; 14 Days of Direct WhatsApp Access to Sam</p>
-            <p style={{color:" #94A3B8",fontSize:"14px",margin:0}}>Got a prompt that's not working, or a new task to automate? Message him directly. Not a ticket system. Direct access. He responds within 24 hours.</p>
+            <p style={{color:" #94A3B8",fontSize:"14px",margin:0}}>Got a prompt that's not working, or a new task to automate? Message me directly. Not a ticket system. Direct access. I respond within 24 hours.</p>
           </div>
           <a href={CTA_URL} target="_blank" rel="noopener noreferrer" style={{display:"block",background:" #F97316",color:" #FFFFFF",fontWeight:700,fontSize:"17px",padding:"18px 36px",borderRadius:"50px",textDecoration:"none",textAlign:"center",marginBottom:"16px"}}>Book Your Free 20-Minute Call</a>
           <p style={{color:" #94A3B8",fontSize:"14px",textAlign:"center",marginBottom:"16px",fontStyle:"italic"}}>Already had your free call? Reserve your session below.</p>
