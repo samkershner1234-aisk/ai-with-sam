@@ -1,7 +1,14 @@
+import { useState, useEffect } from "react";
 import { CTA_URL } from "./constants";
 export default function GuaranteeSection() {
+const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+useEffect(() => {
+const handleResize = () => setIsMobile(window.innerWidth <= 768);
+window.addEventListener("resize", handleResize);
+return () => window.removeEventListener("resize", handleResize);
+}, []);
 return (
-<section id="guarantee" style={{background:" #0F172A",padding:"100px 24px"}}>
+<section id="guarantee" style={{background:" #0F172A",padding:isMobile?"60px 24px":"100px 24px"}}>
 <div style={{maxWidth:"700px",margin:"0 auto",textAlign:"center"}}>
 <p style={{fontSize:"13px",fontWeight:600,letterSpacing:"0.1em",color:" #F97316",textTransform:"uppercase",marginBottom:"16px"}}>My Guarantee</p>
 <div style={{fontSize:"56px",marginBottom:"24px"}}>&#128737;</div>
