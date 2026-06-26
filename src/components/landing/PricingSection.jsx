@@ -102,7 +102,13 @@ function ILSModal({ onClose }) {
 }
 
 export default function PricingSection() {
-  const [showModal, setShowModal] = useState(false);
+const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+useEffect(() => {
+const handleResize = () => setIsMobile(window.innerWidth <= 768);
+window.addEventListener("resize", handleResize);
+return () => window.removeEventListener("resize", handleResize);
+}, []);
+const [showModal, setShowModal] = useState(false);
   return (
     <section id="offer" style={{background:" #F8FAFC",padding:isMobile?"60px 24px":"100px 24px"}}>
       {showModal && <ILSModal onClose={()=>setShowModal(false)}/>}
