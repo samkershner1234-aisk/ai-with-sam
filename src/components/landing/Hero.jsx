@@ -3,8 +3,7 @@ import { motion } from "framer-motion";
 import { CTA_URL } from "./constants";
 
 const badges = [
-  { icon: "⏱", text: "Results in 1 session" },
-  { icon: "💬", text: "14 days access" },
+  { icon: "💬", text: "14 days WhatsApp support" },
   { icon: "🛡", text: "5-Hour Guarantee" },
 ];
 
@@ -25,13 +24,11 @@ export default function Hero() {
     <div className="relative flex items-center justify-center"
       style={{ width: clockSize, height: clockSize }}>
 
-      {/* Outer rings */}
       <div className="absolute rounded-full border border-white/5"
         style={{ width: clockSize, height: clockSize }} />
       <div className="absolute rounded-full border border-[#F97316]/10"
         style={{ width: clockSize * 0.9, height: clockSize * 0.9 }} />
 
-      {/* Spinning arc */}
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 52, repeat: Infinity, ease: "linear" }}
@@ -43,7 +40,6 @@ export default function Hero() {
         }}
       />
 
-      {/* Tick marks */}
       <div className="absolute" style={{ width: clockSize * 0.86, height: clockSize * 0.86 }}>
         {Array.from({ length: 16 }).map((_, i) => {
           const angle = -122 + i * 18;
@@ -68,7 +64,6 @@ export default function Hero() {
         })}
       </div>
 
-      {/* Center copy */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -79,27 +74,23 @@ export default function Hero() {
         <div style={{ fontSize: isMobile ? 13 : 22, color: "rgba(255,255,255,0.85)" }}>
           Reclaim
         </div>
-        <div
-          style={{
-            fontSize: isMobile ? 52 : 110,
-            fontWeight: 900,
-            lineHeight: 1,
-            letterSpacing: "-0.06em",
-            color: "#FBD7B3",
-            filter: "drop-shadow(0 0 18px rgba(249,115,22,0.18))",
-          }}
-        >
+        <div style={{
+          fontSize: isMobile ? 52 : 110,
+          fontWeight: 900,
+          lineHeight: 1,
+          letterSpacing: "-0.06em",
+          color: "#FBD7B3",
+          filter: "drop-shadow(0 0 18px rgba(249,115,22,0.18))",
+        }}>
           5+
         </div>
-        <div
-          style={{
-            fontSize: isMobile ? 30 : 66,
-            fontWeight: 800,
-            lineHeight: 1,
-            letterSpacing: "-0.05em",
-            color: "#F97316",
-          }}
-        >
+        <div style={{
+          fontSize: isMobile ? 30 : 66,
+          fontWeight: 800,
+          lineHeight: 1,
+          letterSpacing: "-0.05em",
+          color: "#F97316",
+        }}>
           hours
         </div>
         <div style={{ marginTop: 6, fontSize: isMobile ? 13 : 22, color: "rgba(255,255,255,0.84)" }}>
@@ -117,22 +108,19 @@ export default function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03)_0%,transparent_50%)]" />
 
       {/* ── MOBILE layout ── */}
-      <div className="relative flex flex-col items-center px-6 pt-10 pb-6 text-center md:hidden">
+      <div className="relative flex flex-col items-center px-6 pt-6 pb-4 text-center md:hidden">
 
-        {/* Headline */}
         <h1 className="text-[clamp(40px,11vw,64px)] font-black leading-[0.92] tracking-[-0.07em]">
           <span className="block text-white">Get Hours</span>
           <span className="block"><span className="text-[#F97316]">Back.</span></span>
           <span className="block text-white">Every Day.</span>
         </h1>
 
-        {/* Subtext */}
-        <p className="mt-4 max-w-xs text-[15px] leading-6 text-white/75">
+        <p className="mt-3 max-w-xs text-[15px] leading-6 text-white/75">
           One live session. A custom AI system built for your exact role.
         </p>
 
-        {/* Badges */}
-        <div className="mt-5 flex flex-col items-center space-y-3">
+        <div className="mt-4 flex flex-col items-center space-y-3">
           {badges.map((b) => (
             <div key={b.text} className="flex items-center gap-3 text-[14px] text-white/75">
               <span className="grid h-6 w-6 place-items-center rounded-full border border-white/10 bg-white/5 text-xs">
@@ -143,8 +131,7 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* Clock — directly below badges, visible above fold */}
-        <div className="mt-6 flex items-center justify-center">
+        <div className="mt-5 flex items-center justify-center">
           {ClockGraphic}
         </div>
       </div>
@@ -153,7 +140,6 @@ export default function Hero() {
       <div className="relative mx-auto hidden min-h-screen w-full max-w-[1440px] items-center md:flex md:px-14 md:py-16">
         <div className="grid w-full grid-cols-[1.05fr_0.95fr] items-center gap-10">
 
-          {/* Left: text */}
           <div className="z-10 max-w-3xl">
             <h1 className="max-w-2xl text-[clamp(44px,6.8vw,100px)] font-black leading-[0.92] tracking-[-0.07em]">
               <span className="block text-white">Get Hours</span>
@@ -177,7 +163,6 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right: clock */}
           <div className="flex items-center justify-center">
             {ClockGraphic}
           </div>
