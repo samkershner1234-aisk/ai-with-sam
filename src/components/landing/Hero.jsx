@@ -1,47 +1,179 @@
-import { useState, useEffect } from "react";
-import { SAM_PHOTO, CTA_URL } from "./constants";
-const badges=[{icon:"⏱",t:"Results in 1 session"},{icon:"💬",t:"14 days of direct WhatsApp access to Sam"},{icon:"🛡",t:"5-Hour Guarantee or Free Follow-Up Session"}];
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { CTA_URL } from "./constants";
+
+const badges = [
+  { icon: "💬", text: "14 days WhatsApp support" },
+  { icon: "🛡", text: "5-Hour Guarantee" },
+];
+
 export default function Hero() {
-const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-useEffect(() => {
-const handleResize = () => setIsMobile(window.innerWidth <= 768);
-window.addEventListener("resize", handleResize);
-return () => window.removeEventListener("resize", handleResize);
-}, []);
-return (
-    <section style={{background:" #0F172A",minHeight:"100vh",display:"flex",alignItems:"center",padding:isMobile?"50px 24px":"80px 24px"}} className="hero-section">
-    <div style={{maxWidth:"1100px",margin:"0 auto",width:"100%",display:"grid",gridTemplateColumns:"55% 45%",gap:"48px",alignItems:"center"}} className="hgrid">
-    <div>
-    <p style={{fontSize:"13px",fontWeight:600,letterSpacing:"0.15em",color:" #F97316",textTransform:"uppercase",marginBottom:"20px"}} className="hero-eyebrow">For Working Professionals</p>
-    <h1 style={{fontWeight:800,color:" #FFFFFF",lineHeight:1.15,marginBottom:"20px"}} className="hero-h1">
-    <span style={{fontSize:"clamp(38px,5vw,64px)",display:"block"}}>Stop Losing Hours</span>
-    <span style={{fontSize:"clamp(30px,4vw,52px)",display:"block",color:" #CBD5E1"}}>to Tasks AI Could Handle in Seconds.</span>
-    </h1>
-    <p style={{color:" #CBD5E1",fontSize:"clamp(17px,2vw,20px)",lineHeight:1.7,marginBottom:"12px"}} className="hero-p1">One 60-minute session. Your AI System, Built Live, for your exact job. You use it before you close your laptop.</p>
-    <p style={{color:" #FFFFFF",fontSize:"15px",fontWeight:500,marginBottom:"28px"}} className="hero-p2">Trusted by professionals in marketing, operations, sales, and admin. Across Israel, the UK, and the US.</p>
-    <div style={{display:"flex",flexWrap:"wrap",gap:"12px",marginBottom:"32px"}} className="hero-badges">
-      {badges.map((b,i)=><span key={i} style={{background:" rgba(30,41,59,0.9)",border:"1px solid #334155",borderRadius:"50px",padding:"10px 18px",fontSize:"14px",color:" #FFFFFF",display:"inline-flex",alignItems:"center",gap:"8px"}}>{b.icon} {b.t}</span>)}
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 768);
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  const clockSize = isMobile ? 200 : 440;
+  const tickRadius = isMobile ? 88 : 196;
+
+  const ClockGraphic = (
+    <div className="relative flex items-center justify-center"
+      style={{ width: clockSize, height: clockSize }}>
+
+      {/* Outer rings — behind everything */}
+      <div className="absolute rounded-full border border-white/5"
+        style={{ width: clockSize, height: clockSize, zIndex: 0 }} />
+      <div className="absolute rounded-full border border-[#F97316]/10"
+        style={{ width: clockSize * 0.9, height: clockSize * 0.9, zIndex: 0 }} />
+
+      {/* Center text — rendered BEFORE the arc so arc sits on top */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="absolute z-10 rounded-[20px] bg-black/10 text-center backdrop-blur-[3px]"
+        style={{ padding: isMobile ? "10px 14px" : "20px 32px" }}
+      >
+        <div style={{ fontSize: isMobile ? 13 : 22, color: "rgba(255,255,255,0.85)" }}>
+          Reclaim
+        </div>
+        <div style={{
+          fontSize: isMobile ? 52 : 110,
+          fontWeight: 900,
+          lineHeight: 1,
+          letterSpacing: "-0.06em",
+          color: "#FBD7B3",
+          filter: "drop-shadow(0 0 18px rgba(249,115,22,0.18))",
+        }}>
+          5+
+        </div>
+        <div style={{
+          fontSize: isMobile ? 30 : 66,
+          fontWeight: 800,
+          lineHeight: 1,
+          letterSpacing: "-0.05em",
+          color: "#F97316",
+        }}>
+          hours
+        </div>
+        <div style={{ marginTop: 6, fontSize: isMobile ? 13 : 22, color: "rgba(255,255,255,0.84)" }}>
+          every week
+        </div>
+      </motion.div>
+
+      {/* Tick marks — on top of center text */}
+      <div className="absolute" style={{ width: clockSize * 0.86, height: clockSize * 0.86, zIndex: 20 }}>
+        {Array.from({ length: 16 }).map((_, i) => {
+          const angle = -122 + i * 18;
+          const strong = i % 4 === 0;
+          return (
+            <span
+              key={i}
+              className="absolute left-1/2 top-1/2 block rounded-full"
+              style={{
+                width: strong ? (isMobile ? 10 : 16) : (isMobile ? 6 : 10),
+                height: strong ? 3 : 2,
+                background: strong
+                  ? "rgba(255,160,80,0.95)"
+                  : "rgba(255,160,80,0.30)",
+                transformOrigin: "left center",
+                transform: `rotate(${angle}deg) translateX(${tickRadius}px)`,
+                boxShadow: "0 0 8px rgba(249,115,22,0.22)",
+                opacity: i < 10 ? 1 : 0.6,
+              }}
+            />
+          );
+        })}
+      </div>
+
+      {/* Spinning arc — topmost layer */}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 52, repeat: Infinity, ease: "linear" }}
+        className="absolute rounded-full border-[6px] border-transparent border-r-[#FFCF9B] border-t-[#FFB466]/50"
+        style={{
+          width: clockSize * 0.82,
+          height: clockSize * 0.82,
+          filter: "drop-shadow(0 0 12px rgba(249,115,22,0.58))",
+          zIndex: 30,
+        }}
+      />
+
+      <div className="pointer-events-none absolute inset-0 rounded-full shadow-[0_0_60px_rgba(249,115,22,0.10)_inset]"
+        style={{ zIndex: 0 }} />
     </div>
-    </div>
-    <div className="hero-photo-col" style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
-    <img src={SAM_PHOTO} alt="Sam Kershner" style={{width:"clamp(220px,30vw,380px)",height:"clamp(220px,30vw,380px)",borderRadius:"50%",objectFit:"cover",objectPosition:"center top",boxShadow:"0 20px 60px rgba(0,0,0,0.5)"}}/>
-    <p style={{fontWeight:700,color:" #FFFFFF",fontSize:"16px",marginTop:"16px",marginBottom:"4px"}}>Sam Kershner</p>
-    <p style={{color:" rgba(255,255,255,0.8)",fontSize:"13px",margin:0}}>I build working AI systems for professionals who've wasted months trying to figure it out themselves.</p>
-    </div>
-    </div>
-    <style>{`
-    @media(max-width:768px){
-    .hero-section{padding:16px 20px!important;min-height:auto!important;align-items:flex-start!important;}
-    .hgrid{grid-template-columns:1fr!important;}
-    .hero-photo-col{display:none!important;}
-    .hero-eyebrow{margin-bottom:10px!important;}
-    .hero-h1{margin-bottom:12px!important;}
-    .hero-p1{margin-bottom:8px!important;font-size:16px!important;}
-    .hero-p2{margin-bottom:16px!important;font-size:14px!important;}
-    .hero-badges{gap:8px!important;margin-bottom:0!important;}
-    .hero-badges span{font-size:13px!important;padding:8px 14px!important;}
-    }
-    `}</style>
+  );
+
+  return (
+    <section className="relative overflow-hidden bg-[#0F172A] text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(249,115,22,0.12)_0%,rgba(15,23,42,0)_50%)]" />
+
+      {/* ── MOBILE layout ── */}
+      <div className="relative flex flex-col items-center px-6 pt-5 pb-4 text-center md:hidden">
+
+        <h1 className="text-[clamp(28px,8vw,42px)] font-black leading-[0.95] tracking-[-0.05em]">
+          <span className="block text-white">Get Hours</span>
+          <span className="block"><span className="text-[#F97316]">Back.</span></span>
+          <span className="block text-white">Every Day.</span>
+        </h1>
+
+        <p className="mt-3 max-w-xs text-[14px] leading-5 text-white/75">
+          One live session. A custom AI system built for your exact role.
+        </p>
+
+        <div className="mt-3 flex flex-col items-center space-y-2">
+          {badges.map((b) => (
+            <div key={b.text} className="flex items-center gap-2 text-[13px] text-white/75">
+              <span className="grid h-5 w-5 place-items-center rounded-full border border-white/10 bg-white/5 text-[10px]">
+                {b.icon}
+              </span>
+              <span>{b.text}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-4 flex items-center justify-center">
+          {ClockGraphic}
+        </div>
+      </div>
+
+      {/* ── DESKTOP layout ── */}
+      <div className="relative mx-auto hidden min-h-screen w-full max-w-[1440px] items-center md:flex md:px-14 md:py-16">
+        <div className="grid w-full grid-cols-[1.05fr_0.95fr] items-center gap-10">
+
+          <div className="z-10 max-w-3xl">
+            <h1 className="max-w-2xl text-[clamp(44px,6.8vw,100px)] font-black leading-[0.92] tracking-[-0.07em]">
+              <span className="block text-white">Get Hours</span>
+              <span className="block"><span className="text-[#F97316]">Back.</span></span>
+              <span className="block text-white">Every Day.</span>
+            </h1>
+
+            <p className="mt-8 max-w-xl text-[19px] leading-8 text-white/75">
+              One live session. A custom AI system built for your exact role.
+            </p>
+
+            <div className="mt-10 flex flex-col items-start space-y-4">
+              {badges.map((b) => (
+                <div key={b.text} className="flex items-center gap-3 text-[16px] text-white/75">
+                  <span className="grid h-7 w-7 place-items-center rounded-full border border-white/10 bg-white/5 text-sm">
+                    {b.icon}
+                  </span>
+                  <span>{b.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center">
+            {ClockGraphic}
+          </div>
+
+        </div>
+      </div>
     </section>
-    );
+  );
 }
