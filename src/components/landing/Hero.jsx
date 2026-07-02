@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { CTA_URL } from "./constants";
 
 const badges = [
@@ -37,7 +36,7 @@ export default function Hero() {
               <span className="mt-2 block text-[#F97316]">Start impact.</span>
             </h1>
 
-            <p className="mt-6 max-w-xl text-[16px] leading-7 text-white/78 md:mt-8 md:text-[19px] md:leading-8">
+            <p className="mt-6 max-w-xl text-[16px] leading-7 text-white/75 md:mt-8 md:text-[19px] md:leading-8">
               One live session. A custom AI system built for your exact role.
               You use it the same day.
             </p>
@@ -46,7 +45,7 @@ export default function Hero() {
               {badges.map((b) => (
                 <div
                   key={b.text}
-                  className="flex items-center gap-3 text-[15px] text-white/78 md:text-[16px]"
+                  className="flex items-center gap-3 text-[15px] text-white/75 md:text-[16px]"
                 >
                   <span className="grid h-7 w-7 place-items-center rounded-full border border-white/10 bg-white/5 text-sm">
                     {b.icon}
@@ -57,12 +56,12 @@ export default function Hero() {
             </div>
 
             <div className="mt-9 md:mt-10">
-              <Button
-                asChild
-                className="h-14 rounded-full bg-[#F97316] px-8 text-[16px] font-bold text-white shadow-[0_18px_40px_rgba(249,115,22,0.24)] transition hover:bg-[#EA5A0C]"
+              <a
+                href={CTA_URL}
+                className="inline-flex h-14 items-center rounded-full bg-[#F97316] px-8 text-[16px] font-bold text-white shadow-[0_18px_40px_rgba(249,115,22,0.24)] transition hover:bg-[#EA5A0C]"
               >
-                <a href={CTA_URL}>Save My Spot →</a>
-              </Button>
+                Save My Spot →
+              </a>
             </div>
           </div>
 
