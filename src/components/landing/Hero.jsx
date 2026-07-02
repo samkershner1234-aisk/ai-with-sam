@@ -103,7 +103,7 @@ export default function Hero() {
   );
 
   return (
-    <section className="relative overflow-hidden bg-[#050816] text-white" style={{ minHeight: "100svh" }}>
+    <section className="relative overflow-hidden bg-[#050816] text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(249,115,22,0.18)_0%,rgba(5,8,22,0)_50%),linear-gradient(180deg,#050816_0%,#0B1020_45%,#050816_100%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03)_0%,transparent_50%)]" />
 
