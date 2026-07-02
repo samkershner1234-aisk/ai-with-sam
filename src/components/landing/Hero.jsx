@@ -108,22 +108,22 @@ export default function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03)_0%,transparent_50%)]" />
 
       {/* ── MOBILE layout ── */}
-      <div className="relative flex flex-col items-center px-6 pt-6 pb-4 text-center md:hidden">
+      <div className="relative flex flex-col items-center px-6 pt-5 pb-4 text-center md:hidden">
 
-        <h1 className="text-[clamp(40px,11vw,64px)] font-black leading-[0.92] tracking-[-0.07em]">
+        <h1 className="text-[clamp(28px,8vw,42px)] font-black leading-[0.95] tracking-[-0.05em]">
           <span className="block text-white">Get Hours</span>
           <span className="block"><span className="text-[#F97316]">Back.</span></span>
           <span className="block text-white">Every Day.</span>
         </h1>
 
-        <p className="mt-3 max-w-xs text-[15px] leading-6 text-white/75">
+        <p className="mt-3 max-w-xs text-[14px] leading-5 text-white/75">
           One live session. A custom AI system built for your exact role.
         </p>
 
-        <div className="mt-4 flex flex-col items-center space-y-3">
+        <div className="mt-3 flex flex-col items-center space-y-2">
           {badges.map((b) => (
-            <div key={b.text} className="flex items-center gap-3 text-[14px] text-white/75">
-              <span className="grid h-6 w-6 place-items-center rounded-full border border-white/10 bg-white/5 text-xs">
+            <div key={b.text} className="flex items-center gap-2 text-[13px] text-white/75">
+              <span className="grid h-5 w-5 place-items-center rounded-full border border-white/10 bg-white/5 text-[10px]">
                 {b.icon}
               </span>
               <span>{b.text}</span>
@@ -131,7 +131,7 @@ export default function Hero() {
           ))}
         </div>
 
-        <div className="mt-5 flex items-center justify-center">
+        <div className="mt-4 flex items-center justify-center">
           {ClockGraphic}
         </div>
       </div>
