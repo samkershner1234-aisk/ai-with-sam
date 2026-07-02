@@ -1,47 +1,134 @@
-import { useState, useEffect } from "react";
-import { SAM_PHOTO, CTA_URL } from "./constants";
-const badges=[{icon:"⏱",t:"Results in 1 session"},{icon:"💬",t:"14 days of direct WhatsApp access to Sam"},{icon:"🛡",t:"5-Hour Guarantee or Free Follow-Up Session"}];
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { CTA_URL } from "./constants";
+
+const badges = [
+  { icon: "⏱", text: "Results in 1 session" },
+  { icon: "💬", text: "14 days access" },
+  { icon: "🛡", text: "5-Hour Guarantee" },
+];
+
 export default function Hero() {
-const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-useEffect(() => {
-const handleResize = () => setIsMobile(window.innerWidth <= 768);
-window.addEventListener("resize", handleResize);
-return () => window.removeEventListener("resize", handleResize);
-}, []);
-return (
-    <section style={{background:" #0F172A",minHeight:"100vh",display:"flex",alignItems:"center",padding:isMobile?"50px 24px":"80px 24px"}} className="hero-section">
-    <div style={{maxWidth:"1100px",margin:"0 auto",width:"100%",display:"grid",gridTemplateColumns:"55% 45%",gap:"48px",alignItems:"center"}} className="hgrid">
-    <div>
-    <p style={{fontSize:"13px",fontWeight:600,letterSpacing:"0.15em",color:" #F97316",textTransform:"uppercase",marginBottom:"20px"}} className="hero-eyebrow">For Working Professionals</p>
-    <h1 style={{fontWeight:800,color:" #FFFFFF",lineHeight:1.15,marginBottom:"20px"}} className="hero-h1">
-    <span style={{fontSize:"clamp(38px,5vw,64px)",display:"block"}}>Stop Losing Hours</span>
-    <span style={{fontSize:"clamp(30px,4vw,52px)",display:"block",color:" #CBD5E1"}}>to Tasks AI Could Handle in Seconds.</span>
-    </h1>
-    <p style={{color:" #CBD5E1",fontSize:"clamp(17px,2vw,20px)",lineHeight:1.7,marginBottom:"12px"}} className="hero-p1">One 60-minute session. Your AI System, Built Live, for your exact job. You use it before you close your laptop.</p>
-    <p style={{color:" #FFFFFF",fontSize:"15px",fontWeight:500,marginBottom:"28px"}} className="hero-p2">Trusted by professionals in marketing, operations, sales, and admin. Across Israel, the UK, and the US.</p>
-    <div style={{display:"flex",flexWrap:"wrap",gap:"12px",marginBottom:"32px"}} className="hero-badges">
-      {badges.map((b,i)=><span key={i} style={{background:" rgba(30,41,59,0.9)",border:"1px solid #334155",borderRadius:"50px",padding:"10px 18px",fontSize:"14px",color:" #FFFFFF",display:"inline-flex",alignItems:"center",gap:"8px"}}>{b.icon} {b.t}</span>)}
-    </div>
-    </div>
-    <div className="hero-photo-col" style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
-    <img src={SAM_PHOTO} alt="Sam Kershner" style={{width:"clamp(220px,30vw,380px)",height:"clamp(220px,30vw,380px)",borderRadius:"50%",objectFit:"cover",objectPosition:"center top",boxShadow:"0 20px 60px rgba(0,0,0,0.5)"}}/>
-    <p style={{fontWeight:700,color:" #FFFFFF",fontSize:"16px",marginTop:"16px",marginBottom:"4px"}}>Sam Kershner</p>
-    <p style={{color:" rgba(255,255,255,0.8)",fontSize:"13px",margin:0}}>I build working AI systems for professionals who've wasted months trying to figure it out themselves.</p>
-    </div>
-    </div>
-    <style>{`
-    @media(max-width:768px){
-    .hero-section{padding:16px 20px!important;min-height:auto!important;align-items:flex-start!important;}
-    .hgrid{grid-template-columns:1fr!important;}
-    .hero-photo-col{display:none!important;}
-    .hero-eyebrow{margin-bottom:10px!important;}
-    .hero-h1{margin-bottom:12px!important;}
-    .hero-p1{margin-bottom:8px!important;font-size:16px!important;}
-    .hero-p2{margin-bottom:16px!important;font-size:14px!important;}
-    .hero-badges{gap:8px!important;margin-bottom:0!important;}
-    .hero-badges span{font-size:13px!important;padding:8px 14px!important;}
-    }
-    `}</style>
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 768);
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  return (
+    <section className="relative min-h-screen overflow-hidden bg-[#050816] text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_42%,rgba(249,115,22,0.18)_0%,rgba(5,8,22,0)_34%),linear-gradient(180deg,#050816_0%,#0B1020_45%,#050816_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03)_0%,transparent_50%)]" />
+
+      <div className="relative mx-auto flex min-h-screen w-full max-w-[1440px] items-center px-6 py-10 md:px-14 md:py-16">
+        <div className="grid w-full grid-cols-1 items-center gap-10 md:grid-cols-[1.05fr_0.95fr] md:gap-6">
+
+          <div className="z-10 max-w-3xl">
+            <div className="mb-5 text-[13px] font-semibold uppercase tracking-[0.24em] text-white/85 md:mb-7">
+              AI With Sam
+            </div>
+
+            <h1 className="max-w-2xl text-[clamp(44px,6.8vw,100px)] font-black leading-[0.92] tracking-[-0.07em]">
+              <span className="block text-white">Stop busywork.</span>
+              <span className="mt-2 block text-[#F97316]">Start impact.</span>
+            </h1>
+
+            <p className="mt-6 max-w-xl text-[16px] leading-7 text-white/78 md:mt-8 md:text-[19px] md:leading-8">
+              One live session. A custom AI system built for your exact role.
+              You use it the same day.
+            </p>
+
+            <div className="mt-8 space-y-4 md:mt-10">
+              {badges.map((b) => (
+                <div
+                  key={b.text}
+                  className="flex items-center gap-3 text-[15px] text-white/78 md:text-[16px]"
+                >
+                  <span className="grid h-7 w-7 place-items-center rounded-full border border-white/10 bg-white/5 text-sm">
+                    {b.icon}
+                  </span>
+                  <span>{b.text}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-9 md:mt-10">
+              <Button
+                asChild
+                className="h-14 rounded-full bg-[#F97316] px-8 text-[16px] font-bold text-white shadow-[0_18px_40px_rgba(249,115,22,0.24)] transition hover:bg-[#EA5A0C]"
+              >
+                <a href={CTA_URL}>Save My Spot →</a>
+              </Button>
+            </div>
+          </div>
+
+          <div className="relative flex min-h-[430px] items-center justify-center md:min-h-[760px]">
+            <div className="absolute h-[330px] w-[330px] rounded-full border border-white/5 md:h-[720px] md:w-[720px]" />
+            <div className="absolute h-[300px] w-[300px] rounded-full border border-[#F97316]/10 md:h-[650px] md:w-[650px]" />
+
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 52, repeat: Infinity, ease: "linear" }}
+              className="absolute h-[278px] w-[278px] rounded-full border-[10px] border-transparent border-r-[#FFCF9B] border-t-[#FFB466]/50 md:h-[570px] md:w-[570px]"
+              style={{
+                transform: "rotate(18deg)",
+                filter: "drop-shadow(0 0 20px rgba(249,115,22,0.58))",
+              }}
+            />
+
+            <div className="absolute h-[290px] w-[290px] rounded-full md:h-[610px] md:w-[610px]">
+              {Array.from({ length: 16 }).map((_, i) => {
+                const angle = -122 + i * 18;
+                const strong = i % 4 === 0;
+                return (
+                  <span
+                    key={i}
+                    className="absolute left-1/2 top-1/2 block rounded-full"
+                    style={{
+                      width: strong ? 18 : 10,
+                      height: strong ? 4 : 3,
+                      background: strong
+                        ? "rgba(255,160,80,0.95)"
+                        : "rgba(255,160,80,0.30)",
+                      transformOrigin: "left center",
+                      transform: `rotate(${angle}deg) translateX(${isMobile ? 132 : 258}px)`,
+                      boxShadow: "0 0 12px rgba(249,115,22,0.22)",
+                      opacity: i < 10 ? 1 : 0.6,
+                    }}
+                  />
+                );
+              })}
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="relative z-10 rounded-[28px] bg-black/10 px-5 py-4 text-center backdrop-blur-[3px] md:px-8 md:py-6"
+            >
+              <div className="mb-2 text-[18px] text-white/85 md:text-[26px]">
+                Reclaim
+              </div>
+              <div className="text-[clamp(72px,12vw,170px)] font-black leading-none tracking-[-0.08em] text-[#FBD7B3] drop-shadow-[0_0_26px_rgba(249,115,22,0.18)]">
+                5+
+              </div>
+              <div className="mt-1 text-[clamp(40px,6vw,92px)] font-extrabold leading-none tracking-[-0.07em] text-[#F97316]">
+                hours
+              </div>
+              <div className="mt-3 text-[18px] text-white/84 md:text-[24px]">
+                every week
+              </div>
+            </motion.div>
+
+            <div className="pointer-events-none absolute inset-0 rounded-full shadow-[0_0_110px_rgba(249,115,22,0.12)_inset]" />
+          </div>
+
+        </div>
+      </div>
     </section>
-    );
+  );
 }
