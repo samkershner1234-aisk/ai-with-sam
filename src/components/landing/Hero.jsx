@@ -24,51 +24,18 @@ export default function Hero() {
     <div className="relative flex items-center justify-center"
       style={{ width: clockSize, height: clockSize }}>
 
+      {/* Outer rings — behind everything */}
       <div className="absolute rounded-full border border-white/5"
-        style={{ width: clockSize, height: clockSize }} />
+        style={{ width: clockSize, height: clockSize, zIndex: 0 }} />
       <div className="absolute rounded-full border border-[#F97316]/10"
-        style={{ width: clockSize * 0.9, height: clockSize * 0.9 }} />
+        style={{ width: clockSize * 0.9, height: clockSize * 0.9, zIndex: 0 }} />
 
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 52, repeat: Infinity, ease: "linear" }}
-        className="absolute rounded-full border-[6px] border-transparent border-r-[#FFCF9B] border-t-[#FFB466]/50"
-        style={{
-          width: clockSize * 0.82,
-          height: clockSize * 0.82,
-          filter: "drop-shadow(0 0 12px rgba(249,115,22,0.58))",
-        }}
-      />
-
-      <div className="absolute" style={{ width: clockSize * 0.86, height: clockSize * 0.86 }}>
-        {Array.from({ length: 16 }).map((_, i) => {
-          const angle = -122 + i * 18;
-          const strong = i % 4 === 0;
-          return (
-            <span
-              key={i}
-              className="absolute left-1/2 top-1/2 block rounded-full"
-              style={{
-                width: strong ? (isMobile ? 10 : 16) : (isMobile ? 6 : 10),
-                height: strong ? 3 : 2,
-                background: strong
-                  ? "rgba(255,160,80,0.95)"
-                  : "rgba(255,160,80,0.30)",
-                transformOrigin: "left center",
-                transform: `rotate(${angle}deg) translateX(${tickRadius}px)`,
-                boxShadow: "0 0 8px rgba(249,115,22,0.22)",
-                opacity: i < 10 ? 1 : 0.6,
-              }}
-            />
-          );
-        })}
-      </div>
-
+      {/* Center text — rendered BEFORE the arc so arc sits on top */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 rounded-[20px] bg-black/10 text-center backdrop-blur-[3px]"
+        className="absolute z-10 rounded-[20px] bg-black/10 text-center backdrop-blur-[3px]"
         style={{ padding: isMobile ? "10px 14px" : "20px 32px" }}
       >
         <div style={{ fontSize: isMobile ? 13 : 22, color: "rgba(255,255,255,0.85)" }}>
@@ -98,14 +65,52 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      <div className="pointer-events-none absolute inset-0 rounded-full shadow-[0_0_60px_rgba(249,115,22,0.10)_inset]" />
+      {/* Tick marks — on top of center text */}
+      <div className="absolute" style={{ width: clockSize * 0.86, height: clockSize * 0.86, zIndex: 20 }}>
+        {Array.from({ length: 16 }).map((_, i) => {
+          const angle = -122 + i * 18;
+          const strong = i % 4 === 0;
+          return (
+            <span
+              key={i}
+              className="absolute left-1/2 top-1/2 block rounded-full"
+              style={{
+                width: strong ? (isMobile ? 10 : 16) : (isMobile ? 6 : 10),
+                height: strong ? 3 : 2,
+                background: strong
+                  ? "rgba(255,160,80,0.95)"
+                  : "rgba(255,160,80,0.30)",
+                transformOrigin: "left center",
+                transform: `rotate(${angle}deg) translateX(${tickRadius}px)`,
+                boxShadow: "0 0 8px rgba(249,115,22,0.22)",
+                opacity: i < 10 ? 1 : 0.6,
+              }}
+            />
+          );
+        })}
+      </div>
+
+      {/* Spinning arc — topmost layer */}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 52, repeat: Infinity, ease: "linear" }}
+        className="absolute rounded-full border-[6px] border-transparent border-r-[#FFCF9B] border-t-[#FFB466]/50"
+        style={{
+          width: clockSize * 0.82,
+          height: clockSize * 0.82,
+          filter: "drop-shadow(0 0 12px rgba(249,115,22,0.58))",
+          zIndex: 30,
+        }}
+      />
+
+      <div className="pointer-events-none absolute inset-0 rounded-full shadow-[0_0_60px_rgba(249,115,22,0.10)_inset]"
+        style={{ zIndex: 0 }} />
     </div>
   );
 
   return (
-    <section className="relative overflow-hidden bg-[#050816] text-white">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(249,115,22,0.18)_0%,rgba(5,8,22,0)_50%),linear-gradient(180deg,#050816_0%,#0B1020_45%,#050816_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03)_0%,transparent_50%)]" />
+    <section className="relative overflow-hidden bg-[#0F172A] text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(249,115,22,0.12)_0%,rgba(15,23,42,0)_50%)]" />
 
       {/* ── MOBILE layout ── */}
       <div className="relative flex flex-col items-center px-6 pt-5 pb-4 text-center md:hidden">
