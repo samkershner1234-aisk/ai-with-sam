@@ -1,43 +1,130 @@
-import { useState, useEffect } from "react";
-import { CTA_URL } from "./constants";
-const ts=[
-  {init:"GK",bg:"#7C3AED",q:"I'm a marketing manager and I was drowning in repetitive tasks. In one session Sam built me a prompt system that now writes my first draft for every brief. I save at least 4 hours a week.",n:"Gideon K.",t:"Senior Growth Marketing Manager · Tel Aviv"},
-  {init:"MR",bg:"#0891B2",q:"I came in thinking I had no idea how to use AI. Within one hour, Sam built me a system that now handles all my client follow-ups automatically. I got back at least 5 hours in the first week alone.",n:"Michal R.",t:"Marketing Manager · Tel Aviv"},
-  {init:"ES",bg:"#059669",q:"I'd tried ChatGPT before and got nowhere. Sam came to the session already knowing my business and built something that actually works for how I operate. I use it every single day.",n:"Eitan S.",t:"Operations Lead · Tel Aviv"},
-  {init:"NK",bg:"#DC2626",q:"Genuinely the most practical 60 minutes I've invested in my career this year. No fluff, no theory. Just a real working solution I could use before I even closed my laptop.",n:"Noa K.",t:"Freelance Operations Consultant · Tel Aviv"},
+import { useState, useEffect, useRef, useCallback } from "react";
+
+const testimonials = [
+  {
+    initials: "GK",
+    color: "#7C3AED",
+    name: "Gideon K.",
+    role: "Senior Growth Marketing Manager · Tel Aviv",
+    quote: "I'm a marketing manager and I was drowning in repetitive tasks. In one session Sam built me a prompt system that now writes my first draft for every brief. I save at least 4 hours a week.",
+  },
+  {
+    initials: "MR",
+    color: "#0D9488",
+    name: "Michal R.",
+    role: "Marketing Manager · Tel Aviv",
+    quote: "I came in thinking I had no idea how to use AI. Within one hour, Sam built me a system that now handles all my client follow-ups automatically. I got back at least 5 hours in the first week alone.",
+  },
+  {
+    initials: "ES",
+    color: "#16A34A",
+    name: "Eitan S.",
+    role: "Operations Lead · Tel Aviv",
+    quote: "I'd tried ChatGPT before and got nowhere. Sam came to the session already knowing my business and built something that actually works for how I operate. I use it every single day.",
+  },
+  {
+    initials: "NK",
+    color: "#DC2626",
+    name: "Noa K.",
+    role: "Freelance Operations Consultant · Tel Aviv",
+    quote: "Genuinely the most practical 60 minutes I've invested in my career this year. No fluff, no theory. Just a real working solution I could use before I even closed my laptop.",
+  },
 ];
+
+function Avatar({ t }) {
+  return (
+    <div style={{width:48,height:48,borderRadius:"50%",background:t.color,display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:700,fontSize:16,flexShrink:0}}>
+      {t.initials}
+    </div>
+  );
+}
+
 export default function Testimonials() {
-const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-useEffect(() => {
-const handleResize = () => setIsMobile(window.innerWidth <= 768);
-window.addEventListener("resize", handleResize);
-return () => window.removeEventListener("resize", handleResize);
-}, []);
-return (
-    <section style={{background:"#0F172A",padding:isMobile?"60px 24px":"100px 24px"}}>
-      <div style={{maxWidth:"1100px",margin:"0 auto"}}>
-        <p style={{fontSize:"13px",fontWeight:600,letterSpacing:"0.1em",color:"#F97316",textTransform:"uppercase",textAlign:"center",marginBottom:"16px"}}>Real Results From Real Sessions</p>
-        <h2 style={{fontSize:"clamp(28px,4vw,40px)",fontWeight:800,color:"#FFFFFF",textAlign:"center",marginBottom:"12px"}}>Working Professionals Who Got Their Time Back</h2>
-        <p style={{color:"#94A3B8",fontSize:"15px",textAlign:"center",fontStyle:"italic",marginBottom:"48px"}}>Every client leaves with a working AI system they use the same day. Here's what they said:</p>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"24px",marginBottom:"48px"}} className="tg">
-          {ts.map((t,i)=><div key={i} style={{background:"#1E293B",border:"1px solid #334155",borderRadius:"16px",padding:"32px"}}>
-            <span style={{fontSize:"48px",fontWeight:800,color:"#F97316",display:"block",lineHeight:1}}>"</span>
-            <p style={{color:"#CBD5E1",fontSize:"15px",lineHeight:1.7,fontStyle:"italic",margin:"8px 0 24px"}}>{t.q}</p>
-            <div style={{display:"flex",alignItems:"center",gap:"12px"}}>
-              <div style={{width:"60px",height:"60px",borderRadius:"50%",background:t.bg,display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,color:"#FFFFFF",fontSize:"16px",flexShrink:0}}>{t.init}</div>
-              <div>
-                <p style={{fontWeight:700,color:"#FFFFFF",fontSize:"15px",margin:0}}>{t.n}</p>
-                <p style={{color:"#94A3B8",fontSize:"13px",margin:0}}>{t.t}</p>
+  const [current, setCurrent] = useState(0);
+  const intervalRef = useRef(null);
+
+  const next = useCallback(() => setCurrent(p => (p + 1) % testimonials.length), []);
+  const prev = useCallback(() => setCurrent(p => (p - 1 + testimonials.length) % testimonials.length), []);
+
+  const handleArrow = useCallback((dir) => {
+    if (dir === 'next') next(); else prev();
+    clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(next, 3000);
+  }, [next, prev]);
+
+  useEffect(() => {
+    intervalRef.current = setInterval(next, 3000);
+    return () => clearInterval(intervalRef.current);
+  }, [next]);
+
+  const t = testimonials[current];
+
+  return (
+    <section style={{background:"#0F172A",padding:"80px 0 72px"}}>
+      <div style={{maxWidth:1100,margin:"0 auto",padding:"0 24px"}}>
+        {/* Header */}
+        <p style={{color:"#F97316",fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",fontSize:13,textAlign:"center",marginBottom:12}}>REAL RESULTS FROM REAL SESSIONS</p>
+        <h2 style={{fontSize:"clamp(24px,4vw,38px)",fontWeight:800,color:"#fff",textAlign:"center",lineHeight:1.2,marginBottom:8}}>
+          Working Professionals Who Got Their Time Back
+        </h2>
+        <p style={{color:"#94A3B8",textAlign:"center",fontSize:16,marginBottom:52,fontStyle:"italic"}}>
+          Every client leaves with a working AI system they use the same day. Here's what they said:
+        </p>
+
+        {/* Desktop: 2x2 grid */}
+        <div className="test-desktop-grid">
+          {testimonials.map((t, i) => (
+            <div key={i} style={{background:"#1E293B",borderRadius:16,padding:"32px 28px",boxShadow:"0 2px 20px rgba(0,0,0,0.3)"}}>
+              <div style={{fontSize:32,color:"#F97316",marginBottom:16,lineHeight:1}}>&ldquo;&ldquo;</div>
+              <p style={{color:"#CBD5E1",fontSize:16,lineHeight:1.7,marginBottom:24,fontStyle:"italic"}}>{t.quote}</p>
+              <div style={{display:"flex",alignItems:"center",gap:12}}>
+                <Avatar t={t}/>
+                <div>
+                  <div style={{fontWeight:700,color:"#fff",fontSize:15}}>{t.name}</div>
+                  <div style={{color:"#64748B",fontSize:13}}>{t.role}</div>
+                </div>
               </div>
             </div>
-          </div>)}
+          ))}
         </div>
-        <div style={{textAlign:"center"}}>
-          <a href={CTA_URL} target="_blank" rel="noopener noreferrer" style={{display:"inline-block",background:"#F97316",color:"#FFFFFF",fontWeight:700,fontSize:"17px",padding:"18px 36px",borderRadius:"50px",textDecoration:"none"}}>Book Your Free 20-Minute Call</a>
-          <p style={{color:"#94A3B8",fontSize:"13px",marginTop:"10px"}}>Free call. No credit card. No commitment.</p>
+
+        {/* Mobile: single quote carousel with fade */}
+        <div className="test-mobile-carousel">
+          <div style={{position:"relative",minHeight:260}}>
+            {testimonials.map((item, i) => (
+              <div key={i} style={{position:"absolute",top:0,left:0,right:0,transition:"opacity 0.5s ease, transform 0.5s ease",opacity: i===current?1:0,transform: i===current?"translateY(0)":"translateY(12px)",pointerEvents: i===current?"auto":"none",background:"#1E293B",borderRadius:16,padding:"32px 24px",boxShadow:"0 2px 20px rgba(0,0,0,0.3)"}}>
+                <div style={{fontSize:36,color:"#F97316",marginBottom:12,lineHeight:1}}>&ldquo;&ldquo;</div>
+                <p style={{color:"#CBD5E1",fontSize:16,lineHeight:1.7,marginBottom:24,fontStyle:"italic"}}>{item.quote}</p>
+                <div style={{display:"flex",alignItems:"center",gap:12}}>
+                  <Avatar t={item}/>
+                  <div>
+                    <div style={{fontWeight:700,color:"#fff",fontSize:15}}>{item.name}</div>
+                    <div style={{color:"#64748B",fontSize:13}}>{item.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Controls */}
+          <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:14,marginTop:16}}>
+            <button onClick={() => handleArrow('prev')} aria-label="Previous testimonial" style={{width:40,height:40,borderRadius:"50%",border:"2px solid #F97316",background:"transparent",color:"#F97316",fontSize:18,cursor:"pointer",fontWeight:700}}>&#8592;</button>
+            {testimonials.map((_, i) => (
+              <button key={i} onClick={() => setCurrent(i)} aria-label={`Testimonial ${i+1}`} style={{width: i===current?24:8,height:8,borderRadius:4,border:"none",background: i===current?"#F97316":"#334155",cursor:"pointer",transition:"all 0.3s",padding:0}}/>
+            ))}
+            <button onClick={() => handleArrow('next')} aria-label="Next testimonial" style={{width:40,height:40,borderRadius:"50%",border:"2px solid #F97316",background:"transparent",color:"#F97316",fontSize:18,cursor:"pointer",fontWeight:700}}>&#8594;</button>
+          </div>
         </div>
       </div>
-      <style>{`@media(max-width:768px){.tg{grid-template-columns:1fr!important}}`}</style>
+
+      <style>{`
+        .test-desktop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .test-mobile-carousel { display: none; }
+        @media (max-width: 767px) {
+          .test-desktop-grid { display: none; }
+          .test-mobile-carousel { display: block; }
+        }
+      `}</style>
     </section>
   );
 }
