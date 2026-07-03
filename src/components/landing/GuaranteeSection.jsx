@@ -1,12 +1,6 @@
 import { useState } from "react";
 import { CTA_URL } from "./constants";
 
-const guaranteePoints = [
-  { icon: "🚫", text: "No questions asked" },
-  { icon: "📋", text: "No forms to fill in" },
-  { icon: "🚧", text: "No hoops to jump through" },
-];
-
 const details = [
   {
     id: "how",
@@ -16,12 +10,12 @@ const details = [
   {
     id: "track",
     label: "Track record",
-    content: "In every session delivered so far, no one has ever needed to claim it. But it's there if you do. You get results or you get more of my time, free.",
+    content: "In every session delivered so far, no one has ever needed to claim it. But it's there if you do. Your results are the only thing that matters.",
   },
   {
     id: "whatsapp",
     label: "WhatsApp access",
-    content: "Your session includes 14 days of direct WhatsApp access to me. Got a prompt that's not working? Message me directly — not a ticket system. I respond within 24 hours.",
+    content: "Your session includes 14 days of direct WhatsApp access to me. Got a prompt that's not working? Message me. I'll fix it.",
   },
 ];
 
@@ -30,58 +24,62 @@ export default function GuaranteeSection() {
   const active = details.find(d => d.id === activeTab);
 
   return (
-    <section style={{background:"#0F172A",padding:"72px 0"}}>
-      <div style={{maxWidth:1100,margin:"0 auto",padding:"0 24px"}}>
-        <p style={{color:"#F97316",fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",fontSize:13,textAlign:"center",marginBottom:12}}>MY GUARANTEE</p>
+    <section style={{ background: "#0F172A", padding: "56px 0" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+        {/* Section label */}
+        <p style={{ color: "#F97316", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", fontSize: 13, textAlign: "center", marginBottom: 10 }}>
+          MY GUARANTEE
+        </p>
 
         {/* Main card: two columns on desktop, stacked on mobile */}
         <div className="guarantee-card">
-
           {/* Left: Shield badge */}
           <div className="guarantee-left">
             {/* Big shield */}
-            <div style={{width:120,height:120,borderRadius:"50%",background:"linear-gradient(135deg,#F97316,#EA580C)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:56,marginBottom:20,boxShadow:"0 0 40px rgba(249,115,22,0.35)"}}>
+            <div style={{ width: 120, height: 120, borderRadius: "50%", background: "linear-gradient(135deg,#F97316,#EA580C)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 52, marginBottom: 20, boxShadow: "0 0 40px rgba(249,115,22,0.35)" }}>
               🛡
             </div>
-            <div style={{fontSize:"clamp(32px,5vw,52px)",fontWeight:900,color:"#F97316",lineHeight:1,marginBottom:6}}>5 Hours</div>
-            <div style={{color:"#94A3B8",fontSize:15,marginBottom:24,textAlign:"center"}}>guaranteed in week one</div>
-            {/* Three promise pills */}
-            <div style={{display:"flex",flexDirection:"column",gap:10,width:"100%",maxWidth:260}}>
-              {guaranteePoints.map((p, i) => (
-                <div key={i} style={{display:"flex",alignItems:"center",gap:10,background:"rgba(249,115,22,0.1)",border:"1px solid rgba(249,115,22,0.25)",borderRadius:10,padding:"10px 16px"}}>
-                  <span style={{fontSize:18}}>{p.icon}</span>
-                  <span style={{color:"#E2E8F0",fontSize:14,fontWeight:600}}>{p.text}</span>
-                </div>
-              ))}
+            <div>
+              <div style={{ fontSize: "clamp(32px,5vw,52px)", fontWeight: 900, color: "#F97316", lineHeight: 1, marginBottom: 4 }}>5 Hours</div>
+              <div style={{ color: "#94A3B8", fontSize: 15, marginBottom: 0, textAlign: "center" }}>Guaranteed in week one</div>
             </div>
           </div>
 
           {/* Right: headline + tabs */}
           <div className="guarantee-right">
-            <h2 style={{fontSize:"clamp(20px,3vw,28px)",fontWeight:800,color:"#fff",lineHeight:1.3,marginBottom:8}}>
+            <h2 style={{ fontSize: "clamp(20px,3vw,28px)", fontWeight: 800, color: "#fff", lineHeight: 1.3, marginBottom: 8 }}>
               If You Don't Save 5 Hours in Week One, I Book You a Free Follow-Up Session.
             </h2>
-            <p style={{color:"#94A3B8",fontSize:15,marginBottom:24}}>No questions asked. No forms. No hoops.</p>
+            <p style={{ color: "#94A3B8", fontSize: 15, marginBottom: 24 }}>No questions asked. No forms. No hoops.</p>
 
             {/* Tab buttons */}
-            <div style={{display:"flex",gap:8,marginBottom:20,flexWrap:"wrap"}}>
+            <div style={{ display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
               {details.map(d => (
-                <button key={d.id} onClick={() => setActiveTab(d.id)} style={{padding:"8px 16px",borderRadius:20,border:"none",cursor:"pointer",fontWeight:600,fontSize:13,transition:"all 0.2s",background:activeTab===d.id?"#F97316":"rgba(255,255,255,0.08)",color:activeTab===d.id?"#fff":"#94A3B8"}}>
+                <button
+                  key={d.id}
+                  onClick={() => setActiveTab(d.id)}
+                  style={{ padding: "8px 16px", borderRadius: 8, border: "none", cursor: "pointer", fontWeight: 600, fontSize: 14, transition: "all 0.2s", background: activeTab === d.id ? "#F97316" : "rgba(255,255,255,0.08)", color: activeTab === d.id ? "#fff" : "#94A3B8" }}
+                >
                   {d.label}
                 </button>
               ))}
             </div>
 
             {/* Tab content */}
-            <div style={{background:"rgba(255,255,255,0.05)",borderRadius:12,padding:"20px 20px",minHeight:90,borderLeft:"3px solid #F97316"}}>
-              <p style={{color:"#CBD5E1",fontSize:15,lineHeight:1.7,margin:0}}>{active.content}</p>
+            <div style={{ background: "rgba(255,255,255,0.05)", borderRadius: 10, padding: "20px 20px", minHeight: 80, borderLeft: "3px solid #F97316" }}>
+              <p style={{ color: "#CBD5E1", fontSize: 15, lineHeight: 1.7, margin: 0 }}>{active.content}</p>
             </div>
 
             {/* CTA */}
-            <a href={CTA_URL} target="_blank" rel="noopener noreferrer" style={{display:"inline-block",marginTop:24,background:"#F97316",color:"#fff",fontWeight:700,fontSize:15,padding:"14px 28px",borderRadius:10,textDecoration:"none",transition:"opacity 0.2s"}}>
+            <a
+              href={CTA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: "inline-block", marginTop: 24, background: "#F97316", color: "#fff", fontWeight: 700, fontSize: 15, padding: "14px 28px", borderRadius: 10, textDecoration: "none", transition: "opacity 0.2s" }}
+            >
               Book Your Free 20-Minute Call
             </a>
-            <p style={{color:"#475569",fontSize:12,marginTop:8}}>Free call. No credit card. No commitment.</p>
+            <p style={{ color: "#475569", fontSize: 13, marginTop: 10 }}>Free call. No credit card. No commitment.</p>
           </div>
         </div>
       </div>
@@ -110,7 +108,7 @@ export default function GuaranteeSection() {
           .guarantee-card {
             flex-direction: column;
             padding: 32px 24px;
-            gap: 28px;
+            gap: 24px;
           }
           .guarantee-left {
             min-width: unset;
