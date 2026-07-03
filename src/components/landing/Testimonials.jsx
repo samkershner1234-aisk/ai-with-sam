@@ -33,7 +33,7 @@ const testimonials = [
 
 function Avatar({ t }) {
   return (
-    <div style={{width:48,height:48,borderRadius:"50%",background:t.color,display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontWeight:700,fontSize:16,flexShrink:0}}>
+    <div style={{ width: 48, height: 48, borderRadius: "50%", background: t.color, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 700, fontSize: 16, flexShrink: 0 }}>
       {t.initials}
     </div>
   );
@@ -52,7 +52,7 @@ export default function Testimonials() {
   const handleArrow = useCallback((dir) => {
     setPaused(true);
     clearInterval(intervalRef.current);
-    if (dir === 'next') next(); else prev();
+    if (dir === "next") next(); else prev();
   }, [next, prev]);
 
   const handleDot = useCallback((i) => {
@@ -90,64 +90,71 @@ export default function Testimonials() {
   }, [paused, next]);
 
   return (
-    <section style={{background:"#0F172A",padding:"80px 0 72px"}}>
-      <div style={{maxWidth:1100,margin:"0 auto",padding:"0 24px"}}>
+    <section style={{ background: "#0F172A", padding: "80px 0 72px" }}>
+      <div style={{ maxWidth: 700, margin: "0 auto", padding: "0 24px" }}>
         {/* Header */}
-        <p style={{color:"#F97316",fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",fontSize:13,textAlign:"center",marginBottom:12}}>REAL RESULTS FROM REAL SESSIONS</p>
-        <h2 style={{fontSize:"clamp(24px,4vw,38px)",fontWeight:800,color:"#fff",textAlign:"center",lineHeight:1.2,marginBottom:8}}>
+        <p style={{ color: "#F97316", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", fontSize: 13, textAlign: "center", marginBottom: 12 }}>
+          REAL RESULTS FROM REAL SESSIONS
+        </p>
+        <h2 style={{ fontSize: "clamp(24px,4vw,38px)", fontWeight: 800, color: "#fff", textAlign: "center", lineHeight: 1.2, marginBottom: 8 }}>
           Working Professionals Who Got Their Time Back
         </h2>
-        <p style={{color:"#94A3B8",textAlign:"center",fontSize:16,marginBottom:52,fontStyle:"italic"}}>
+        <p style={{ color: "#94A3B8", textAlign: "center", fontSize: 16, marginBottom: 52, fontStyle: "italic" }}>
           Every client leaves with a working AI system they use the same day. Here's what they said:
         </p>
 
-        {/* Desktop: 2x2 grid */}
-        <div className="test-desktop-grid">
-          {testimonials.map((t, i) => (
-            <div key={i} style={{background:"#1E293B",borderRadius:16,padding:"32px 28px",boxShadow:"0 2px 20px rgba(0,0,0,0.3)"}}>
-              <div style={{fontSize:32,color:"#F97316",marginBottom:16,lineHeight:1}}>&ldquo;&ldquo;</div>
-              <p style={{color:"#CBD5E1",fontSize:16,lineHeight:1.7,marginBottom:24,fontStyle:"italic"}}>{t.quote}</p>
-              <div style={{display:"flex",alignItems:"center",gap:12}}>
-                <Avatar t={t}/>
-                <div>
-                  <div style={{fontWeight:700,color:"#fff",fontSize:15}}>{t.name}</div>
-                  <div style={{color:"#64748B",fontSize:13}}>{t.role}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Mobile: single quote carousel with swipe support */}
+        {/* Carousel — all screen sizes */}
         <div
-          className="test-mobile-carousel"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
-          style={{userSelect:"none"}}
+          style={{ userSelect: "none" }}
         >
-          {/* Arrows above the card */}
-          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:14,padding:"0 2px"}}>
-            <button onClick={() => handleArrow('prev')} aria-label="Previous testimonial" style={{width:44,height:44,borderRadius:"50%",border:"2px solid #F97316",background:"rgba(249,115,22,0.12)",color:"#F97316",fontSize:20,cursor:"pointer",fontWeight:700,display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.2s"}}>&#8592;</button>
-            {/* Dot indicators in the middle */}
-            <div style={{display:"flex",gap:8,alignItems:"center"}}>
+          {/* Arrows + dots above the card */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14, padding: "0 2px" }}>
+            <button
+              onClick={() => handleArrow("prev")}
+              aria-label="Previous testimonial"
+              style={{ width: 44, height: 44, borderRadius: "50%", border: "2px solid #F97316", background: "rgba(249,115,22,0.12)", color: "#F97316", fontSize: 20, cursor: "pointer", fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s" }}
+            >&#8592;</button>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
               {testimonials.map((_, i) => (
-                <button key={i} onClick={() => handleDot(i)} aria-label={`Testimonial ${i+1}`} style={{width:i===current?24:8,height:8,borderRadius:4,border:"none",background:i===current?"#F97316":"#334155",cursor:"pointer",transition:"all 0.3s",padding:0}}/>
+                <button
+                  key={i}
+                  onClick={() => handleDot(i)}
+                  aria-label={`Testimonial ${i + 1}`}
+                  style={{ width: i === current ? 24 : 8, height: 8, borderRadius: 4, border: "none", background: i === current ? "#F97316" : "#334155", cursor: "pointer", transition: "all 0.3s", padding: 0 }}
+                />
               ))}
             </div>
-            <button onClick={() => handleArrow('next')} aria-label="Next testimonial" style={{width:44,height:44,borderRadius:"50%",border:"2px solid #F97316",background:"rgba(249,115,22,0.12)",color:"#F97316",fontSize:20,cursor:"pointer",fontWeight:700,display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.2s"}}>&#8594;</button>
+            <button
+              onClick={() => handleArrow("next")}
+              aria-label="Next testimonial"
+              style={{ width: 44, height: 44, borderRadius: "50%", border: "2px solid #F97316", background: "rgba(249,115,22,0.12)", color: "#F97316", fontSize: 20, cursor: "pointer", fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s" }}
+            >&#8594;</button>
           </div>
 
           {/* Card */}
-          <div style={{position:"relative",minHeight:280}}>
+          <div style={{ position: "relative", minHeight: 280 }}>
             {testimonials.map((item, i) => (
-              <div key={i} style={{position:"absolute",top:0,left:0,right:0,transition:"opacity 0.5s ease, transform 0.5s ease",opacity:i===current?1:0,transform:i===current?"translateY(0)":"translateY(12px)",pointerEvents:i===current?"auto":"none",background:"#1E293B",borderRadius:16,padding:"32px 24px",boxShadow:"0 2px 20px rgba(0,0,0,0.3)"}}>
-                <div style={{fontSize:36,color:"#F97316",marginBottom:12,lineHeight:1}}>&ldquo;&ldquo;</div>
-                <p style={{color:"#CBD5E1",fontSize:16,lineHeight:1.7,marginBottom:24,fontStyle:"italic"}}>{item.quote}</p>
-                <div style={{display:"flex",alignItems:"center",gap:12}}>
-                  <Avatar t={item}/>
+              <div
+                key={i}
+                style={{
+                  position: "absolute", top: 0, left: 0, right: 0,
+                  transition: "opacity 0.5s ease, transform 0.5s ease",
+                  opacity: i === current ? 1 : 0,
+                  transform: i === current ? "translateY(0)" : "translateY(12px)",
+                  pointerEvents: i === current ? "auto" : "none",
+                  background: "#1E293B", borderRadius: 16, padding: "32px 28px",
+                  boxShadow: "0 2px 20px rgba(0,0,0,0.3)"
+                }}
+              >
+                <div style={{ fontSize: 36, color: "#F97316", marginBottom: 12, lineHeight: 1 }}>&ldquo;&ldquo;</div>
+                <p style={{ color: "#CBD5E1", fontSize: 16, lineHeight: 1.7, marginBottom: 24, fontStyle: "italic" }}>{item.quote}</p>
+                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  <Avatar t={item} />
                   <div>
-                    <div style={{fontWeight:700,color:"#fff",fontSize:15}}>{item.name}</div>
-                    <div style={{color:"#64748B",fontSize:13}}>{item.role}</div>
+                    <div style={{ fontWeight: 700, color: "#fff", fontSize: 15 }}>{item.name}</div>
+                    <div style={{ color: "#64748B", fontSize: 13 }}>{item.role}</div>
                   </div>
                 </div>
               </div>
