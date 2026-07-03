@@ -25,6 +25,8 @@ export default function HowItWorks() {
   const [current, setCurrent] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const timerRef = useRef(null);
+  const touchStartX = useRef(null);
+  const swiped = useRef(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -37,6 +39,11 @@ export default function HowItWorks() {
     timerRef.current = setInterval(() => setCurrent(p => (p + 1) % steps.length), 3000);
   };
 
+  const stopTimer = () => {
+    clearInterval(timerRef.current);
+    timerRef.current = null;
+  };
+
   useEffect(() => {
     if (isMobile) startTimer();
     return () => clearInterval(timerRef.current);
@@ -45,6 +52,26 @@ export default function HowItWorks() {
   const goTo = (idx) => { clearInterval(timerRef.current); setCurrent(idx); startTimer(); };
   const prev = () => goTo((current - 1 + steps.length) % steps.length);
   const next = () => goTo((current + 1) % steps.length);
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+    swiped.current = false;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStartX.current === null || swiped.current) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      swiped.current = true;
+      stopTimer();
+      if (diff > 0) {
+        setCurrent(p => (p + 1) % steps.length);
+      } else {
+        setCurrent(p => (p - 1 + steps.length) % steps.length);
+      }
+    }
+    touchStartX.current = null;
+  };
 
   return (
     <section style={{ background: "#0F172A", padding: "80px 0" }}>
@@ -60,39 +87,40 @@ export default function HowItWorks() {
         {!isMobile && (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 28 }}>
             {steps.map((s, i) => (
-              <div key={i} style={{ background: "#1E293B", borderRadius: 16, padding: "36px 28px", border: "1px solid rgba(255,255,255,0.06)", position: "relative" }}>
-                <div style={{ fontWeight: 900, fontSize: 36, color: "rgba(249,115,22,0.2)", marginBottom: 16, lineHeight: 1 }}>{s.num}</div>
-                <h3 style={{ fontWeight: 700, fontSize: 18, color: "#fff", marginBottom: 12, lineHeight: 1.3 }}>{s.title}</h3>
-                <p style={{ color: "#94A3B8", fontSize: 15, lineHeight: 1.65, marginBottom: 20 }}>{s.body}</p>
-                <span style={{ background: "rgba(249,115,22,0.12)", color: "#F97316", borderRadius: 20, padding: "5px 12px", fontSize: 12, fontWeight: 600 }}>{s.tag}</span>
+              <div key={i} style={{ background: "#1E293B", borderRadius: 18, padding: "32px 28px", border: "1px solid rgba(255,255,255,0.06)", position: "relative" }}>
+                <div style={{ fontSize: 48, fontWeight: 900, color: "#F97316", marginBottom: 16, lineHeight: 1 }}>{s.num}</div>
+                <h3 style={{ fontWeight: 800, fontSize: 20, color: "#fff", marginBottom: 12, lineHeight: 1.3 }}>{s.title}</h3>
+                <p style={{ color: "#94A3B8", fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>{s.body}</p>
+                <span style={{ background: "rgba(249,115,22,0.12)", border: "1px solid rgba(249,115,22,0.3)", borderRadius: 999, padding: "5px 14px", fontSize: 12, fontWeight: 700, color: "#F97316" }}>{s.tag}</span>
               </div>
             ))}
           </div>
         )}
 
-        {/* Mobile carousel */}
+        {/* Mobile: carousel with swipe */}
         {isMobile && (
-          <div>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, marginBottom: 18 }}>
-              <button onClick={prev} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(249,115,22,0.15)", border: "2px solid #F97316", color: "#F97316", fontSize: 18, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>‹</button>
-              {steps.map((_, i) => (
-                <button key={i} onClick={() => goTo(i)} style={{ width: i === current ? 20 : 8, height: 8, borderRadius: 4, background: i === current ? "#F97316" : "rgba(249,115,22,0.3)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s" }} />
-              ))}
-              <button onClick={next} style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(249,115,22,0.15)", border: "2px solid #F97316", color: "#F97316", fontSize: 18, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>›</button>
+          <div
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            style={{ userSelect: "none" }}
+          >
+            <div style={{ background: "#1E293B", borderRadius: 18, padding: "32px 24px", border: "1px solid rgba(255,255,255,0.06)", minHeight: 280 }}>
+              <div style={{ fontSize: 48, fontWeight: 900, color: "#F97316", marginBottom: 16, lineHeight: 1 }}>{steps[current].num}</div>
+              <h3 style={{ fontWeight: 800, fontSize: 21, color: "#fff", marginBottom: 12, lineHeight: 1.3 }}>{steps[current].title}</h3>
+              <p style={{ color: "#94A3B8", fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>{steps[current].body}</p>
+              <span style={{ background: "rgba(249,115,22,0.12)", border: "1px solid rgba(249,115,22,0.3)", borderRadius: 999, padding: "5px 14px", fontSize: 12, fontWeight: 700, color: "#F97316" }}>{steps[current].tag}</span>
             </div>
-            <div style={{ overflow: "hidden" }}>
-              <div style={{ display: "flex", transition: "transform 0.4s cubic-bezier(.4,0,.2,1)", transform: `translateX(-${current * 100}%)` }}>
-                {steps.map((s, i) => (
-                  <div key={i} style={{ minWidth: "100%", background: "#1E293B", borderRadius: 16, padding: "36px 28px", border: "1px solid rgba(255,255,255,0.06)" }}>
-                    <div style={{ fontWeight: 900, fontSize: 36, color: "rgba(249,115,22,0.2)", marginBottom: 16 }}>{s.num}</div>
-                    <h3 style={{ fontWeight: 700, fontSize: 18, color: "#fff", marginBottom: 12, lineHeight: 1.3 }}>{s.title}</h3>
-                    <p style={{ color: "#94A3B8", fontSize: 15, lineHeight: 1.65, marginBottom: 20 }}>{s.body}</p>
-                    <span style={{ background: "rgba(249,115,22,0.12)", color: "#F97316", borderRadius: 20, padding: "5px 12px", fontSize: 12, fontWeight: 600 }}>{s.tag}</span>
-                  </div>
+
+            {/* Arrows + dots */}
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20, marginTop: 24 }}>
+              <button onClick={prev} style={{ background: "rgba(249,115,22,0.12)", border: "1.5px solid rgba(249,115,22,0.35)", borderRadius: "50%", width: 40, height: 40, cursor: "pointer", color: "#F97316", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center" }}>‹</button>
+              <div style={{ display: "flex", gap: 8 }}>
+                {steps.map((_, i) => (
+                  <button key={i} onClick={() => goTo(i)} style={{ width: i === current ? 22 : 8, height: 8, borderRadius: 4, background: i === current ? "#F97316" : "rgba(249,115,22,0.25)", border: "none", cursor: "pointer", transition: "all 0.3s" }} />
                 ))}
               </div>
+              <button onClick={next} style={{ background: "rgba(249,115,22,0.12)", border: "1.5px solid rgba(249,115,22,0.35)", borderRadius: "50%", width: 40, height: 40, cursor: "pointer", color: "#F97316", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center" }}>›</button>
             </div>
-            <p style={{ textAlign: "center", color: "#64748B", fontSize: 13, marginTop: 14 }}>Step {current + 1} of {steps.length}</p>
           </div>
         )}
       </div>
