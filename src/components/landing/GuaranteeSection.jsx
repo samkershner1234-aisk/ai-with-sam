@@ -31,26 +31,21 @@ export default function GuaranteeSection() {
           MY GUARANTEE
         </p>
 
-        {/* Main card: two columns on desktop, stacked on mobile */}
+        {/* Main card */}
         <div className="guarantee-card">
-          {/* Left: Shield badge */}
+          {/* Left: small shield icon */}
           <div className="guarantee-left">
-            {/* Big shield */}
-            <div style={{ width: 120, height: 120, borderRadius: "50%", background: "linear-gradient(135deg,#F97316,#EA580C)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 52, marginBottom: 20, boxShadow: "0 0 40px rgba(249,115,22,0.35)" }}>
+            <div style={{ width: 72, height: 72, borderRadius: "50%", background: "linear-gradient(135deg,#F97316,#EA580C)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 32, boxShadow: "0 0 28px rgba(249,115,22,0.35)", flexShrink: 0 }}>
               🛡
-            </div>
-            <div>
-              <div style={{ fontSize: "clamp(32px,5vw,52px)", fontWeight: 900, color: "#F97316", lineHeight: 1, marginBottom: 4 }}>5 Hours</div>
-              <div style={{ color: "#94A3B8", fontSize: 15, marginBottom: 0, textAlign: "center" }}>Guaranteed in week one</div>
             </div>
           </div>
 
           {/* Right: headline + tabs */}
           <div className="guarantee-right">
-            <h2 style={{ fontSize: "clamp(20px,3vw,28px)", fontWeight: 800, color: "#fff", lineHeight: 1.3, marginBottom: 8 }}>
+            <h2 style={{ fontSize: "clamp(18px,2.8vw,26px)", fontWeight: 800, color: "#fff", lineHeight: 1.3, marginBottom: 8 }}>
               If You Don't Save 5 Hours in Week One, I Book You a Free Follow-Up Session.
             </h2>
-            <p style={{ color: "#94A3B8", fontSize: 15, marginBottom: 24 }}>No questions asked. No forms. No hoops.</p>
+            <p style={{ color: "#94A3B8", fontSize: 15, marginBottom: 20 }}>No questions asked. No forms. No hoops.</p>
 
             {/* Tab buttons */}
             <div style={{ display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
@@ -66,7 +61,7 @@ export default function GuaranteeSection() {
             </div>
 
             {/* Tab content */}
-            <div style={{ background: "rgba(255,255,255,0.05)", borderRadius: 10, padding: "20px 20px", minHeight: 80, borderLeft: "3px solid #F97316" }}>
+            <div style={{ background: "rgba(255,255,255,0.05)", borderRadius: 10, padding: "20px 20px", minHeight: 72, borderLeft: "3px solid #F97316" }}>
               <p style={{ color: "#CBD5E1", fontSize: 15, lineHeight: 1.7, margin: 0 }}>{active.content}</p>
             </div>
 
@@ -87,11 +82,11 @@ export default function GuaranteeSection() {
       <style>{`
         .guarantee-card {
           display: flex;
-          gap: 48px;
+          gap: 32px;
           background: #1E293B;
           border-radius: 20px;
-          padding: 48px 44px;
-          align-items: center;
+          padding: 40px 40px;
+          align-items: flex-start;
           box-shadow: 0 4px 40px rgba(0,0,0,0.3);
         }
         .guarantee-left {
@@ -99,20 +94,20 @@ export default function GuaranteeSection() {
           flex-direction: column;
           align-items: center;
           flex-shrink: 0;
-          min-width: 220px;
+          padding-top: 4px;
         }
         .guarantee-right {
           flex: 1;
         }
         @media (max-width: 767px) {
           .guarantee-card {
-            flex-direction: column;
-            padding: 32px 24px;
-            gap: 24px;
+            flex-direction: row;
+            padding: 28px 22px;
+            gap: 16px;
+            align-items: flex-start;
           }
           .guarantee-left {
             min-width: unset;
-            width: 100%;
           }
         }
       `}</style>
