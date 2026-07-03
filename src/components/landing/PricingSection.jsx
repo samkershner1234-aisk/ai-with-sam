@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CTA_URL } from "./constants";
+import { CTA_URL, WHATSAPP_URL } from "./constants";
 
 const ITEMS = [
   "60-minute live session on Google Meet",
@@ -14,12 +14,98 @@ const BONUSES = [
   { title: "14-Day WhatsApp Access to Sam", desc: "Direct access after the session. Got a question? Message Sam. Usually replies within a few hours." },
 ];
 
+const ILS_PHONE = "0526198680";
+
+function ILSPaymentPopup({ onClose }) {
+  const [selected, setSelected] = useState(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(ILS_PHONE).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  const waLink = WHATSAPP_URL.replace(/\?.*$/, "") + "?text=" + encodeURIComponent("Hi! I would like to pay with bank transfer.");
+
+  return (
+    <div
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.6)", zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 20px" }}
+    >
+      <div style={{ background: "#fff", borderRadius: 16, padding: "32px 28px", maxWidth: 380, width: "100%", boxShadow: "0 8px 48px rgba(0,0,0,0.25)", position: "relative" }}>
+        <button onClick={onClose} style={{ position: "absolute", top: 14, right: 16, background: "none", border: "none", fontSize: 20, cursor: "pointer", color: "#64748B" }}>✕</button>
+        <h3 style={{ fontWeight: 800, fontSize: 20, color: "#0F172A", marginBottom: 6 }}>Pay ₪400 ILS</h3>
+        <p style={{ color: "#64748B", fontSize: 14, marginBottom: 22 }}>Choose your preferred payment method:</p>
+
+        {/* Options */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 20 }}>
+          {["Bit", "Paybox", "Bank Transfer"].map((method) => (
+            <button
+              key={method}
+              onClick={() => setSelected(method)}
+              style={{
+                padding: "13px 16px",
+                borderRadius: 10,
+                border: selected === method ? "2px solid #F97316" : "2px solid #E2E8F0",
+                background: selected === method ? "rgba(249,115,22,0.06)" : "#F8FAFC",
+                fontWeight: 700,
+                fontSize: 15,
+                color: selected === method ? "#F97316" : "#0F172A",
+                cursor: "pointer",
+                textAlign: "left",
+                transition: "all 0.15s",
+              }}
+            >
+              {method === "Bit" && "💙 "}{method === "Paybox" && "🟣 "}{method === "Bank Transfer" && "🏦 "}{method}
+            </button>
+          ))}
+        </div>
+
+        {/* Result */}
+        {(selected === "Bit" || selected === "Paybox") && (
+          <div style={{ background: "#F0FDF4", border: "1.5px solid #22C55E", borderRadius: 10, padding: "14px 16px" }}>
+            <p style={{ color: "#15803D", fontSize: 14, fontWeight: 600, marginBottom: 10 }}>
+              Send ₪400 to this number on {selected}:
+            </p>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <span style={{ fontSize: 22, fontWeight: 800, color: "#0F172A", letterSpacing: "0.05em" }}>{ILS_PHONE}</span>
+              <button
+                onClick={handleCopy}
+                style={{ background: copied ? "#22C55E" : "#0F172A", color: "#fff", border: "none", borderRadius: 7, padding: "6px 14px", fontWeight: 700, fontSize: 13, cursor: "pointer", transition: "background 0.2s" }}
+              >
+                {copied ? "Copied ✓" : "Copy"}
+              </button>
+            </div>
+            <p style={{ color: "#64748B", fontSize: 12, marginTop: 8 }}>After sending, message Sam on WhatsApp to confirm.</p>
+          </div>
+        )}
+
+        {selected === "Bank Transfer" && (
+          <a
+            href={waLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ display: "block", background: "#22C55E", color: "#fff", fontWeight: 700, fontSize: 15, padding: "13px 16px", borderRadius: 10, textDecoration: "none", textAlign: "center" }}
+          >
+            💬 Message Sam on WhatsApp
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function PricingSection() {
   const [itemsOpen, setItemsOpen] = useState(false);
   const [bonusesOpen, setBonusesOpen] = useState(false);
+  const [showILSPopup, setShowILSPopup] = useState(false);
 
   return (
     <section style={{ background: "#f8f9fb", padding: "56px 0" }}>
+      {showILSPopup && <ILSPaymentPopup onClose={() => setShowILSPopup(false)} />}
+
       <div style={{ maxWidth: 560, margin: "0 auto", padding: "0 20px" }}>
         {/* Section header */}
         <p style={{ color: "#F97316", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", fontSize: 13, textAlign: "center", marginBottom: 10 }}>
@@ -32,7 +118,7 @@ export default function PricingSection() {
         {/* Main card */}
         <div style={{ background: "#fff", borderRadius: 18, boxShadow: "0 4px 32px rgba(15,23,42,0.10)", overflow: "hidden" }}>
           {/* Badge */}
-          <div style={{ background: "#F97316", padding: "10px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ background: "#F97316", padding: "10px 24px" }}>
             <span style={{ color: "#fff", fontWeight: 700, fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase" }}>
               FOR WORKING PROFESSIONALS
             </span>
@@ -41,13 +127,10 @@ export default function PricingSection() {
           <div style={{ padding: "28px 28px 24px" }}>
             {/* Product name + price */}
             <div style={{ marginBottom: 20 }}>
-              <div style={{ fontSize: "clamp(18px,3vw,22px)", fontWeight: 800, color: "#0F172A", marginBottom: 6 }}>
+              <div style={{ fontSize: "clamp(18px,3vw,22px)", fontWeight: 800, color: "#0F172A", marginBottom: 14 }}>
                 Your AI System, Built Live
               </div>
-              <div style={{ color: "#64748B", fontSize: 14, marginBottom: 14, lineHeight: 1.5 }}>
-                One session. Working AI built for your job. Results before you close your laptop.
-              </div>
-              <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 6 }}>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 8 }}>
                 <span style={{ fontSize: "clamp(28px,5vw,40px)", fontWeight: 900, color: "#0F172A" }}>₪400</span>
                 <span style={{ color: "#64748B", fontSize: 14 }}>one-time · $135 USD · £100 GBP</span>
               </div>
@@ -118,18 +201,30 @@ export default function PricingSection() {
             </a>
             <p style={{ color: "#64748B", fontSize: 13, textAlign: "center", marginBottom: 20 }}>Already had your free call? Reserve your session below.</p>
 
-            {/* Payment links */}
+            {/* Payment buttons */}
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
-              {[
-                { label: "Pay ₪400 ILS", href: CTA_URL },
-                { label: "Pay $135 USD", href: CTA_URL },
-                { label: "Pay £100 GBP", href: CTA_URL },
-              ].map(({ label, href }) => (
-                <a key={label} href={href} target="_blank" rel="noopener noreferrer"
-                  style={{ flex: "1 1 120px", minWidth: 110, textAlign: "center", border: "1.5px solid #E2E8F0", borderRadius: 8, padding: "10px 8px", color: "#334155", fontWeight: 600, fontSize: 13, textDecoration: "none", background: "#fff" }}>
-                  {label}
-                </a>
-              ))}
+              <button
+                onClick={() => setShowILSPopup(true)}
+                style={{ flex: "1 1 120px", minWidth: 110, textAlign: "center", border: "1.5px solid #E2E8F0", borderRadius: 8, padding: "10px 8px", color: "#334155", fontWeight: 600, fontSize: 13, background: "#fff", cursor: "pointer" }}
+              >
+                Pay ₪400 ILS
+              </button>
+              <a
+                href="https://www.paypal.com/ncp/payment/FJRZD966GUUWW"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ flex: "1 1 120px", minWidth: 110, textAlign: "center", border: "1.5px solid #E2E8F0", borderRadius: 8, padding: "10px 8px", color: "#334155", fontWeight: 600, fontSize: 13, textDecoration: "none", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center" }}
+              >
+                Pay $135 USD
+              </a>
+              <a
+                href="https://www.paypal.com/ncp/payment/YTA8589KBMZVS"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ flex: "1 1 120px", minWidth: 110, textAlign: "center", border: "1.5px solid #E2E8F0", borderRadius: 8, padding: "10px 8px", color: "#334155", fontWeight: 600, fontSize: 13, textDecoration: "none", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center" }}
+              >
+                Pay £100 GBP
+              </a>
             </div>
           </div>
         </div>
