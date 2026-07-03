@@ -97,6 +97,19 @@ export default function Testimonials() {
 
         {/* Mobile: single quote carousel with fade */}
         <div className="test-mobile-carousel">
+          {/* Arrows above the card */}
+          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:14,padding:"0 2px"}}>
+            <button onClick={() => handleArrow('prev')} aria-label="Previous testimonial" style={{width:44,height:44,borderRadius:"50%",border:"2px solid #F97316",background:"rgba(249,115,22,0.12)",color:"#F97316",fontSize:20,cursor:"pointer",fontWeight:700,display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.2s"}}>&#8592;</button>
+            {/* Dot indicators in the middle */}
+            <div style={{display:"flex",gap:8,alignItems:"center"}}>
+              {testimonials.map((_, i) => (
+                <button key={i} onClick={() => handleDot(i)} aria-label={`Testimonial ${i+1}`} style={{width:i===current?24:8,height:8,borderRadius:4,border:"none",background:i===current?"#F97316":"#334155",cursor:"pointer",transition:"all 0.3s",padding:0}}/>
+              ))}
+            </div>
+            <button onClick={() => handleArrow('next')} aria-label="Next testimonial" style={{width:44,height:44,borderRadius:"50%",border:"2px solid #F97316",background:"rgba(249,115,22,0.12)",color:"#F97316",fontSize:20,cursor:"pointer",fontWeight:700,display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.2s"}}>&#8594;</button>
+          </div>
+
+          {/* Card */}
           <div style={{position:"relative",minHeight:280}}>
             {testimonials.map((item, i) => (
               <div key={i} style={{position:"absolute",top:0,left:0,right:0,transition:"opacity 0.5s ease, transform 0.5s ease",opacity:i===current?1:0,transform:i===current?"translateY(0)":"translateY(12px)",pointerEvents:i===current?"auto":"none",background:"#1E293B",borderRadius:16,padding:"32px 24px",boxShadow:"0 2px 20px rgba(0,0,0,0.3)"}}>
@@ -112,16 +125,6 @@ export default function Testimonials() {
               </div>
             ))}
           </div>
-
-          {/* Controls: arrows + dots */}
-          <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:14,marginTop:16}}>
-            <button onClick={() => handleArrow('prev')} aria-label="Previous testimonial" style={{width:40,height:40,borderRadius:"50%",border:"2px solid #F97316",background:"transparent",color:"#F97316",fontSize:18,cursor:"pointer",fontWeight:700,transition:"all 0.2s"}}>&#8592;</button>
-            {testimonials.map((_, i) => (
-              <button key={i} onClick={() => handleDot(i)} aria-label={`Testimonial ${i+1}`} style={{width:i===current?24:8,height:8,borderRadius:4,border:"none",background:i===current?"#F97316":"#334155",cursor:"pointer",transition:"all 0.3s",padding:0}}/>
-            ))}
-            <button onClick={() => handleArrow('next')} aria-label="Next testimonial" style={{width:40,height:40,borderRadius:"50%",border:"2px solid #F97316",background:"transparent",color:"#F97316",fontSize:18,cursor:"pointer",fontWeight:700,transition:"all 0.2s"}}>&#8594;</button>
-          </div>
-          <p style={{textAlign:"center",fontSize:12,color:"#475569",marginTop:8}}>{paused ? "Paused — tap an arrow to resume" : "Auto-rotating every 3s"}</p>
         </div>
       </div>
 
