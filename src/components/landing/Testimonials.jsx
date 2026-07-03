@@ -43,6 +43,8 @@ export default function Testimonials() {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const intervalRef = useRef(null);
+  const touchStartX = useRef(null);
+  const swiped = useRef(false);
 
   const next = useCallback(() => setCurrent(p => (p + 1) % testimonials.length), []);
   const prev = useCallback(() => setCurrent(p => (p - 1 + testimonials.length) % testimonials.length), []);
@@ -58,6 +60,27 @@ export default function Testimonials() {
     clearInterval(intervalRef.current);
     setCurrent(i);
   }, []);
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+    swiped.current = false;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStartX.current === null || swiped.current) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      swiped.current = true;
+      setPaused(true);
+      clearInterval(intervalRef.current);
+      if (diff > 0) {
+        setCurrent(p => (p + 1) % testimonials.length);
+      } else {
+        setCurrent(p => (p - 1 + testimonials.length) % testimonials.length);
+      }
+    }
+    touchStartX.current = null;
+  };
 
   useEffect(() => {
     if (!paused) {
@@ -95,8 +118,13 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Mobile: single quote carousel with fade */}
-        <div className="test-mobile-carousel">
+        {/* Mobile: single quote carousel with swipe support */}
+        <div
+          className="test-mobile-carousel"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          style={{userSelect:"none"}}
+        >
           {/* Arrows above the card */}
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:14,padding:"0 2px"}}>
             <button onClick={() => handleArrow('prev')} aria-label="Previous testimonial" style={{width:44,height:44,borderRadius:"50%",border:"2px solid #F97316",background:"rgba(249,115,22,0.12)",color:"#F97316",fontSize:20,cursor:"pointer",fontWeight:700,display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.2s"}}>&#8592;</button>
@@ -127,15 +155,6 @@ export default function Testimonials() {
           </div>
         </div>
       </div>
-
-      <style>{`
-        .test-desktop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-        .test-mobile-carousel { display: none; }
-        @media (max-width: 767px) {
-          .test-desktop-grid { display: none; }
-          .test-mobile-carousel { display: block; }
-        }
-      `}</style>
     </section>
   );
 }
