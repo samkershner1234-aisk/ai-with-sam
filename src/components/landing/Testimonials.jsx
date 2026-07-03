@@ -41,23 +41,30 @@ function Avatar({ t }) {
 
 export default function Testimonials() {
   const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
   const intervalRef = useRef(null);
 
   const next = useCallback(() => setCurrent(p => (p + 1) % testimonials.length), []);
   const prev = useCallback(() => setCurrent(p => (p - 1 + testimonials.length) % testimonials.length), []);
 
   const handleArrow = useCallback((dir) => {
-    if (dir === 'next') next(); else prev();
+    setPaused(true);
     clearInterval(intervalRef.current);
-    intervalRef.current = setInterval(next, 3000);
+    if (dir === 'next') next(); else prev();
   }, [next, prev]);
 
-  useEffect(() => {
-    intervalRef.current = setInterval(next, 3000);
-    return () => clearInterval(intervalRef.current);
-  }, [next]);
+  const handleDot = useCallback((i) => {
+    setPaused(true);
+    clearInterval(intervalRef.current);
+    setCurrent(i);
+  }, []);
 
-  const t = testimonials[current];
+  useEffect(() => {
+    if (!paused) {
+      intervalRef.current = setInterval(next, 3000);
+    }
+    return () => clearInterval(intervalRef.current);
+  }, [paused, next]);
 
   return (
     <section style={{background:"#0F172A",padding:"80px 0 72px"}}>
@@ -90,9 +97,9 @@ export default function Testimonials() {
 
         {/* Mobile: single quote carousel with fade */}
         <div className="test-mobile-carousel">
-          <div style={{position:"relative",minHeight:260}}>
+          <div style={{position:"relative",minHeight:280}}>
             {testimonials.map((item, i) => (
-              <div key={i} style={{position:"absolute",top:0,left:0,right:0,transition:"opacity 0.5s ease, transform 0.5s ease",opacity: i===current?1:0,transform: i===current?"translateY(0)":"translateY(12px)",pointerEvents: i===current?"auto":"none",background:"#1E293B",borderRadius:16,padding:"32px 24px",boxShadow:"0 2px 20px rgba(0,0,0,0.3)"}}>
+              <div key={i} style={{position:"absolute",top:0,left:0,right:0,transition:"opacity 0.5s ease, transform 0.5s ease",opacity:i===current?1:0,transform:i===current?"translateY(0)":"translateY(12px)",pointerEvents:i===current?"auto":"none",background:"#1E293B",borderRadius:16,padding:"32px 24px",boxShadow:"0 2px 20px rgba(0,0,0,0.3)"}}>
                 <div style={{fontSize:36,color:"#F97316",marginBottom:12,lineHeight:1}}>&ldquo;&ldquo;</div>
                 <p style={{color:"#CBD5E1",fontSize:16,lineHeight:1.7,marginBottom:24,fontStyle:"italic"}}>{item.quote}</p>
                 <div style={{display:"flex",alignItems:"center",gap:12}}>
@@ -106,14 +113,15 @@ export default function Testimonials() {
             ))}
           </div>
 
-          {/* Controls */}
+          {/* Controls: arrows + dots */}
           <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:14,marginTop:16}}>
-            <button onClick={() => handleArrow('prev')} aria-label="Previous testimonial" style={{width:40,height:40,borderRadius:"50%",border:"2px solid #F97316",background:"transparent",color:"#F97316",fontSize:18,cursor:"pointer",fontWeight:700}}>&#8592;</button>
+            <button onClick={() => handleArrow('prev')} aria-label="Previous testimonial" style={{width:40,height:40,borderRadius:"50%",border:"2px solid #F97316",background:"transparent",color:"#F97316",fontSize:18,cursor:"pointer",fontWeight:700,transition:"all 0.2s"}}>&#8592;</button>
             {testimonials.map((_, i) => (
-              <button key={i} onClick={() => setCurrent(i)} aria-label={`Testimonial ${i+1}`} style={{width: i===current?24:8,height:8,borderRadius:4,border:"none",background: i===current?"#F97316":"#334155",cursor:"pointer",transition:"all 0.3s",padding:0}}/>
+              <button key={i} onClick={() => handleDot(i)} aria-label={`Testimonial ${i+1}`} style={{width:i===current?24:8,height:8,borderRadius:4,border:"none",background:i===current?"#F97316":"#334155",cursor:"pointer",transition:"all 0.3s",padding:0}}/>
             ))}
-            <button onClick={() => handleArrow('next')} aria-label="Next testimonial" style={{width:40,height:40,borderRadius:"50%",border:"2px solid #F97316",background:"transparent",color:"#F97316",fontSize:18,cursor:"pointer",fontWeight:700}}>&#8594;</button>
+            <button onClick={() => handleArrow('next')} aria-label="Next testimonial" style={{width:40,height:40,borderRadius:"50%",border:"2px solid #F97316",background:"transparent",color:"#F97316",fontSize:18,cursor:"pointer",fontWeight:700,transition:"all 0.2s"}}>&#8594;</button>
           </div>
+          <p style={{textAlign:"center",fontSize:12,color:"#475569",marginTop:8}}>{paused ? "Paused — tap an arrow to resume" : "Auto-rotating every 3s"}</p>
         </div>
       </div>
 
