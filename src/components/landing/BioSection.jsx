@@ -10,7 +10,7 @@ export default function BioSection() {
         </p>
 
         {/* Card */}
-        <div style={{ background: "#F8FAFC", borderRadius: 20, padding: "36px 32px", display: "flex", flexDirection: "column", alignItems: "center", gap: 0 }}>
+        <div style={{ background: "#F8FAFC", borderRadius: 20, padding: "36px 32px", display: "flex", flexDirection: "column", alignItems: "center" }}>
           {/* Photo + name row */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: 20 }}>
             <div style={{ position: "relative", marginBottom: 14 }}>
@@ -59,12 +59,6 @@ export default function BioSection() {
             >
               Book Your Free 20-Minute Call
             </a>
-            <p style={{ color: "#94A3B8", fontSize: 13, marginTop: 12 }}>
-              Not ready to book yet?{" "}
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ color: "#F97316", fontWeight: 600, textDecoration: "none" }}>
-                Message Sam on WhatsApp
-              </a>{" "}and ask anything. Usually replies within a few hours.
-            </p>
           </div>
         </div>
       </div>
