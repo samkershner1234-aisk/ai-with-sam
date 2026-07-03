@@ -1,37 +1,47 @@
 import { useState, useEffect } from "react";
 import { CTA_URL } from "./constants";
+
 const faqs=[
-  {q:"What if I've never used AI before?",a:"Even better. Clients who have never used AI before often get the most out of the session because we start completely fresh. I won't assume any prior knowledge. We build something from zero, together."},
-  {q:"What does a typical session look like?",a:"We start the session on Google Meet with a quick 5-minute review of what we identified on the discovery call. Then I build your AI system live. You watch, ask questions, and we test it together in real time. By the end of the 60 minutes, you have a working system and you've already used it at least once before we hang up."},
-  {q:"Do I need to prepare anything before the session?",a:"Just come ready to describe how you work. Before the session I'll send you a short 3-question form so I can research your role and workflow in advance. The more specific you are on that form, the faster we can build something powerful on the day."},
-  {q:"How do I know this will actually work for my specific job?",a:"Before every session I research your role and workflow. On the discovery call, I tell you exactly what I'd build — so you know what you're getting before you pay anything. And if the result doesn't save you 5 hours in week one, I book a free follow-up. There is zero risk to you."},
+  {q:"What if I've never used AI before?",a:"Even better. Clients who have never used AI before often get the most out of this because we build something from scratch that fits exactly how they already work. No prior knowledge needed."},
+  {q:"What does a typical session look like?",a:"We start the session on Google Meet with a quick 5-minute overview of what I've prepared based on your role. Then we spend 50–55 minutes building your custom AI solution live. You watch, ask questions, and by the end, you have something working."},
+  {q:"Do I need to prepare anything before the session?",a:"Just come ready to describe how you work. The more specific you can be about your day-to-day tasks, the more useful the solution I build will be. No software to install. No materials to read."},
+  {q:"How do I know this will actually work for my specific job?",a:"Before every session I research your role, industry, and common workflows so I can build something relevant before we even start. If for any reason I can't build something useful, you don't pay."},
   {q:"What happens after the session?",a:"You receive a full recording of the session, a written recap document with all your custom prompts and next steps, and 14 days of direct WhatsApp access to me. Got a prompt that's not working, or a new task to automate? Message me directly. Not a ticket system. Direct access."},
-  {q:"What if I want more support after the 14 days?",a:"Just message me on WhatsApp. Most clients find the system is self-sufficient after two weeks, but if you want additional sessions or ongoing support, we can arrange that."},
-  {q:"What's the guarantee again?",a:"If you haven't saved 5 hours in your first week, message me on WhatsApp within 7 days and I will book you a free follow-up session immediately. No questions asked. No forms. Zero risk to you."},
-  {q:"How do I book?",a:"Click any 'Book Your Free 20-Minute Call' button on this page. You'll land on a Calendly page where you can pick a time that works for you. Payment is confirmed after the discovery call, once you've decided you want to go ahead."},
-  ];
+  {q:"What if I want more support after the 14 days?",a:"Just message me on WhatsApp. Most clients find that 14 days is more than enough — but if you need more time or a follow-up session, we can arrange that."},
+  {q:"What's the guarantee again?",a:"If you haven't saved 5 hours in your first week, message me on WhatsApp and I'll book a free follow-up session immediately. No forms. No questions."},
+  {q:"How do I book?",a:"Click any 'Book Your Free 20-Minute Call' button on this page. You'll land on a short booking form. Pick a time that works for you. I'll send a confirmation and a few questions about your role beforehand."},
+];
+
 export default function FAQSection() {
-const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-useEffect(() => {
-const handleResize = () => setIsMobile(window.innerWidth <= 768);
-window.addEventListener("resize", handleResize);
-return () => window.removeEventListener("resize", handleResize);
-}, []);
-const [open, setOpen] = useState(null);
+  const [open, setOpen] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <section id="faq" style={{background:" #FFFFFF",padding:isMobile?"60px 24px":"100px 24px"}}>
-      <div style={{maxWidth:"720px",margin:"0 auto"}}>
-        <h2 style={{fontSize:"clamp(28px,4vw,40px)",fontWeight:800,color:" #1E293B",textAlign:"center",marginBottom:"48px"}}>Still on the Fence? Here's What Others Asked First.</h2>
-        {faqs.map((f,i)=>(
-      <div key={i} style={{borderBottom:"1px solid #E2E8F0"}}>
-        <button onClick={()=>setOpen(open===i?null:i)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center",padding:"24px 0",textAlign:"left"}}>
-          <span style={{fontSize:"17px",fontWeight:600,color:" #1E293B",paddingRight:"16px"}}>{f.q}</span>
-          <span style={{fontSize:"20px",color:" #F97316",flexShrink:0,transform:open===i?"rotate(45deg)":"none",transition:"transform 0.2s"}}>+</span>
-        </button>
-        {open===i&&<p style={{color:" #475569",fontSize:"15px",lineHeight:1.7,paddingBottom:"20px",margin:0}}>{f.a}</p>}
-      </div>
-      ))}
+    <section style={{ background: "#0F172A", padding: isMobile ? "60px 24px 0" : "100px 24px 0" }}>
+      <div style={{ maxWidth: "700px", margin: "0 auto" }}>
+        <h2 style={{ fontSize: "clamp(24px,3.5vw,36px)", fontWeight: 800, color: "#fff", textAlign: "center", marginBottom: 40, lineHeight: 1.2 }}>
+          Still on the Fence? Here's What Others Asked First.
+        </h2>
+        {faqs.map((faq, i) => (
+          <div key={i} style={{ borderBottom: "1px solid rgba(255,255,255,0.08)", padding: "18px 0" }}>
+            <button
+              onClick={() => setOpen(open === i ? null : i)}
+              style={{ width: "100%", background: "none", border: "none", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, textAlign: "left" }}
+            >
+              <span style={{ fontWeight: 600, fontSize: isMobile ? 15 : 17, color: "#fff", lineHeight: 1.4 }}>{faq.q}</span>
+              <span style={{ color: "#F97316", fontSize: 22, fontWeight: 700, flexShrink: 0, transform: open === i ? "rotate(45deg)" : "none", transition: "transform 0.2s" }}>+</span>
+            </button>
+            {open === i && (
+              <p style={{ color: "#94A3B8", fontSize: isMobile ? 14 : 16, lineHeight: 1.7, marginTop: 12, paddingRight: 32 }}>{faq.a}</p>
+            )}
+          </div>
+        ))}
       </div>
     </section>
-    );
+  );
 }
