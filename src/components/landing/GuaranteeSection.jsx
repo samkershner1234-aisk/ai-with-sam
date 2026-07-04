@@ -62,7 +62,7 @@ export default function GuaranteeSection() {
 
             {/* Tab content */}
             <div style={{ background: "rgba(255,255,255,0.05)", borderRadius: 10, padding: "20px 20px", minHeight: 72, borderLeft: "3px solid #F97316" }}>
-              <p style={{ color: "#CBD5E1", fontSize: 15, lineHeight: 1.7, margin: 0 }}>{active.content}</p>
+              <p className="guarantee-body-text" style={{ color: "#CBD5E1", lineHeight: 1.7, margin: 0 }}>{active.content}</p>
             </div>
 
             {/* CTA */}
@@ -98,6 +98,14 @@ export default function GuaranteeSection() {
         }
         .guarantee-right {
           flex: 1;
+        }
+        .guarantee-body-text {
+          font-size: 15px;
+        }
+        @media (max-width: 480px) {
+          .guarantee-body-text {
+            font-size: 16px;
+          }
         }
         @media (max-width: 767px) {
           .guarantee-card {
