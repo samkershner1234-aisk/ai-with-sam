@@ -90,7 +90,7 @@ export default function Testimonials() {
   }, [paused, next]);
 
   return (
-    <section style={{ background: "#0F172A", padding: "80px 0 72px" }}>
+    <section style={{ background: "#0F172A", padding: "40px 0 72px" }}>
       <div style={{ maxWidth: 700, margin: "0 auto", padding: "0 24px" }}>
         {/* Header */}
         <p style={{ color: "#F97316", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", fontSize: 13, textAlign: "center", marginBottom: 12 }}>
