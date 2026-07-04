@@ -24,7 +24,7 @@ export default function GuaranteeSection() {
   const active = details.find(d => d.id === activeTab);
 
   return (
-    <section style={{ background: "#0F172A", padding: "56px 0" }}>
+    <section style={{ background: "#0F172A", padding: "40px 0" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
         {/* Section label */}
         <p style={{ color: "#F97316", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", fontSize: 13, textAlign: "center", marginBottom: 10 }}>
