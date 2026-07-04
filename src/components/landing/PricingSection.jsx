@@ -134,7 +134,7 @@ export default function PricingSection() {
             <span style={{ color: "#F97316", fontWeight: 700, fontSize: 14 }}>5-Hour Guarantee — No one has ever claimed it.</span>
           </div>
 
-          <p style={{ color: "#F97316", fontWeight: 700, fontSize: 15, marginBottom: 16 }}>
+          <p style={{ color: "#FFFFFF", fontWeight: 700, fontSize: 15, marginBottom: 16 }}>
             400₪ / $135 USD / £100 GBP for your 60-minute session.
           </p>
 
