@@ -121,7 +121,7 @@ export default function Hero() {
           <span className="block text-white">Every Day.</span>
         </h1>
 
-        <p className="mt-3 max-w-xs text-[14px] leading-5 text-white/75">
+        <p className="mt-3 max-w-xs text-[16px] leading-6 text-white/75">
           One live session. A custom AI system built for your exact role.
         </p>
 
