@@ -115,7 +115,7 @@ export default function Hero() {
       {/* ── MOBILE layout ── */}
       <div className="relative flex flex-col items-center px-6 pt-5 pb-4 text-center md:hidden">
 
-        <h1 className="text-[clamp(28px,8vw,42px)] font-black leading-[0.95] tracking-[-0.05em]">
+        <h1 className="text-[clamp(34px,9.5vw,50px)] font-black leading-[0.95] tracking-[-0.05em]">
           <span className="block text-white">Get Hours</span>
           <span className="block"><span className="text-[#F97316]">Back.</span></span>
           <span className="block text-white">Every Day.</span>
@@ -142,11 +142,11 @@ export default function Hero() {
       </div>
 
       {/* ── DESKTOP layout ── */}
-      <div className="relative mx-auto hidden min-h-screen w-full max-w-[1440px] items-center md:flex md:px-14 md:py-16">
+      <div className="relative mx-auto hidden w-full max-w-[1440px] items-center md:flex md:px-14 md:pt-16 md:pb-8">
         <div className="grid w-full grid-cols-[1.05fr_0.95fr] items-center gap-10">
 
           <div className="z-10 max-w-3xl">
-            <h1 className="max-w-2xl text-[clamp(44px,6.8vw,100px)] font-black leading-[0.92] tracking-[-0.07em]">
+            <h1 className="max-w-2xl text-[clamp(52px,7.6vw,116px)] font-black leading-[0.92] tracking-[-0.07em]">
               <span className="block text-white">Get Hours</span>
               <span className="block"><span className="text-[#F97316]">Back.</span></span>
               <span className="block text-white">Every Day.</span>
