@@ -104,7 +104,7 @@ export default function PricingSection() {
   };
 
   return (
-    <section id="offer" style={{ background: "#0F172A", padding: "56px 0" }}>
+    <section id="offer" style={{ background: "#0F172A", padding: "56px 0 40px" }}>
       {showCurrencyPicker && <CurrencyPickerPopup onClose={() => setShowCurrencyPicker(false)} onILS={handleILS} />}
       {showILSPopup && <ILSPaymentPopup onClose={() => setShowILSPopup(false)} />}
 

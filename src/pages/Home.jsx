@@ -20,7 +20,7 @@ export default function Home() {
       <Hero />
       <PainSection />
       {/* "The problem isn't you" highlight box */}
-      <section style={{ background: "#0F172A", padding: "0 24px 64px" }}>
+      <section style={{ background: "#0F172A", padding: "0 24px 40px" }}>
         <div style={{ maxWidth: 700, margin: "0 auto" }}>
           <div style={{ background: "linear-gradient(135deg, rgba(249,115,22,0.12), rgba(249,115,22,0.04))", border: "1.5px solid rgba(249,115,22,0.35)", borderRadius: 18, padding: "36px 40px", textAlign: "center", boxShadow: "0 0 40px rgba(249,115,22,0.08)" }}>
             <div style={{ fontSize: 32, marginBottom: 12 }}>💡</div>
