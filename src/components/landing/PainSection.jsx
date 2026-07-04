@@ -77,7 +77,7 @@ export default function PainSection() {
   };
 
   return (
-    <section style={{ background: "#0F172A", padding: "80px 0 72px" }}>
+    <section style={{ background: "#0F172A", padding: "40px 0 72px" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
         <p style={{ color: "#F97316", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", fontSize: 13, textAlign: "center", marginBottom: 12 }}>
           SOUND FAMILIAR?
