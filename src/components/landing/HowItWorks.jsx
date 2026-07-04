@@ -107,7 +107,7 @@ export default function HowItWorks() {
             <div style={{ background: "#1E293B", borderRadius: 18, padding: "32px 24px", border: "1px solid rgba(255,255,255,0.06)", minHeight: 280 }}>
               <div style={{ fontSize: 48, fontWeight: 900, color: "#F97316", marginBottom: 16, lineHeight: 1 }}>{steps[current].num}</div>
               <h3 style={{ fontWeight: 800, fontSize: 21, color: "#fff", marginBottom: 12, lineHeight: 1.3 }}>{steps[current].title}</h3>
-              <p style={{ color: "#94A3B8", fontSize: 15, lineHeight: 1.7, marginBottom: 16 }}>{steps[current].body}</p>
+              <p style={{ color: "#94A3B8", fontSize: 16, lineHeight: 1.7, marginBottom: 16 }}>{steps[current].body}</p>
               <span style={{ background: "rgba(249,115,22,0.12)", border: "1px solid rgba(249,115,22,0.3)", borderRadius: 999, padding: "5px 14px", fontSize: 12, fontWeight: 700, color: "#F97316" }}>{steps[current].tag}</span>
             </div>
 
