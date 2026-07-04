@@ -3,6 +3,7 @@ import { CTA_URL } from "./constants";
 
 const faqs=[
   {q:"What if I've never used AI before?",a:"Even better. Clients who have never used AI before often get the most out of this because we build something from scratch that fits exactly how they already work. No prior knowledge needed."},
+  {q:"Can I really save 5 hours from one session?",a:"Yes. Every client leaves with a working system the same day, and the guarantee exists because most people save more than 5 hours in week one alone."},
   {q:"What does a typical session look like?",a:"We start the session on Google Meet with a quick 5-minute overview of what I've prepared based on your role. Then we spend 50–55 minutes building your custom AI solution live. You watch, ask questions, and by the end, you have something working."},
   {q:"Do I need to prepare anything before the session?",a:"Just come ready to describe how you work. The more specific you can be about your day-to-day tasks, the more useful the solution I build will be. No software to install. No materials to read."},
   {q:"How do I know this will actually work for my specific job?",a:"Before every session I research your role, industry, and common workflows so I can build something relevant before we even start. If for any reason I can't build something useful, you don't pay."},
