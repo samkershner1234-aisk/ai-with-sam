@@ -112,7 +112,7 @@ export default function PainSection() {
             <div style={{ background: "#1E293B", borderRadius: 18, padding: "32px 24px", border: "1px solid rgba(255,255,255,0.06)", minHeight: 220 }}>
               <div style={{ fontSize: 36, marginBottom: 18 }}>{cards[current].icon}</div>
               <h3 style={{ fontWeight: 800, fontSize: 21, color: "#fff", marginBottom: 12, lineHeight: 1.3 }}>{cards[current].title}</h3>
-              <p style={{ color: "#94A3B8", fontSize: 15, lineHeight: 1.7 }}>{cards[current].body}</p>
+              <p style={{ color: "#94A3B8", fontSize: 16, lineHeight: 1.7 }}>{cards[current].body}</p>
             </div>
 
             {/* Arrows */}
