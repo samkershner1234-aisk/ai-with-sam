@@ -22,7 +22,7 @@ export default function FAQSection() {
   }, []);
 
   return (
-    <section style={{ background: "#0F172A", padding: isMobile ? "60px 24px 0" : "100px 24px 0" }}>
+    <section style={{ background: "#0F172A", padding: isMobile ? "36px 24px 0" : "48px 24px 0" }}>
       <div style={{ maxWidth: "700px", margin: "0 auto" }}>
         <h2 style={{ fontSize: "clamp(24px,3.5vw,36px)", fontWeight: 800, color: "#fff", textAlign: "center", marginBottom: 40, lineHeight: 1.2 }}>
           Still on the Fence? Here's What Others Asked First.
