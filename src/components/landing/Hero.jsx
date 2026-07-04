@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { CTA_URL } from "./constants";
+import { CTA_URL, SAM_PHOTO } from "./constants";
 
 const badges = [
   { icon: "💬", text: "14 days WhatsApp support" },
@@ -121,9 +121,14 @@ export default function Hero() {
           <span className="block text-white">Every Day.</span>
         </h1>
 
-        <p className="mt-3 max-w-xs text-[14px] leading-5 text-white/75">
+        <p className="mt-3 max-w-xs text-[16px] leading-6 text-white/75">
           One live session. A custom AI system built for your exact role.
         </p>
+
+        <div className="mt-4 flex flex-col items-center">
+          <img src={SAM_PHOTO} alt="Sam Kershner" className="h-14 w-14 rounded-full object-cover border-2 border-[#F97316]/60" />
+          <p className="mt-1 text-[11px] text-white/60">Built by Sam Kershner, AI Systems Builder.</p>
+        </div>
 
         <div className="mt-3 flex flex-col items-center space-y-2">
           {badges.map((b) => (
@@ -155,6 +160,11 @@ export default function Hero() {
             <p className="mt-8 max-w-xl text-[19px] leading-8 text-white/75">
               One live session. A custom AI system built for your exact role.
             </p>
+
+            <div className="mt-6 flex items-center gap-3">
+              <img src={SAM_PHOTO} alt="Sam Kershner" className="h-14 w-14 rounded-full object-cover border-2 border-[#F97316]/60" />
+              <p className="text-[13px] leading-tight text-white/60">Built by Sam Kershner,<br />AI Systems Builder.</p>
+            </div>
 
             <div className="mt-10 flex flex-col items-start space-y-4">
               {badges.map((b) => (

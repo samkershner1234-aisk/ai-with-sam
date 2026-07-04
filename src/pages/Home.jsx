@@ -32,11 +32,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <BioSection />
       <HowItWorks />
       <Testimonials />
       <PricingSection />
       <GuaranteeSection />
-      <BioSection />
       <FAQSection />
       <ClosingCTA />
       <Footer />

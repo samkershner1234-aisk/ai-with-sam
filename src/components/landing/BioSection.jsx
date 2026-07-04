@@ -33,7 +33,7 @@ export default function BioSection() {
             <h2 style={{ fontSize: "clamp(18px,3vw,24px)", fontWeight: 800, color: "#fff", marginBottom: 14, lineHeight: 1.3 }}>
               I Build Working AI Systems.<br />One Session. Real Results.
             </h2>
-            <p style={{ color: "#94A3B8", fontSize: 15, lineHeight: 1.7, marginBottom: 24 }}>
+            <p className="bio-body-text" style={{ color: "#94A3B8", lineHeight: 1.7, marginBottom: 24 }}>
               Before this, I spent 4+ years as an AI-native professional. I don't just talk about AI tools — I build with them. Every client leaves with something they can use immediately.
             </p>
             <a href={CTA_URL} target="_blank" rel="noopener noreferrer"
@@ -43,6 +43,16 @@ export default function BioSection() {
           </div>
         </div>
       </div>
+      <style>{`
+        .bio-body-text {
+          font-size: 15px;
+        }
+        @media (max-width: 480px) {
+          .bio-body-text {
+            font-size: 16px;
+          }
+        }
+      `}</style>
     </section>
   );
 }
