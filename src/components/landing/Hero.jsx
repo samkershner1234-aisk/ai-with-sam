@@ -127,7 +127,7 @@ export default function Hero() {
 
         <div className="mt-4 flex flex-col items-center">
           <img src={SAM_PHOTO} alt="Sam Kershner" className="h-14 w-14 rounded-full object-cover border-2 border-[#F97316]/60" />
-          <p className="mt-1 text-[11px] text-white/60">Built by Sam Kershner, AI Systems Builder.</p>
+          <p className="mt-1 text-[16px] text-white/60">Built by Sam Kershner, AI Systems Builder.</p>
         </div>
 
         <div className="mt-3 flex flex-col items-center space-y-2">
@@ -163,7 +163,7 @@ export default function Hero() {
 
             <div className="mt-6 flex items-center gap-3">
               <img src={SAM_PHOTO} alt="Sam Kershner" className="h-14 w-14 rounded-full object-cover border-2 border-[#F97316]/60" />
-              <p className="text-[13px] leading-tight text-white/60">Built by Sam Kershner,<br />AI Systems Builder.</p>
+              <p className="text-[16px] leading-tight text-white/60">Built by Sam Kershner,<br />AI Systems Builder.</p>
             </div>
 
             <div className="mt-10 flex flex-col items-start space-y-4">
