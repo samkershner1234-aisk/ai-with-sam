@@ -4,7 +4,10 @@ export default function Footer() {
     <footer style={{background:"#0A0F1E",padding:"60px 24px 40px",marginTop:0}}>
       <div style={{maxWidth:"1100px",margin:"0 auto",display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"48px"}} className="fg">
         <div>
-          <p style={{fontWeight:800,color:"#FFFFFF",fontSize:"18px",marginBottom:"12px"}}>AI With Sam</p>
+          <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"12px"}}>
+            <img src="/logo.png" alt="AI With Sam Logo" style={{height:"32px",width:"32px",objectFit:"contain"}} />
+            <p style={{fontWeight:800,color:"#FFFFFF",fontSize:"18px",margin:0}}>AI With Sam</p>
+          </div>
           <p style={{color:"#64748B",fontSize:"13px",lineHeight:1.8,margin:0}}>AI Consulting for Working Professionals<br/>Based in Israel · Sessions via Google Meet<br/>🌍 Israel · UK · US · Available Globally</p>
         </div>
         <div>

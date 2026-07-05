@@ -18,7 +18,10 @@ export default function Navbar() {
   return (
     <nav style={{background:"#0F172A",height:"64px",position:"sticky",top:0,zIndex:1000,borderBottom:scrolled?"1px solid #1E293B":"none"}}>
       <div style={{maxWidth:"1100px",margin:"0 auto",padding:"0 24px",height:"100%",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-        <span style={{fontWeight:800,color:"#FFFFFF",fontSize:"20px"}}>AI With Sam</span>
+        <div style={{display:"flex",alignItems:"center",gap:"10px"}}>
+          <img src="/logo.png" alt="AI With Sam Logo" style={{height:"36px",width:"36px",objectFit:"contain"}} />
+          <span style={{fontWeight:800,color:"#FFFFFF",fontSize:"20px"}}>AI With Sam</span>
+        </div>
         <div className="desk-nav" style={{display:"flex",gap:"32px",alignItems:"center"}}>
           {links.map(l=><a key={l.href} href={l.href} style={{color:"#CBD5E1",fontSize:"15px",fontWeight:500,textDecoration:"none"}}>{l.label}</a>)}
         </div>
