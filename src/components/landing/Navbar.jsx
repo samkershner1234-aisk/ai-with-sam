@@ -18,7 +18,7 @@ export default function Navbar() {
   return (
     <nav style={{background:"#0F172A",height:"64px",position:"sticky",top:0,zIndex:1000,borderBottom:scrolled?"1px solid #1E293B":"none"}}>
       <div style={{maxWidth:"1100px",margin:"0 auto",padding:"0 24px",height:"100%",display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-        <div style={{display:"flex",alignItems:"center",gap:"10px"}}>
+        <div onClick={() => window.scrollTo({top:0,behavior:"smooth"})} style={{display:"flex",alignItems:"center",gap:"10px",cursor:"pointer"}}>
           <img src="/logo.png" alt="AI With Sam Logo" style={{height:"36px",width:"36px",objectFit:"contain"}} />
           <span style={{fontWeight:800,color:"#FFFFFF",fontSize:"20px"}}>AI With Sam</span>
         </div>
