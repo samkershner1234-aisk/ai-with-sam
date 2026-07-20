@@ -3,7 +3,7 @@ import { CTA_URL, WHATSAPP_URL } from "./constants";
 
 const COMBINED_ITEMS = [
   "60-minute live session on Google Meet",
-  "A practical AI workflow or prompt built around one real task from your job",
+  "A ready-to-use solution or prompt built around one real task from your job",
   "Full session recording so you can rewatch and repeat every step",
   "Written recap of everything we built, yours to keep",
   "Hands-on build so you leave with something you can use immediately",
@@ -122,16 +122,16 @@ export default function PricingSection() {
 
           {/* Title */}
           <h3 style={{ fontWeight: 800, fontSize: "clamp(18px,3.5vw,26px)", color: "#fff", marginBottom: 6, lineHeight: 1.25 }}>
-            Turn One Repetitive Task Into a Practical AI Workflow.
+            Solve One Repetitive Task You Deal With Every Week.
           </h3>
           <p style={{ color: "#94A3B8", fontSize: 15, marginBottom: 24, lineHeight: 1.6 }}>
-            Bring one repetitive task from your job. In one 60-minute session, we build a practical AI workflow around it that you can use right away.
+            Bring one repetitive task from your job. In a single 60-minute session, we build a solution together that you can start using right away.
           </p>
 
           {/* Guarantee pill */}
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(249,115,22,0.12)", border: "1.5px solid rgba(249,115,22,0.35)", borderRadius: 999, padding: "7px 16px", marginBottom: 24 }}>
             <span style={{ fontSize: 16 }}>🛡️</span>
-            <span style={{ color: "#F97316", fontWeight: 700, fontSize: 14 }}>Results Guaranteed: a practical workflow, or I continue for up to 30 extra minutes at no charge.</span>
+            <span style={{ color: "#F97316", fontWeight: 700, fontSize: 14 }}>Results Guaranteed: you leave with something usable, or I continue for up to 30 extra minutes at no charge.</span>
           </div>
 
           <p style={{ color: "#FFFFFF", fontWeight: 700, fontSize: 15, marginBottom: 16 }}>
