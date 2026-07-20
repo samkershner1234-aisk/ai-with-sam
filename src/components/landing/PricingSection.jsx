@@ -3,10 +3,10 @@ import { CTA_URL, WHATSAPP_URL } from "./constants";
 
 const COMBINED_ITEMS = [
   "60-minute live session on Google Meet",
-  "A custom AI prompt, tool, or automation built for your exact role",
+  "A practical AI workflow or prompt built around one real task from your job",
   "Full session recording so you can rewatch and repeat every step",
   "Written recap of everything we built — yours to keep",
-  "Hands-on implementation so you leave with something that works",
+  "Hands-on build so you leave with something you can use immediately",
   { title: "Your Personal Prompt Kit", desc: "Custom prompts made for your workflow, ready to copy and use immediately." },
   { title: "14-Day WhatsApp Access to Sam", desc: "Direct access after the session. Got a question? Message Sam. Usually replies within a few hours." },
 ];
@@ -114,7 +114,7 @@ export default function PricingSection() {
           THE OFFER
         </p>
         <h2 style={{ fontSize: "clamp(22px,4vw,32px)", fontWeight: 800, color: "#fff", textAlign: "center", lineHeight: 1.25, marginBottom: 32 }}>
-          One Session. One Working AI System.<br />Results Before You Close Your Laptop.
+          One Real Work Problem.<br />One Practical AI Workflow.
         </h2>
 
         {/* Main card */}
@@ -122,10 +122,10 @@ export default function PricingSection() {
 
           {/* Title */}
           <h3 style={{ fontWeight: 800, fontSize: "clamp(18px,3.5vw,26px)", color: "#fff", marginBottom: 6, lineHeight: 1.25 }}>
-            Save 5+ Hours This Week. Guaranteed.
+            Turn One Repetitive Task Into a Practical AI Workflow.
           </h3>
           <p style={{ color: "#94A3B8", fontSize: 15, marginBottom: 24, lineHeight: 1.6 }}>
-            A private, 1-on-1 session where we build AI into your actual job — live, on your screen, for your workflow.
+            Bring one repetitive, frustrating, or time-consuming task from your job. During the 60-minute session, we build a practical AI workflow or prompt around it together — designed to help you reduce repetitive work and reclaim hours every week.
           </p>
 
           {/* Guarantee pill */}
