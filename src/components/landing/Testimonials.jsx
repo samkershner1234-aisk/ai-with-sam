@@ -103,7 +103,7 @@ export default function Testimonials() {
           Every client leaves with a practical AI workflow they can use the same day. Here's what they said:
         </p>
 
-        {/* Carousel — all screen sizes */}
+        {/* Carousel, all screen sizes */}
         <div
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
