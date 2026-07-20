@@ -16,7 +16,7 @@ const steps = [
   {
     num: "03",
     title: "Put It Into Practice",
-    body: "Use your recording, personalised Prompt Kit, and 14 days of WhatsApp support to apply and refine what we built—designed to help you reclaim hours every week.",
+    body: "Use your recording, personalised Prompt Kit, and 14 days of WhatsApp support to apply and refine what we built, designed to help you reclaim hours every week.",
     tag: "Same day · No tech skills needed",
   },
 ];
