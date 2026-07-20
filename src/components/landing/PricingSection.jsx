@@ -131,7 +131,7 @@ export default function PricingSection() {
           {/* Guarantee pill */}
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(249,115,22,0.12)", border: "1.5px solid rgba(249,115,22,0.35)", borderRadius: 999, padding: "7px 16px", marginBottom: 24 }}>
             <span style={{ fontSize: 16 }}>🛡️</span>
-            <span style={{ color: "#F97316", fontWeight: 700, fontSize: 14 }}>5-Hour Guarantee — No one has ever claimed it.</span>
+            <span style={{ color: "#F97316", fontWeight: 700, fontSize: 14 }}>Results Guaranteed — a practical workflow, or I keep going.</span>
           </div>
 
           <p style={{ color: "#FFFFFF", fontWeight: 700, fontSize: 15, marginBottom: 16 }}>
