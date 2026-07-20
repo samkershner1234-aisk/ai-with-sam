@@ -3,18 +3,18 @@ import { useState, useEffect, useRef } from "react";
 const cards = [
   {
     icon: "⏰",
-    title: "You're Wasting Hours Every Day",
-    body: "You spend more time trying to figure out AI tools than actually using them. YouTube tutorials are generic and don't apply to your specific job or the way you actually work.",
+    title: "The Same Tasks Eat Your Time Every Week",
+    body: "The same repetitive, time-consuming tasks come back again and again. You know AI could help, but generic tutorials never fit your specific job or the way you actually work.",
   },
   {
     icon: "✖️",
     title: "Nothing You Try Actually Sticks",
-    body: "You've tried ChatGPT, Copilot, Gemini, Perplexity, Claude. You played around. You got nowhere. Nothing produced anything useful for your real day-to-day work.",
+    body: "You've tried ChatGPT, Copilot, Gemini, Perplexity, Claude. You played around. You got nowhere. Nothing turned into a workflow you actually use for your real, recurring tasks.",
   },
   {
     icon: "📉",
     title: "You're Falling Behind at Work",
-    body: "Everyone around you is talking about AI. You're nodding along in meetings, but secretly you have no idea how to make it actually work for your specific role.",
+    body: "Everyone around you is talking about AI. You're nodding along in meetings, but secretly you have no idea how to turn it into something that saves you time on your specific tasks.",
   },
 ];
 
