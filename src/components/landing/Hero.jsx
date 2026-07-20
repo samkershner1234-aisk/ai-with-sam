@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { CTA_URL, SAM_PHOTO } from "./constants";
 
 const badges = [
-  { icon: "💬", text: "14 days WhatsApp support" },
-  { icon: "🛡", text: "5-Hour Guarantee" },
+  { icon: "💬", text: "14 Days of WhatsApp Support" },
+  { icon: "🛡", text: "Results Guaranteed" },
 ];
 
 export default function Hero() {
@@ -38,6 +38,9 @@ export default function Hero() {
         className="absolute z-10 rounded-[20px] bg-black/10 text-center backdrop-blur-[3px]"
         style={{ padding: isMobile ? "10px 14px" : "20px 32px" }}
       >
+        <div style={{ fontSize: isMobile ? 10 : 14, color: "rgba(255,255,255,0.6)", marginBottom: 2 }}>
+          Designed to help you
+        </div>
         <div style={{ fontSize: isMobile ? 13 : 22, color: "rgba(255,255,255,0.85)" }}>
           Reclaim
         </div>
@@ -116,13 +119,13 @@ export default function Hero() {
       <div className="relative flex flex-col items-center px-6 pt-5 pb-4 text-center md:hidden">
 
         <h1 className="text-[clamp(34px,9.5vw,50px)] font-black leading-[0.95] tracking-[-0.05em]">
-          <span className="block text-white">Get Hours</span>
-          <span className="block"><span className="text-[#F97316]">Back.</span></span>
-          <span className="block text-white">Every Day.</span>
+          <span className="block text-white">Turn One Repetitive</span>
+          <span className="block"><span className="text-[#F97316]">Work Task Into a</span></span>
+          <span className="block text-white">Practical AI Workflow.</span>
         </h1>
 
         <p className="mt-3 max-w-xs text-[16px] leading-6 text-white/75">
-          One live session. A custom AI system built for your exact role.
+          In one 60-minute session, we’ll turn one of your repetitive work tasks into a practical AI workflow you can start using immediately.
         </p>
 
         <div className="mt-4 flex flex-col items-center">
@@ -140,6 +143,7 @@ export default function Hero() {
             </div>
           ))}
         </div>
+        <p className="mt-2 max-w-xs text-[11px] leading-4 text-white/50 text-center">You’ll leave with at least one practical AI workflow or prompt you can use in your real work, or I’ll continue for up to 30 extra minutes at no charge.</p>
 
         <div className="mt-4 flex items-center justify-center">
           {ClockGraphic}
@@ -152,13 +156,13 @@ export default function Hero() {
 
           <div className="z-10 max-w-3xl">
             <h1 className="max-w-2xl text-[clamp(52px,7.6vw,116px)] font-black leading-[0.92] tracking-[-0.07em]">
-              <span className="block text-white">Get Hours</span>
-              <span className="block"><span className="text-[#F97316]">Back.</span></span>
-              <span className="block text-white">Every Day.</span>
+              <span className="block text-white">Turn One Repetitive</span>
+              <span className="block"><span className="text-[#F97316]">Work Task Into a</span></span>
+              <span className="block text-white">Practical AI Workflow.</span>
             </h1>
 
             <p className="mt-8 max-w-xl text-[19px] leading-8 text-white/75">
-              One live session. A custom AI system built for your exact role.
+              In one 60-minute session, we’ll turn one of your repetitive work tasks into a practical AI workflow you can start using immediately.
             </p>
 
             <div className="mt-6 flex items-center gap-3">
@@ -176,6 +180,7 @@ export default function Hero() {
                 </div>
               ))}
             </div>
+            <p className="mt-3 max-w-md text-[13px] leading-5 text-white/50">You’ll leave with at least one practical AI workflow or prompt you can use in your real work, or I’ll continue for up to 30 extra minutes at no charge.</p>
           </div>
 
           <div className="flex items-center justify-center">
