@@ -5,12 +5,12 @@ const details = [
   {
     id: "how",
     label: "How it works",
-    content: "Message me on WhatsApp within the first 7 days if you haven't saved 5 hours. I'll schedule a free follow-up session immediately. No forms. No questions. Simple as that.",
+    content: "You will leave with at least one practical AI workflow or prompt you can use in your real work—or I'll continue for up to 30 extra minutes at no charge. The guarantee covers the practical deliverable created during the session. It does not guarantee a specific number of hours saved, income earned, or business result.",
   },
   {
     id: "track",
     label: "Track record",
-    content: "In every session delivered so far, no one has ever needed to claim it. But it's there if you do. Your results are the only thing that matters.",
+    content: "In every session so far, clients have left with something practical they can use. The guarantee is there if you ever need it. What matters is that you walk away with a workflow that works for your real job.",
   },
   {
     id: "whatsapp",
@@ -28,7 +28,7 @@ export default function GuaranteeSection() {
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
         {/* Section label */}
         <p style={{ color: "#F97316", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", fontSize: 13, textAlign: "center", marginBottom: 10 }}>
-          MY GUARANTEE
+          RESULTS GUARANTEED
         </p>
 
         {/* Main card */}
@@ -44,9 +44,9 @@ export default function GuaranteeSection() {
             {/* Right: headline */}
             <div className="guarantee-right">
               <h2 style={{ fontSize: "clamp(18px,2.8vw,26px)", fontWeight: 800, color: "#fff", lineHeight: 1.3, marginBottom: 8 }}>
-                If You Don't Save 5 Hours in Week One, I Book You a Free Follow-Up Session.
+                Results Guaranteed: You will leave with at least one practical AI workflow or prompt you can use in your real work. Or I’ll continue for up to 30 extra minutes at no charge.
               </h2>
-              <p style={{ color: "#94A3B8", fontSize: 15, margin: 0 }}>No questions asked. No forms. No hoops.</p>
+              <p style={{ color: "#94A3B8", fontSize: 15, margin: 0 }}>You are not paying for generic AI advice. We work on one real task from your job and build something practical around it together.</p>
             </div>
           </div>
 
