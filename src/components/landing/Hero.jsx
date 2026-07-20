@@ -24,13 +24,13 @@ export default function Hero() {
     <div className="relative flex items-center justify-center"
       style={{ width: clockSize, height: clockSize }}>
 
-      {/* Outer rings — behind everything */}
+      {/* Outer rings, behind everything */}
       <div className="absolute rounded-full border border-white/5"
         style={{ width: clockSize, height: clockSize, zIndex: 0 }} />
       <div className="absolute rounded-full border border-[#F97316]/10"
         style={{ width: clockSize * 0.9, height: clockSize * 0.9, zIndex: 0 }} />
 
-      {/* Center text — rendered BEFORE the arc so arc sits on top */}
+      {/* Center text, rendered BEFORE the arc so arc sits on top */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -38,9 +38,6 @@ export default function Hero() {
         className="absolute z-10 rounded-[20px] bg-black/10 text-center backdrop-blur-[3px]"
         style={{ padding: isMobile ? "10px 14px" : "20px 32px" }}
       >
-        <div style={{ fontSize: isMobile ? 10 : 14, color: "rgba(255,255,255,0.6)", marginBottom: 2 }}>
-          Designed to help you
-        </div>
         <div style={{ fontSize: isMobile ? 13 : 22, color: "rgba(255,255,255,0.85)" }}>
           Reclaim
         </div>
@@ -68,7 +65,7 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* Tick marks — on top of center text */}
+      {/* Tick marks, on top of center text */}
       <div className="absolute" style={{ width: clockSize * 0.86, height: clockSize * 0.86, zIndex: 20 }}>
         {Array.from({ length: 16 }).map((_, i) => {
           const angle = -122 + i * 18;
@@ -93,7 +90,7 @@ export default function Hero() {
         })}
       </div>
 
-      {/* Spinning arc — topmost layer */}
+      {/* Spinning arc, topmost layer */}
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 52, repeat: Infinity, ease: "linear" }}
@@ -143,7 +140,6 @@ export default function Hero() {
             </div>
           ))}
         </div>
-        <p className="mt-2 max-w-xs text-[11px] leading-4 text-white/50 text-center">You’ll leave with at least one practical AI workflow or prompt you can use in your real work, or I’ll continue for up to 30 extra minutes at no charge.</p>
 
         <div className="mt-4 flex items-center justify-center">
           {ClockGraphic}
@@ -180,8 +176,7 @@ export default function Hero() {
                 </div>
               ))}
             </div>
-            <p className="mt-3 max-w-md text-[13px] leading-5 text-white/50">You’ll leave with at least one practical AI workflow or prompt you can use in your real work, or I’ll continue for up to 30 extra minutes at no charge.</p>
-          </div>
+              </div>
 
           <div className="flex items-center justify-center">
             {ClockGraphic}
