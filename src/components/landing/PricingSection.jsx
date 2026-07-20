@@ -125,7 +125,7 @@ export default function PricingSection() {
             Solve One Repetitive Task You Deal With Every Week.
           </h3>
           <p style={{ color: "#94A3B8", fontSize: 15, marginBottom: 24, lineHeight: 1.6 }}>
-            Bring one repetitive task from your job. In a single 60-minute session, we build a solution together that you can start using right away.
+            In a single 60-minute session, we build a solution together that you can start using right away.
           </p>
 
           {/* Guarantee pill */}
