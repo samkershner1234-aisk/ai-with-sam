@@ -10,7 +10,7 @@ const steps = [
   {
     num: "02",
     title: "Build the Workflow Together",
-    body: "During the 60-minute session on Google Meet, we turn that one task into a practical AI workflow or prompt you can use immediately. Not a template. Not generic advice. Something built around your real work.",
+    body: "During the live session on Google Meet, we turn that one task into a working AI solution or prompt you can put to work straight away. Not a template. Not generic advice. Something built around your real work.",
     tag: "60 minutes · Live on Google Meet\n400₪ / $135 / £100",
   },
   {
