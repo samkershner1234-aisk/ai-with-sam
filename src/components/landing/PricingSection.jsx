@@ -114,7 +114,7 @@ export default function PricingSection() {
           THE OFFER
         </p>
         <h2 style={{ fontSize: "clamp(22px,4vw,32px)", fontWeight: 800, color: "#fff", textAlign: "center", lineHeight: 1.25, marginBottom: 32 }}>
-          One Real Work Problem.<br />One Useful AI Solution.
+          One Real Work Problem.<br />One Practical AI Workflow.
         </h2>
 
         {/* Main card */}
@@ -122,10 +122,10 @@ export default function PricingSection() {
 
           {/* Title */}
           <h3 style={{ fontWeight: 800, fontSize: "clamp(18px,3.5vw,26px)", color: "#fff", marginBottom: 6, lineHeight: 1.25 }}>
-            Turn One Repetitive Task Into Something You Can Use Right Away
+            Turn One Time-Consuming Task Into a Process That Works Better
           </h3>
           <p style={{ color: "#94A3B8", fontSize: 15, marginBottom: 24, lineHeight: 1.6 }}>
-            In one 60-minute session, we take a frustrating or time-consuming part of your job and build a clear AI-powered process around it.
+            We focus on one high-value part of your job and build a personalised solution you can put to work straight away.
           </p>
 
           {/* Guarantee pill */}
