@@ -114,7 +114,7 @@ export default function PricingSection() {
           THE OFFER
         </p>
         <h2 style={{ fontSize: "clamp(22px,4vw,32px)", fontWeight: 800, color: "#fff", textAlign: "center", lineHeight: 1.25, marginBottom: 32 }}>
-          One Real Work Problem.<br />One Practical AI Workflow.
+          One Real Work Problem.<br />One Useful AI Solution.
         </h2>
 
         {/* Main card */}
@@ -122,16 +122,16 @@ export default function PricingSection() {
 
           {/* Title */}
           <h3 style={{ fontWeight: 800, fontSize: "clamp(18px,3.5vw,26px)", color: "#fff", marginBottom: 6, lineHeight: 1.25 }}>
-            Solve One Repetitive Task You Deal With Every Week.
+            Turn One Repetitive Task Into Something You Can Use Right Away
           </h3>
           <p style={{ color: "#94A3B8", fontSize: 15, marginBottom: 24, lineHeight: 1.6 }}>
-            In a single 60-minute session, we build a solution together that you can start using right away.
+            In one 60-minute session, we take a frustrating or time-consuming part of your job and build a clear AI-powered process around it.
           </p>
 
           {/* Guarantee pill */}
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(249,115,22,0.12)", border: "1.5px solid rgba(249,115,22,0.35)", borderRadius: 999, padding: "7px 16px", marginBottom: 24 }}>
             <span style={{ fontSize: 16 }}>🛡️</span>
-            <span style={{ color: "#F97316", fontWeight: 700, fontSize: 14 }}>Results Guaranteed: you leave with something usable, or I continue for up to 30 extra minutes at no charge.</span>
+            <span style={{ color: "#F97316", fontWeight: 700, fontSize: 14 }}>Results Guaranteed: Leave with a working AI solution for one real task, or get an extra 30 minutes with me, free.</span>
           </div>
 
           <p style={{ color: "#FFFFFF", fontWeight: 700, fontSize: 15, marginBottom: 16 }}>
