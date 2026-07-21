@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { CTA_URL, SAM_PHOTO } from "./constants";
 
 const badges = [
-  { icon: "💬", text: "14 days WhatsApp support" },
-  { icon: "🛡", text: "5-Hour Guarantee" },
+  { icon: "💬", text: "14 Days of WhatsApp Support" },
+  { icon: "🛡", text: "Results Guaranteed" },
 ];
 
 export default function Hero() {
@@ -24,13 +24,13 @@ export default function Hero() {
     <div className="relative flex items-center justify-center"
       style={{ width: clockSize, height: clockSize }}>
 
-      {/* Outer rings — behind everything */}
+      {/* Outer rings, behind everything */}
       <div className="absolute rounded-full border border-white/5"
         style={{ width: clockSize, height: clockSize, zIndex: 0 }} />
       <div className="absolute rounded-full border border-[#F97316]/10"
         style={{ width: clockSize * 0.9, height: clockSize * 0.9, zIndex: 0 }} />
 
-      {/* Center text — rendered BEFORE the arc so arc sits on top */}
+      {/* Center text, rendered BEFORE the arc so arc sits on top */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -65,7 +65,7 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* Tick marks — on top of center text */}
+      {/* Tick marks, on top of center text */}
       <div className="absolute" style={{ width: clockSize * 0.86, height: clockSize * 0.86, zIndex: 20 }}>
         {Array.from({ length: 16 }).map((_, i) => {
           const angle = -122 + i * 18;
@@ -90,7 +90,7 @@ export default function Hero() {
         })}
       </div>
 
-      {/* Spinning arc — topmost layer */}
+      {/* Spinning arc, topmost layer */}
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 52, repeat: Infinity, ease: "linear" }}
@@ -116,13 +116,12 @@ export default function Hero() {
       <div className="relative flex flex-col items-center px-6 pt-5 pb-4 text-center md:hidden">
 
         <h1 className="text-[clamp(34px,9.5vw,50px)] font-black leading-[0.95] tracking-[-0.05em]">
-          <span className="block text-white">Get Hours</span>
-          <span className="block"><span className="text-[#F97316]">Back.</span></span>
-          <span className="block text-white">Every Day.</span>
+          <span className="block text-white">Stop Wasting Time</span>
+          <span className="block text-white">on <span className="text-[#F97316]">Repetitive Work.</span></span>
         </h1>
 
         <p className="mt-3 max-w-xs text-[16px] leading-6 text-white/75">
-          One live session. A custom AI system built for your exact role.
+          Bring one task that keeps slowing you down. In 60 minutes, we’ll build a clear AI-powered process you can start using with confidence.
         </p>
 
         <div className="mt-4 flex flex-col items-center">
@@ -152,13 +151,12 @@ export default function Hero() {
 
           <div className="z-10 max-w-3xl">
             <h1 className="max-w-2xl text-[clamp(52px,7.6vw,116px)] font-black leading-[0.92] tracking-[-0.07em]">
-              <span className="block text-white">Get Hours</span>
-              <span className="block"><span className="text-[#F97316]">Back.</span></span>
-              <span className="block text-white">Every Day.</span>
+              <span className="block text-white">Stop Wasting Time</span>
+              <span className="block text-white">on <span className="text-[#F97316]">Repetitive Work.</span></span>
             </h1>
 
             <p className="mt-8 max-w-xl text-[19px] leading-8 text-white/75">
-              One live session. A custom AI system built for your exact role.
+              Bring one task that keeps slowing you down. In 60 minutes, we’ll build a clear AI-powered process you can start using with confidence.
             </p>
 
             <div className="mt-6 flex items-center gap-3">
@@ -176,7 +174,7 @@ export default function Hero() {
                 </div>
               ))}
             </div>
-          </div>
+              </div>
 
           <div className="flex items-center justify-center">
             {ClockGraphic}

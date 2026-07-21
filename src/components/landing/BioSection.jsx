@@ -31,10 +31,10 @@ export default function BioSection() {
           <div style={{ width: "100%", height: 1, background: "rgba(255,255,255,0.06)", marginBottom: 20 }} />
           <div style={{ textAlign: "center", maxWidth: 520 }}>
             <h2 style={{ fontSize: "clamp(18px,3vw,24px)", fontWeight: 800, color: "#fff", marginBottom: 14, lineHeight: 1.3 }}>
-              I Build Working AI Systems.<br />One Session. Real Results.
+              I Build Job-Specific AI Systems<br />Around Your Real Work.
             </h2>
             <p className="bio-body-text" style={{ color: "#94A3B8", lineHeight: 1.7, marginBottom: 24 }}>
-              I have spent 4+ years as an AI-native marketer across fintech, media and gaming industries. I don't just talk about AI tools, I build with them. Every client leaves with something they can use immediately.
+              I have spent 4+ years as an AI-native marketer across fintech, media and gaming industries. I don't just talk about AI tools, I build with them. Every client leaves with a practical workflow built around one real task from their job.
             </p>
             <a href={CTA_URL} target="_blank" rel="noopener noreferrer"
               style={{ display: "inline-block", background: "#F97316", color: "#fff", fontWeight: 700, fontSize: 16, padding: "14px 32px", borderRadius: 10, textDecoration: "none" }}>

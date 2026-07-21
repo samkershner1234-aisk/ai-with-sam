@@ -2,14 +2,16 @@ import { useState, useEffect } from "react";
 import { CTA_URL } from "./constants";
 
 const faqs=[
+  {q:"What will we work on during the session?",a:"We focus on one recurring or time-consuming task from your job and build a useful set of prompts or a clearer process around it."},
+  {q:"Is this general AI training?",a:"No. This is not a general AI course. We work on one real problem from your job and build a practical solution around it."},
   {q:"What if I've never used AI before?",a:"Even better. Clients who have never used AI before often get the most out of this because we build something from scratch that fits exactly how they already work. No prior knowledge needed."},
-  {q:"Can I really save 5 hours from one session?",a:"Yes. Every client leaves with a working system the same day, and the guarantee exists because most people save more than 5 hours in week one alone."},
-  {q:"What does a typical session look like?",a:"We start the session on Google Meet with a quick 5-minute overview of what I've prepared based on your role. Then we spend 50–55 minutes building your custom AI solution live. You watch, ask questions, and by the end, you have something working."},
-  {q:"Do I need to prepare anything before the session?",a:"Just come ready to describe how you work. The more specific you can be about your day-to-day tasks, the more useful the solution I build will be. No software to install. No materials to read."},
-  {q:"How do I know this will actually work for my specific job?",a:"Before every session I research your role, industry, and common workflows so I can build something relevant before we even start. If for any reason I can't build something useful, you don't pay."},
-  {q:"What happens after the session?",a:"You receive a full recording of the session, a written recap document with all your custom prompts and next steps, and 14 days of direct WhatsApp access to me. Got a prompt that's not working, or a new task to automate? Message me directly. Not a ticket system. Direct access."},
-  {q:"What if I want more support after the 14 days?",a:"Just message me on WhatsApp. Most clients find that 14 days is more than enough — but if you need more time or a follow-up session, we can arrange that."},
-  {q:"What's the guarantee again?",a:"If you haven't saved 5 hours in your first week, message me on WhatsApp and I'll book a free follow-up session immediately. No forms. No questions."},
+  {q:"What does Results Guaranteed mean?",a:"You'll leave with at least one usable AI solution or prompt for your real work, or I'll extend the session by up to 30 minutes at no charge."},
+  {q:"Will I definitely save a specific number of hours?",a:"The workflow is designed to help reduce repetitive work and reclaim time, but the exact time saved depends on your task, how often you use it, and how you implement it."},
+  {q:"Can we work on several tasks?",a:"The session is designed to focus on one high-value task or workflow so we can create something useful rather than rushing through several problems."},
+  {q:"What does a typical session look like?",a:"We start on Google Meet with a quick 5-minute overview of what I've prepared based on your role. Then we spend 50 to 55 minutes building your solution live. You watch, ask questions, and by the end you have something working."},
+  {q:"Do I need to prepare anything before the session?",a:"Just come ready to describe how you work and the one task you want to improve. The more specific you can be about your day-to-day tasks, the more useful the workflow I build will be. No software to install. No materials to read."},
+  {q:"What happens after the session?",a:"You receive a full recording of the session, a written recap document with all your prompts and next steps, and 14 days of direct WhatsApp access to me. Got a prompt that's not working, or a new task to work on? Message me directly. Not a ticket system. Direct access."},
+  {q:"What if I want more support after the 14 days?",a:"Just message me on WhatsApp. Most clients find that 14 days is more than enough, but if you need more time or a follow-up session, we can arrange that."},
   {q:"How do I book?",a:"Click any 'Book Your Free 20-Minute Call' button on this page. You'll land on a short booking form. Pick a time that works for you. I'll send a confirmation and a few questions about your role beforehand."},
 ];
 

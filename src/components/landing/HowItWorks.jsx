@@ -3,20 +3,20 @@ import { useState, useEffect, useRef } from "react";
 const steps = [
   {
     num: "01",
-    title: "We Identify Exactly What AI Can Do For Your Job",
-    body: "On a free 20-minute call, you describe how you work and I map out exactly what I'd build for you. Free. In 20 minutes.",
+    title: "Bring One Real Work Task",
+    body: "Choose one repetitive, frustrating, or time-consuming task you want to improve. On a free 20-minute call, you describe how you work and we see if it’s a good fit.",
     tag: "20 minutes · Free",
   },
   {
     num: "02",
-    title: "Your AI System Gets Built Live, On the Call",
-    body: "60 minutes on Google Meet. You get a working AI solution built in real time, tailored to your exact workflow. Not a template. Not generic advice. A real custom prompt, tool, or automation. Built for your job.",
+    title: "Build the Workflow Together",
+    body: "During the live session on Google Meet, we turn that one task into a working AI solution or prompt you can put to work straight away. Not a template. Not generic advice. Something built around your real work.",
     tag: "60 minutes · Live on Google Meet\n400₪ / $135 / £100",
   },
   {
     num: "03",
-    title: "You Use It Before You Close Your Laptop",
-    body: "You leave with a working system, a full session recording, a written recap of every step, and 14 days of direct WhatsApp access to Sam. Start saving time immediately. The same day.",
+    title: "Put It Into Practice",
+    body: "Use your recording, personalised Prompt Kit, and 14 days of WhatsApp support to apply and refine what we built, designed to help you reclaim hours every week.",
     tag: "Same day · No tech skills needed",
   },
 ];

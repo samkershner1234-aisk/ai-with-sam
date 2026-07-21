@@ -100,10 +100,10 @@ export default function Testimonials() {
           Working Professionals Who Got Their Time Back
         </h2>
         <p style={{ color: "#94A3B8", textAlign: "center", fontSize: 16, marginBottom: 52, fontStyle: "italic" }}>
-          Every client leaves with a working AI system they use the same day. Here's what they said:
+          Every client leaves with a ready-to-use solution they can apply the same day. Here's what they said:
         </p>
 
-        {/* Carousel — all screen sizes */}
+        {/* Carousel, all screen sizes */}
         <div
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}

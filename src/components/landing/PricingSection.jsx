@@ -3,10 +3,10 @@ import { CTA_URL, WHATSAPP_URL } from "./constants";
 
 const COMBINED_ITEMS = [
   "60-minute live session on Google Meet",
-  "A custom AI prompt, tool, or automation built for your exact role",
+  "A ready-to-use solution or prompt built around one real task from your job",
   "Full session recording so you can rewatch and repeat every step",
-  "Written recap of everything we built — yours to keep",
-  "Hands-on implementation so you leave with something that works",
+  "Written recap of everything we built, yours to keep",
+  "Hands-on build so you leave with something you can use immediately",
   { title: "Your Personal Prompt Kit", desc: "Custom prompts made for your workflow, ready to copy and use immediately." },
   { title: "14-Day WhatsApp Access to Sam", desc: "Direct access after the session. Got a question? Message Sam. Usually replies within a few hours." },
 ];
@@ -114,7 +114,7 @@ export default function PricingSection() {
           THE OFFER
         </p>
         <h2 style={{ fontSize: "clamp(22px,4vw,32px)", fontWeight: 800, color: "#fff", textAlign: "center", lineHeight: 1.25, marginBottom: 32 }}>
-          One Session. One Working AI System.<br />Results Before You Close Your Laptop.
+          One Real Work Problem.<br />One Practical AI Workflow.
         </h2>
 
         {/* Main card */}
@@ -122,16 +122,16 @@ export default function PricingSection() {
 
           {/* Title */}
           <h3 style={{ fontWeight: 800, fontSize: "clamp(18px,3.5vw,26px)", color: "#fff", marginBottom: 6, lineHeight: 1.25 }}>
-            Save 5+ Hours This Week. Guaranteed.
+            Turn One Time-Consuming Task Into a Process That Works Better
           </h3>
           <p style={{ color: "#94A3B8", fontSize: 15, marginBottom: 24, lineHeight: 1.6 }}>
-            A private, 1-on-1 session where we build AI into your actual job — live, on your screen, for your workflow.
+            We focus on one high-value part of your job and build a personalised solution you can put to work straight away.
           </p>
 
           {/* Guarantee pill */}
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(249,115,22,0.12)", border: "1.5px solid rgba(249,115,22,0.35)", borderRadius: 999, padding: "7px 16px", marginBottom: 24 }}>
             <span style={{ fontSize: 16 }}>🛡️</span>
-            <span style={{ color: "#F97316", fontWeight: 700, fontSize: 14 }}>5-Hour Guarantee — No one has ever claimed it.</span>
+            <span style={{ color: "#F97316", fontWeight: 700, fontSize: 14 }}>Results Guaranteed: Leave with a working AI solution for one real task, or get an extra 30 minutes with me, free.</span>
           </div>
 
           <p style={{ color: "#FFFFFF", fontWeight: 700, fontSize: 15, marginBottom: 16 }}>
