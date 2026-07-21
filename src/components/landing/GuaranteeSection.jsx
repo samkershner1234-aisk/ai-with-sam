@@ -18,7 +18,7 @@ export default function GuaranteeSection() {
 
           {/* 3. Headline */}
           <h2 className="guarantee-headline" style={{ fontSize: "clamp(20px,3vw,26px)", fontWeight: 800, color: "#fff", lineHeight: 1.3, margin: "0 0 12px" }}>
-            Leave With a Practical AI Workflow
+            Leave With an AI Workflow You Can Use Immediately
           </h2>
 
           {/* 4. Guarantee explanation */}
