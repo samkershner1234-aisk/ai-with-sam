@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { CTA_URL } from "./constants";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -23,6 +24,7 @@ export default function Navbar() {
           <span style={{fontWeight:800,color:"#FFFFFF",fontSize:"20px"}}><span style={{color:"#F97316"}}>AI</span> With Sam</span>
         </div>
         <div className="desk-nav" style={{display:"flex",gap:"32px",alignItems:"center"}}>
+          <Link to="/ai-time-waste-audit" style={{color:"#CBD5E1",fontSize:"15px",fontWeight:500,textDecoration:"none"}}>Free AI Audit</Link>
           {links.map(l=><a key={l.href} href={l.href} style={{color:"#CBD5E1",fontSize:"15px",fontWeight:500,textDecoration:"none"}}>{l.label}</a>)}
         </div>
         <a href={CTA_URL} target="_blank" rel="noopener noreferrer" className="desk-cta" style={{background:"#F97316",color:"#FFFFFF",fontWeight:700,fontSize:"14px",padding:"12px 24px",borderRadius:"50px",textDecoration:"none"}}>Book Your Free 20-Minute Call</a>
@@ -33,6 +35,7 @@ export default function Navbar() {
         </button>
       </div>
       {open&&<div style={{background:"#0F172A",borderTop:"1px solid #1E293B",padding:"16px 24px 24px"}}>
+        <Link to="/ai-time-waste-audit" onClick={()=>setOpen(false)} style={{display:"block",color:"#CBD5E1",fontSize:"16px",fontWeight:500,padding:"12px 0",textDecoration:"none",borderBottom:"1px solid #1E293B"}}>Free AI Audit</Link>
         {links.map(l=><a key={l.href} href={l.href} onClick={()=>setOpen(false)} style={{display:"block",color:"#CBD5E1",fontSize:"16px",fontWeight:500,padding:"12px 0",textDecoration:"none",borderBottom:"1px solid #1E293B"}}>{l.label}</a>)}
         <a href={CTA_URL} target="_blank" rel="noopener noreferrer" style={{display:"block",marginTop:"16px",background:"#F97316",color:"#FFFFFF",fontWeight:700,fontSize:"16px",padding:"16px 24px",borderRadius:"50px",textDecoration:"none",textAlign:"center"}}>Book Your Free 20-Minute Call</a>
       </div>}
