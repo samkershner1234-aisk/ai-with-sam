@@ -25,30 +25,7 @@ export function PartialResult({ answers, onContinue }) {
   return (
     <div>
       <Eyebrow>We found your strongest opportunity</Eyebrow>
-      <h1 style={{ fontSize: "28px", fontWeight: 800, color: T.white, margin: "0 0 20px", lineHeight: 1.25 }}>
-        Your strongest opportunity is {content.title}
-      </h1>
-      <Card style={{ marginBottom: "16px" }}>
-        <div style={labelStyle}>The task area you identified</div>
-        <div style={{ color: T.white, fontSize: "16px", lineHeight: 1.6 }}>{answers.taskCategoryLabel || content.title}</div>
-      </Card>
-      {desc && (
-        <Card style={{ marginBottom: "16px" }}>
-          <div style={labelStyle}>The task you described</div>
-          <div style={{ color: T.white, fontSize: "16px", lineHeight: 1.6 }}>{shortTask}</div>
-        </Card>
-      )}
-      <Card style={{ marginBottom: "16px" }}>
-        <div style={labelStyle}>Estimated monthly time exposure</div>
-        <div style={{ color: T.orange, fontSize: "20px", fontWeight: 700 }}>{answers.estimatedMonthlyRange}</div>
-      </Card>
-      <Card style={{ marginBottom: "16px" }}>
-        <div style={labelStyle}>Your current starting point</div>
-        <div style={{ color: T.white, fontSize: "15px", lineHeight: 1.6 }}>{readinessStart}</div>
-      </Card>
-      <p style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7 }}>
-        Based on your answers, this task appears to be a strong candidate for a clearer AI-assisted process.
-      </p>
+      <h1 style={{ fontSize: "28px", fontWeight: 800, color: T.white, margin: "0 0 20px", lineHeight: 1.25 }}> We've identified your strongest AI opportunity. See the full breakdown below. </h1> {desc && ( <Card style={{ marginBottom: "16px" }}> <div style={labelStyle}>The task you described</div> <div style={{ color: T.white, fontSize: "16px", lineHeight: 1.6 }}>{shortTask}</div> </Card> )}
       <Card style={{ marginTop: "8px" }}>
         <div style={{ color: T.white, fontWeight: 700, marginBottom: "10px" }}>Your full breakdown includes:</div>
         <List items={[
@@ -120,30 +97,7 @@ export function FullResult({ answers, canonicalUrl, onRetake, onShare }) {
         {firstName}, your strongest opportunity is {content.title}.
       </h1>
 
-      {section("The task you identified", (
-        <Card><div style={{ color: T.grey, fontSize: "15px", lineHeight: 1.6 }}>{shortTask}</div></Card>
-      ))}
-
-      {section("This task may be taking more time than it appears", (
-        <Card>
-          <div style={{ color: T.white, fontSize: "15px", lineHeight: 1.7 }}>
-            Based on how often you do it and how long it normally takes, you may currently spend{" "}
-            <span style={{ color: T.orange, fontWeight: 700 }}>{answers.estimatedMonthlyRange}</span> on this task.
-          </div>
-          <div style={{ color: T.greyDim, fontSize: "13px", marginTop: "8px" }}>This is an estimate based on your answers, not a guaranteed saving.</div>
-        </Card>
-      ))}
-
-      {section("Why this may be a good AI opportunity", (
-        <Card>
-          <div style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7 }}>{content.diagnosis}</div>
-          <div style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7, marginTop: "10px" }}>
-            This task happens regularly and appears to involve repeatable inputs, decisions or outputs. Those are signs that a well-designed AI process may be useful.
-          </div>
-        </Card>
-      ))}
-
-      {section("What AI may and may not do here", (<ResponsibilityCards content={content} />))}
+      {section("Why this may be a good AI opportunity", ( <Card> <div style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7 }}>{content.diagnosis}</div> </Card> ))} {section("What AI may and may not do here", ( <Card> <div style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7 }}>AI may help with {content.aiHelp.join(", ")}.</div> <div style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7, marginTop: "8px" }}>You remain responsible for {content.responsible.join(", ")}.</div> </Card> ))}
 
       {section("Your current AI readiness", (
         <Card>
@@ -152,28 +106,7 @@ export function FullResult({ answers, canonicalUrl, onRetake, onShare }) {
         </Card>
       ))}
 
-      {section("Your best next step", (
-        <Card>
-          <div style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7 }}>Do not try to automate your entire job. Start with this one task.</div>
-          <ol style={{ margin: "12px 0 0", paddingLeft: "18px", color: T.white, fontSize: "15px", lineHeight: 1.9 }}>
-            <li>Define the information you start with.</li>
-            <li>Define the steps you repeat.</li>
-            <li>Define the result you need.</li>
-          </ol>
-        </Card>
-      ))}
-
-      {section("Want Help Building the Actual Solution?", (
-        <Card>
-          <div style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7 }}>
-            During a free 20-minute call, we will review the task you identified and decide whether a personalised AI Clarity Session is the right next step.
-          </div>
-          <div style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7, marginTop: "10px" }}>
-            If it is a good fit, the paid 60-minute session focuses on turning one real task into a clear AI-powered process you can start using with confidence.
-          </div>
-          <div style={{ color: T.white, fontSize: "15px", lineHeight: 1.7, marginTop: "14px", fontWeight: 600 }}>
-            You have already identified the task. The next step is deciding what the actual solution should look like.
-          </div>
+      {section("Your best next step", ( <Card> <div style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7 }}>Do not try to automate your entire job. Start with this one task, defining the information you start with, the steps you repeat, and the result you need.</div> </Card> ))} {section("Want Help Building the Actual Solution?", ( <Card> <div style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7 }}> During a free 20-minute call, we will review this task and decide whether a personalised session is the right next step for you. </div> <div style={{ color: T.white, fontSize: "15px", lineHeight: 1.7, marginTop: "10px", fontWeight: 600 }}> You have already identified the task. Now let us map out the actual solution together. </div>
           <div style={{ marginTop: "16px" }}>
             <a href={CTA_URL} target="_blank" rel="noopener noreferrer" onClick={() => onShare && onShare("booking")}
                style={{ display: "block", textAlign: "center", background: T.orange, color: T.white, fontWeight: 700, fontSize: "16px", padding: "16px 24px", borderRadius: T.radiusPill, textDecoration: "none", minHeight: "48px", boxSizing: "border-box" }}>
