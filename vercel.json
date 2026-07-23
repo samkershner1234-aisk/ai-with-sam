@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    { "source": "/AITime-WasteAudit", "destination": "/ai-time-waste-audit", "permanent": true },
+    { "source": "/ai-time-waste", "destination": "/ai-time-waste-audit", "permanent": true },
+    { "source": "/ai-audit", "destination": "/ai-time-waste-audit", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
+}
