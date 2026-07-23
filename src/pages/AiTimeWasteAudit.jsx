@@ -251,14 +251,6 @@ export default function AiTimeWasteAudit() {
             <p style={{ color: T.grey, fontSize: "16px", lineHeight: 1.7, marginBottom: "22px" }}>
               Answer four quick questions and discover where AI may help you reduce unnecessary repetitive work.
             </p>
-            <Card style={{ marginBottom: "22px" }}>
-              <ul style={{ margin: 0, paddingLeft: "18px", color: T.grey, fontSize: "15px", lineHeight: 2 }}>
-                <li>Find your strongest AI opportunity</li>
-                <li>See where your time may be disappearing</li>
-                <li>Get a practical next step</li>
-                <li>No technical knowledge required</li>
-              </ul>
-            </Card>
             <PrimaryButton onClick={startAudit}>Find My Best AI Opportunity</PrimaryButton>
             <p style={{ color: T.greyDim, fontSize: "13px", marginTop: "14px", textAlign: "center" }}>Takes about 2 minutes. No complicated AI questions.</p>
             <p style={{ color: T.greyDim, fontSize: "13px", marginTop: "4px", textAlign: "center" }}>Built for professionals in every role and industry.</p>
