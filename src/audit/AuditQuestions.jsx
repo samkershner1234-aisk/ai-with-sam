@@ -36,12 +36,7 @@ function ValueCard({ range, onBack, onContinue, headingRef, reduced }) {
       <ProgressBar current={3} total={TOTAL} reduced={reduced} />
       <Card>
         <div style={{ color: T.greyDim, fontSize: "13px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "8px" }}>Based on your answers...</div>
-        <h2 ref={headingRef} tabIndex={-1} style={{ outline: "none", fontSize: "20px", fontWeight: 700, color: T.white, margin: "0 0 10px", lineHeight: 1.4 }}>
-          This task may currently take <span style={{ color: T.orange }}>{range}</span>.
-        </h2>
-        <p style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7, margin: 0 }}>
-          That makes it worth checking whether a clearer AI-assisted process could reduce repeated effort.
-        </p>
+        <h2 ref={headingRef} tabIndex={-1} style={{ outline: "none", fontSize: "20px", fontWeight: 700, color: T.white, margin: "0 0 10px", lineHeight: 1.4 }}> This task may currently take approximately <span style={{ color: T.orange }}>{range}</span>. </h2>
       </Card>
       <div style={{ display: "flex", gap: "12px", marginTop: "22px" }}>
         <SecondaryButton onClick={onBack}>Back</SecondaryButton>
@@ -64,10 +59,7 @@ export default function AuditQuestions({ answers, setAnswers, onComplete, onBack
   const focusHeading = () => { if (headingRef.current) headingRef.current.focus(); };
   const scrollTop = () => { if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" }); };
 
-  const estimatedRange = useMemo(() => {
-    const hours = computeMonthlyHours(answers.monthlyFrequency, answers.timePerOccurrenceHours);
-    return mapMonthlyRange(hours);
-  }, [answers.monthlyFrequency, answers.timePerOccurrenceHours]);
+  const estimatedRange = useMemo(() => { const monthlyHoursRaw = computeMonthlyHours(answers.monthlyFrequency, answers.timePerOccurrenceHours); const WEEKS_PER_MONTH = 52 / 12; const MONTHLY_CAP = 40; const capped = monthlyHoursRaw > MONTHLY_CAP; const weeklyRaw = (capped ? MONTHLY_CAP : monthlyHoursRaw) / WEEKS_PER_MONTH; const weeklyDisplay = Math.round(weeklyRaw * 10) / 10; const monthlyDisplay = Math.round(monthlyHoursRaw); const weeklyPart = capped ? `${weeklyDisplay}+ hours per week` : `${weeklyDisplay} hours per week`; const monthlyPart = capped ? "40+ hours per month" : `around ${monthlyDisplay} hours per month`; return `${weeklyPart} (${monthlyPart})`; }, [answers.monthlyFrequency, answers.timePerOccurrenceHours]);
 
   const valid = useMemo(() => {
     switch (step) {
