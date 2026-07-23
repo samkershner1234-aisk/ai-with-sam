@@ -13,7 +13,15 @@ function List({ items }) {
 
 export function PartialResult({ answers, onContinue }) {
   const content = RESULT_CONTENT[answers.taskCategory] || RESULT_CONTENT.other;
-  const shortTask = (answers.taskDescription || "").slice(0, 160);
+  const desc = (answers.taskDescription || "").trim();
+  const shortTask = desc.slice(0, 160);
+  const readinessStart = {
+    beginner: "You are starting fresh with this task.",
+    experimenting: "You have already tested AI but need a clearer approach.",
+    developing: "You are using AI occasionally and may benefit from a repeatable process.",
+    confident: "You are ready to improve consistency and efficiency.",
+  }[answers.readinessLevel] || "You are starting fresh with this task.";
+  const labelStyle = { color: T.greyDim, fontSize: "13px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "6px" };
   return (
     <div>
       <Eyebrow>We found your strongest opportunity</Eyebrow>
@@ -21,28 +29,38 @@ export function PartialResult({ answers, onContinue }) {
         Your strongest opportunity is {content.title}
       </h1>
       <Card style={{ marginBottom: "16px" }}>
-        <div style={{ color: T.greyDim, fontSize: "13px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "6px" }}>The task you identified</div>
-        <div style={{ color: T.white, fontSize: "16px", lineHeight: 1.6 }}>{shortTask}</div>
+        <div style={labelStyle}>The task area you identified</div>
+        <div style={{ color: T.white, fontSize: "16px", lineHeight: 1.6 }}>{answers.taskCategoryLabel || content.title}</div>
+      </Card>
+      {desc && (
+        <Card style={{ marginBottom: "16px" }}>
+          <div style={labelStyle}>The task you described</div>
+          <div style={{ color: T.white, fontSize: "16px", lineHeight: 1.6 }}>{shortTask}</div>
+        </Card>
+      )}
+      <Card style={{ marginBottom: "16px" }}>
+        <div style={labelStyle}>Estimated monthly time exposure</div>
+        <div style={{ color: T.orange, fontSize: "20px", fontWeight: 700 }}>{answers.estimatedMonthlyRange}</div>
       </Card>
       <Card style={{ marginBottom: "16px" }}>
-        <div style={{ color: T.greyDim, fontSize: "13px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "6px" }}>Estimated monthly time exposure</div>
-        <div style={{ color: T.orange, fontSize: "20px", fontWeight: 700 }}>{answers.estimatedMonthlyRange}</div>
+        <div style={labelStyle}>Your current starting point</div>
+        <div style={{ color: T.white, fontSize: "15px", lineHeight: 1.6 }}>{readinessStart}</div>
       </Card>
       <p style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7 }}>
         Based on your answers, this task appears to be a strong candidate for a clearer AI-assisted process.
       </p>
       <Card style={{ marginTop: "8px" }}>
-        <div style={{ color: T.white, fontWeight: 700, marginBottom: "10px" }}>Your complete result includes:</div>
+        <div style={{ color: T.white, fontWeight: 700, marginBottom: "10px" }}>Your full breakdown includes:</div>
         <List items={[
           "Why this task may be suitable for AI",
           "What AI may help with",
           "What should remain under your control",
-          "Your current AI readiness",
-          "The three steps to take next",
+          "A recommendation based on your current experience",
+          "Three practical next steps",
         ]} />
       </Card>
       <div style={{ marginTop: "22px" }}>
-        <PrimaryButton onClick={onContinue}>See My Complete Result</PrimaryButton>
+        <PrimaryButton onClick={onContinue}>See My Personalised Next Steps</PrimaryButton>
       </div>
     </div>
   );
@@ -67,7 +85,7 @@ export function FullResult({ answers, canonicalUrl, onRetake, onShare }) {
   const content = RESULT_CONTENT[answers.taskCategory] || RESULT_CONTENT.other;
   const [copied, setCopied] = useState(false);
   const firstName = answers.firstName || "There";
-  const shortTask = (answers.taskDescription || "").slice(0, 220);
+  const shortTask = (answers.taskDescription || "").trim().slice(0, 220) || (answers.taskCategoryLabel || content.title);
   const readinessLabel = READINESS_LABELS[answers.readinessLevel] || READINESS_LABELS.beginner;
   const readinessCopy = READINESS_COPY[answers.readinessLevel] || READINESS_COPY.beginner;
 
