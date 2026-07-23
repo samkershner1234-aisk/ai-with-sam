@@ -80,8 +80,8 @@ function ContactForm({ answers, onSubmit, submitting, submitError, onRetry }) {
   return (
     <form onSubmit={submit} noValidate>
       <Eyebrow>Almost there</Eyebrow>
-      <h1 ref={headingRef} tabIndex={-1} style={{ outline: "none", fontSize: "26px", fontWeight: 800, color: T.white, margin: "0 0 8px" }}>See Your Complete Result</h1>
-      <p style={{ color: T.grey, fontSize: "15px", lineHeight: 1.6, marginBottom: "22px" }}>Enter your details to unlock your personalised breakdown and recommended next step.</p>
+      <h1 ref={headingRef} tabIndex={-1} style={{ outline: "none", fontSize: "26px", fontWeight: 800, color: T.white, margin: "0 0 8px" }}>See Your Personalised Next Steps</h1>
+      <p style={{ color: T.grey, fontSize: "15px", lineHeight: 1.6, marginBottom: "22px" }}>Enter your details to view your complete breakdown.</p>
       <Card>
         <div style={wrap}>
           <label style={label} htmlFor="firstName">First name</label>
@@ -121,7 +121,7 @@ function ContactForm({ answers, onSubmit, submitting, submitError, onRetry }) {
           </div>
         </div>
       )}
-      <PrimaryButton type="submit" disabled={submitting}>{submitting ? "Saving..." : "Show My Complete Result"}</PrimaryButton>
+      <PrimaryButton type="submit" disabled={submitting}>{submitting ? "Saving..." : "Show My Personalised Next Steps"}</PrimaryButton>
     </form>
   );
 }
@@ -185,14 +185,11 @@ export default function AiTimeWasteAudit() {
     const payload = {
       schemaVersion: SCHEMA_VERSION,
       firstName: contact.firstName, email: contact.email, whatsapp: contact.whatsapp, jobTitle: contact.jobTitle,
-      workType: merged.workType || "", workTypeOther: merged.workTypeOther || "",
       taskCategory: merged.taskCategory || "", taskCategoryLabel: merged.taskCategoryLabel || "",
       taskDescription: merged.taskDescription || "",
       taskFrequencyLabel: merged.taskFrequencyLabel || "", monthlyFrequency: merged.monthlyFrequency,
       timePerOccurrenceLabel: merged.timePerOccurrenceLabel || "", timePerOccurrenceHours: merged.timePerOccurrenceHours,
-      frustrationReasons: merged.frustrationReasons || [], frustrationOther: merged.frustrationOther || "",
       aiExperienceLabel: merged.aiExperienceLabel || "", readinessLevel: merged.readinessLevel || "",
-      desiredOutcome: merged.desiredOutcome || "",
       estimatedMonthlyHours: merged.estimatedMonthlyHours, estimatedMonthlyRange: merged.estimatedMonthlyRange,
       company: contact.company || "",
       ...utm,
@@ -247,12 +244,12 @@ export default function AiTimeWasteAudit() {
       <Shell>
         {phase === "intro" && (
           <div>
-            <Eyebrow>Free 3-minute audit</Eyebrow>
+            <Eyebrow>Free 2-minute audit</Eyebrow>
             <h1 style={{ fontSize: "32px", fontWeight: 800, color: T.white, margin: "0 0 14px", lineHeight: 1.2 }}>
               Which Part of Your Job Should You Use AI For First?
             </h1>
             <p style={{ color: T.grey, fontSize: "16px", lineHeight: 1.7, marginBottom: "22px" }}>
-              Answer a few simple questions and identify one repetitive task that may be worth simplifying with AI.
+              Answer four quick questions and discover where AI may help you reduce unnecessary repetitive work.
             </p>
             <Card style={{ marginBottom: "22px" }}>
               <ul style={{ margin: 0, paddingLeft: "18px", color: T.grey, fontSize: "15px", lineHeight: 2 }}>
@@ -263,7 +260,7 @@ export default function AiTimeWasteAudit() {
               </ul>
             </Card>
             <PrimaryButton onClick={startAudit}>Find My Best AI Opportunity</PrimaryButton>
-            <p style={{ color: T.greyDim, fontSize: "13px", marginTop: "14px", textAlign: "center" }}>Takes about 3 minutes. No complicated AI questions.</p>
+            <p style={{ color: T.greyDim, fontSize: "13px", marginTop: "14px", textAlign: "center" }}>Takes about 2 minutes. No complicated AI questions.</p>
             <p style={{ color: T.greyDim, fontSize: "13px", marginTop: "4px", textAlign: "center" }}>Built for professionals in every role and industry.</p>
           </div>
         )}
