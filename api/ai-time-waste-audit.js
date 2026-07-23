@@ -1,7 +1,7 @@
 // Vercel serverless function: secure server-side lead submission.
 // Runtime: Node.js (Vercel default). Never exposes the Apps Script URL or shared secret to the browser.
 
-const SCHEMA_VERSION = 1;
+const SCHEMA_VERSION = 2;
 
 const CATEGORY_VALUES = ["writing","research","organisation","meetings","content","analysis","administration","other"];
 const READINESS_VALUES = ["beginner","experimenting","developing","confident"];
@@ -73,6 +73,10 @@ export default async function handler(req, res) {
   if (!EMAIL_RE.test(email)) return res.status(400).json({ ok: false, error: "A valid email is required" });
 
   const taskCategory = CATEGORY_VALUES.includes(body.taskCategory) ? body.taskCategory : "other";
+  const taskDescriptionValue = str(body.taskDescription, 300);
+  if (taskCategory === "other" && taskDescriptionValue.trim().length < 3) {
+    return res.status(400).json({ ok: false, error: "Please describe the task" });
+  }
   const readinessLevel = READINESS_VALUES.includes(body.readinessLevel) ? body.readinessLevel : "beginner";
   const monthlyFrequency = FREQUENCY_VALUES.includes(Number(body.monthlyFrequency)) ? Number(body.monthlyFrequency) : 0;
   const timePerOccurrenceHours = TIME_VALUES.includes(Number(body.timePerOccurrenceHours)) ? Number(body.timePerOccurrenceHours) : 0;
@@ -101,7 +105,7 @@ export default async function handler(req, res) {
     workTypeOther: str(body.workTypeOther, 120),
     taskCategory,
     taskCategoryLabel: str(body.taskCategoryLabel, 120),
-    taskDescription: str(body.taskDescription, 300),
+    taskDescription: taskDescriptionValue,
     taskFrequencyLabel: str(body.taskFrequencyLabel, 60),
     monthlyFrequency,
     timePerOccurrenceLabel: str(body.timePerOccurrenceLabel, 60),
