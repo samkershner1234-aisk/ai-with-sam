@@ -1,7 +1,7 @@
 // Shared audit data + deterministic logic.
 // Used by the frontend (src/audit) and the server route (api/ai-time-waste-audit.js).
 
-export const SCHEMA_VERSION = 1;
+export const SCHEMA_VERSION = 2;
 export const AUDIT_PATH = "/ai-time-waste-audit";
 
 export const CATEGORY_VALUES = [
@@ -66,7 +66,7 @@ export const FRUSTRATION_OPTIONS = [
 ];
 
 export const EXPERIENCE_OPTIONS = [
-  { label: "No, I do not know where to begin", value: "beginner" },
+  { label: "I have not tried AI for this task", value: "beginner" },
   { label: "I tried, but the results were not useful", value: "experimenting" },
   { label: "I use AI occasionally but without a clear process", value: "developing" },
   { label: "I already use AI but want a better system", value: "developing" },
@@ -92,13 +92,13 @@ export const READINESS_LABELS = {
 
 export const READINESS_COPY = {
   beginner:
-    "You do not need to learn every AI tool. You need one useful starting point tied to a task you already understand.",
+    "You do not need to learn every AI tool. Begin with one task you already understand and test a focused use case.",
   experimenting:
-    "You have already started testing AI. The next improvement is giving it better context and a clearer process.",
+    "You have already tested AI. The next improvement is giving it better context, clearer instructions and a defined output.",
   developing:
-    "You are already using AI. The biggest opportunity is turning occasional use into a reliable, reusable method.",
+    "You are already using AI occasionally. Your biggest opportunity is turning random use into a reliable method you can reuse.",
   confident:
-    "You understand the basics. Your next opportunity is improving consistency, quality and efficiency.",
+    "You understand the basics. Your next opportunity is improving consistency, quality and efficiency around this specific task.",
 };
 
 export const RESULT_CONTENT = {
