@@ -147,9 +147,14 @@ export default async function handler(req, res) {
       console.error("Audit upstream non-OK status:", upstream.status);
       return res.status(502).json({ ok: false, error: "Could not save your details" });
     }
-    return res.status(200).json({ ok: true, stored: data && data.ok !== false });
+    if (!data || data.success !== true) {
+      console.error("Audit storage rejected:", data && data.code ? data.code : "unknown");
+      return res.status(502).json({ ok: false, error: "Could not save your details" });
+    }
+    return res.status(200).json({ ok: true, stored: true });
   } catch (err) {
     console.error("Audit submission error:", err && err.name ? err.name : "unknown");
     return res.status(502).json({ ok: false, error: "Could not save your details" });
   }
+}
 }
