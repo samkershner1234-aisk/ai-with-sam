@@ -6,8 +6,9 @@ const SCHEMA_VERSION = 2;
 const CATEGORY_VALUES = ["writing","research","organisation","meetings","content","analysis","administration","other"];
 const READINESS_VALUES = ["beginner","experimenting","developing","confident"];
 
-const FREQUENCY_VALUES = [60, 20, 12, 4, 2, 0.5];
-const TIME_VALUES = [0.17, 0.375, 0.75, 1.5, 3, 5];
+const WEEKLY_OCCURRENCE_VALUES = [21, 7, 3, 1, 1.25, 0.125];
+const MONTHLY_OCCURRENCE_VALUES = [84, 28, 12, 4, 5, 0.5];
+const TIME_MINUTE_VALUES = [5, 20, 45, 90, 180, 300];
 
 // ---- basic in-memory throttle (best-effort; per warm instance only) ----
 const HITS = new Map();
@@ -22,18 +23,31 @@ function throttled(ip) {
   return arr.length > MAX_PER_WINDOW;
 }
 
-function computeMonthlyHours(f, t) {
-  const a = Number(f), b = Number(t);
-  if (!isFinite(a) || !isFinite(b) || a < 0 || b < 0) return 0;
-  return Math.round(a * b * 100) / 100;
+function ceilHours(minutes) {
+  const m = Number(minutes);
+  if (!isFinite(m) || m <= 0) return 0;
+  return Math.ceil(m / 60);
 }
-function mapMonthlyRange(hours) {
+function timeDisplay(hours, unit) {
   const h = Number(hours);
-  if (!isFinite(h) || h < 1) return "Under 1 hour per month";
-  if (h < 3) return "Around 1-3 hours per month";
-  if (h < 5) return "Around 3-5 hours per month";
-  if (h < 10) return "Around 5-10 hours per month";
-  return "More than 10 hours per month";
+  const period = unit === "week" ? "per week" : "per month";
+  if (!isFinite(h) || h < 1) return "Less than 1 hour " + period;
+  return h + "+ hours " + period;
+}
+// Server-authoritative time calc. Weekly and monthly are independent; each rounds up.
+function computeTimeEstimate(weeklyOccurrences, monthlyOccurrences, timePerOccurrenceMinutes) {
+  const wOcc = Number(weeklyOccurrences), mOcc = Number(monthlyOccurrences), mins = Number(timePerOccurrenceMinutes);
+  const safe = (n) => (isFinite(n) && n >= 0 ? n : 0);
+  const estimatedWeeklyMinutes = safe(wOcc) * safe(mins);
+  const estimatedMonthlyMinutes = safe(mOcc) * safe(mins);
+  const estimatedWeeklyHours = ceilHours(estimatedWeeklyMinutes);
+  const estimatedMonthlyHours = ceilHours(estimatedMonthlyMinutes);
+  return {
+    estimatedWeeklyMinutes, estimatedMonthlyMinutes,
+    estimatedWeeklyHours, estimatedMonthlyHours,
+    estimatedWeeklyDisplay: timeDisplay(estimatedWeeklyHours, "week"),
+    estimatedMonthlyDisplay: timeDisplay(estimatedMonthlyHours, "month"),
+  };
 }
 
 function str(v, max) {
@@ -55,35 +69,39 @@ async function readBody(req) {
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
-    return res.status(405).json({ ok: false, error: "Method not allowed" });
+    return res.status(405).json({ success: false, code: "METHOD_NOT_ALLOWED", message: "Method not allowed." });
   }
 
   const ip = (req.headers["x-forwarded-for"] || "").toString().split(",")[0].trim() || "unknown";
-  if (throttled(ip)) return res.status(429).json({ ok: false, error: "Too many requests" });
+  if (throttled(ip)) return res.status(429).json({ success: false, code: "RATE_LIMITED", message: "Too many requests. Please try again shortly." });
 
   const body = await readBody(req);
-  if (!body || typeof body !== "object") return res.status(400).json({ ok: false, error: "Invalid request" });
+  if (!body || typeof body !== "object") return res.status(400).json({ success: false, code: "INVALID_REQUEST", message: "We could not read your submission." });
 
   // Honeypot: any value means bot. Return a generic OK so bots do not learn anything.
   if (str(body.company, 200).trim().length > 0) return res.status(200).json({ ok: true });
 
   const firstName = str(body.firstName, 80).trim();
   const email = str(body.email, 160).trim();
-  if (!firstName) return res.status(400).json({ ok: false, error: "First name is required" });
-  if (!EMAIL_RE.test(email)) return res.status(400).json({ ok: false, error: "A valid email is required" });
+  if (!firstName) return res.status(400).json({ success: false, code: "VALIDATION_ERROR", message: "First name is required." });
+  if (!EMAIL_RE.test(email)) return res.status(400).json({ success: false, code: "VALIDATION_ERROR", message: "A valid email is required." });
 
   const taskCategory = CATEGORY_VALUES.includes(body.taskCategory) ? body.taskCategory : "other";
   const taskDescriptionValue = str(body.taskDescription, 300);
   if (taskCategory === "other" && taskDescriptionValue.trim().length < 3) {
-    return res.status(400).json({ ok: false, error: "Please describe the task" });
+    return res.status(400).json({ success: false, code: "VALIDATION_ERROR", message: "Please describe the task." });
   }
   const readinessLevel = READINESS_VALUES.includes(body.readinessLevel) ? body.readinessLevel : "beginner";
-  const monthlyFrequency = FREQUENCY_VALUES.includes(Number(body.monthlyFrequency)) ? Number(body.monthlyFrequency) : 0;
-  const timePerOccurrenceHours = TIME_VALUES.includes(Number(body.timePerOccurrenceHours)) ? Number(body.timePerOccurrenceHours) : 0;
+  const weeklyOccurrences = WEEKLY_OCCURRENCE_VALUES.includes(Number(body.weeklyOccurrences)) ? Number(body.weeklyOccurrences) : 0;
+  const monthlyOccurrences = MONTHLY_OCCURRENCE_VALUES.includes(Number(body.monthlyOccurrences)) ? Number(body.monthlyOccurrences) : 0;
+  const timePerOccurrenceMinutes = TIME_MINUTE_VALUES.includes(Number(body.timePerOccurrenceMinutes)) ? Number(body.timePerOccurrenceMinutes) : 0;
 
   // Server-side recalculation (never trust client math).
-  const estimatedMonthlyHours = computeMonthlyHours(monthlyFrequency, timePerOccurrenceHours);
-  const estimatedMonthlyRange = mapMonthlyRange(estimatedMonthlyHours);
+  const est = computeTimeEstimate(weeklyOccurrences, monthlyOccurrences, timePerOccurrenceMinutes);
+  const estimatedWeeklyHours = est.estimatedWeeklyHours;
+  const estimatedMonthlyHours = est.estimatedMonthlyHours;
+  const estimatedWeeklyDisplay = est.estimatedWeeklyDisplay;
+  const estimatedMonthlyDisplay = est.estimatedMonthlyDisplay;
 
   let frustrationReasons = Array.isArray(body.frustrationReasons) ? body.frustrationReasons.slice(0, 3).map((x) => str(x, 80)) : [];
 
@@ -91,7 +109,7 @@ export default async function handler(req, res) {
   const SHARED_SECRET = process.env.AI_AUDIT_SHARED_SECRET;
   if (!APPS_SCRIPT_URL || !SHARED_SECRET) {
     // Do not leak which variable is missing.
-    return res.status(503).json({ ok: false, error: "Lead storage is not configured" });
+    return res.status(503).json({ success: false, code: "NOT_CONFIGURED", message: "Lead storage is not configured." });
   }
 
   const payload = {
@@ -107,16 +125,19 @@ export default async function handler(req, res) {
     taskCategoryLabel: str(body.taskCategoryLabel, 120),
     taskDescription: taskDescriptionValue,
     taskFrequencyLabel: str(body.taskFrequencyLabel, 60),
-    monthlyFrequency,
+    weeklyOccurrences,
+    monthlyOccurrences,
     timePerOccurrenceLabel: str(body.timePerOccurrenceLabel, 60),
-    timePerOccurrenceHours,
+    timePerOccurrenceMinutes,
     frustrationReasons,
     frustrationOther: str(body.frustrationOther, 120),
     aiExperienceLabel: str(body.aiExperienceLabel, 120),
     readinessLevel,
     desiredOutcome: str(body.desiredOutcome, 120),
+    estimatedWeeklyHours,
     estimatedMonthlyHours,
-    estimatedMonthlyRange,
+    estimatedWeeklyDisplay,
+    estimatedMonthlyDisplay,
     source: "AI Time-Waste Audit",
     submittedAt: new Date().toISOString(),
     utmSource: str(body.utmSource, 120),
@@ -145,15 +166,29 @@ export default async function handler(req, res) {
 
     if (!upstream.ok) {
       console.error("Audit upstream non-OK status:", upstream.status);
-      return res.status(502).json({ ok: false, error: "Could not save your details" });
+      return res.status(502).json({ success: false, code: "SUBMISSION_FAILED", message: "We could not save your details." });
     }
     if (!data || data.success !== true) {
       console.error("Audit storage rejected:", data && data.code ? data.code : "unknown");
-      return res.status(502).json({ ok: false, error: "Could not save your details" });
+      return res.status(502).json({ success: false, code: "SUBMISSION_FAILED", message: "We could not save your details." });
     }
-    return res.status(200).json({ ok: true, stored: true });
+    return res.status(200).json({
+      success: true,
+      action: data.action === "updated" ? "updated" : "created",
+      requestId: typeof data.requestId === "string" ? data.requestId : "",
+      result: {
+        taskCategory,
+        taskCategoryLabel: str(body.taskCategoryLabel, 120),
+        taskDescription: taskDescriptionValue,
+        estimatedWeeklyHours,
+        estimatedMonthlyHours,
+        estimatedWeeklyDisplay,
+        estimatedMonthlyDisplay,
+        readinessLevel,
+      },
+    });
   } catch (err) {
     console.error("Audit submission error:", err && err.name ? err.name : "unknown");
-    return res.status(502).json({ ok: false, error: "Could not save your details" });
+    return res.status(502).json({ success: false, code: "SUBMISSION_FAILED", message: "We could not save your details." });
   }
 }
