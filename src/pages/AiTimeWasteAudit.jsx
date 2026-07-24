@@ -3,9 +3,10 @@ import AuditHeader from "../audit/AuditHeader";
 import AuditQuestions from "../audit/AuditQuestions";
 import { PartialResult, FullResult } from "../audit/AuditResult";
 import { Shell, Card, Eyebrow, PrimaryButton, SecondaryButton, T, useReducedMotion } from "../audit/ui";
-import { AUDIT_PATH, SCHEMA_VERSION, computeMonthlyHours, mapMonthlyRange } from "../audit/auditData";
+import { AUDIT_PATH, SCHEMA_VERSION, computeTimeEstimate } from "../audit/auditData";
 
 const STORAGE_KEY = "ai_time_waste_audit_v1";
+const RESULT_KEY = "aiTimeWasteAuditResult";
 const PROD_ORIGIN = "https://www.aiforeveryrole.com";
 const CANONICAL_URL = PROD_ORIGIN + AUDIT_PATH;
 
@@ -36,6 +37,23 @@ function saveSession(answers) {
 }
 function clearSession() {
   try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
+}
+
+// Persist the completed result so a page refresh keeps it during the session.
+function saveResult(result) {
+  try { sessionStorage.setItem(RESULT_KEY, JSON.stringify(result)); } catch (e) { /* ignore */ }
+}
+function loadResult() {
+  try {
+    const raw = sessionStorage.getItem(RESULT_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed === "object" && parsed.taskCategory) return parsed;
+    return null;
+  } catch (e) { return null; }
+}
+function clearResult() {
+  try { sessionStorage.removeItem(RESULT_KEY); } catch (e) {}
 }
 
 function getUtm() {
@@ -146,8 +164,9 @@ function Analysing({ reduced, onDone }) {
 
 export default function AiTimeWasteAudit() {
   const reduced = useReducedMotion();
-  const [phase, setPhase] = useState("intro"); // intro | questions | partial | contact | analysing | result
-  const [answers, setAnswers] = useState(() => loadSession());
+  const savedResult = loadResult();
+  const [phase, setPhase] = useState(savedResult ? "result" : "intro"); // intro | questions | partial | contact | analysing | result
+  const [answers, setAnswers] = useState(() => (savedResult ? { ...loadSession(), ...savedResult } : loadSession()));
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(false);
   const submittedOnce = useRef(false);
@@ -161,8 +180,8 @@ export default function AiTimeWasteAudit() {
   useEffect(() => { saveSession(answers); }, [answers]);
 
   const withComputed = (a) => {
-    const hours = computeMonthlyHours(a.monthlyFrequency, a.timePerOccurrenceHours);
-    return { ...a, estimatedMonthlyHours: hours, estimatedMonthlyRange: mapMonthlyRange(hours) };
+    const est = computeTimeEstimate(a.weeklyOccurrences, a.monthlyOccurrences, a.timePerOccurrenceMinutes);
+    return { ...a, ...est };
   };
 
   const startAudit = () => { track("audit_started"); setAnswers((p) => ({ ...p, __step: 1 })); setPhase("questions"); };
@@ -187,15 +206,17 @@ export default function AiTimeWasteAudit() {
       firstName: contact.firstName, email: contact.email, whatsapp: contact.whatsapp, jobTitle: contact.jobTitle,
       taskCategory: merged.taskCategory || "", taskCategoryLabel: merged.taskCategoryLabel || "",
       taskDescription: merged.taskDescription || "",
-      taskFrequencyLabel: merged.taskFrequencyLabel || "", monthlyFrequency: merged.monthlyFrequency,
-      timePerOccurrenceLabel: merged.timePerOccurrenceLabel || "", timePerOccurrenceHours: merged.timePerOccurrenceHours,
+      taskFrequencyLabel: merged.taskFrequencyLabel || "", weeklyOccurrences: merged.weeklyOccurrences, monthlyOccurrences: merged.monthlyOccurrences,
+      timePerOccurrenceLabel: merged.timePerOccurrenceLabel || "", timePerOccurrenceMinutes: merged.timePerOccurrenceMinutes,
       aiExperienceLabel: merged.aiExperienceLabel || "", readinessLevel: merged.readinessLevel || "",
-      estimatedMonthlyHours: merged.estimatedMonthlyHours, estimatedMonthlyRange: merged.estimatedMonthlyRange,
+      estimatedWeeklyHours: merged.estimatedWeeklyHours, estimatedMonthlyHours: merged.estimatedMonthlyHours,
+      estimatedWeeklyDisplay: merged.estimatedWeeklyDisplay, estimatedMonthlyDisplay: merged.estimatedMonthlyDisplay,
       company: contact.company || "",
       ...utm,
       referrer: (typeof document !== "undefined" && document.referrer ? document.referrer.slice(0, 300) : ""),
     };
     let ok = false;
+    let serverResult = null;
     try {
       const ctrl = new AbortController();
       const timer = setTimeout(() => ctrl.abort(), 12000);
@@ -204,12 +225,27 @@ export default function AiTimeWasteAudit() {
       });
       clearTimeout(timer);
       const data = await res.json().catch(() => ({}));
-      ok = res.ok && data && data.ok !== false;
+      ok = res.ok && data && data.success === true;
+      if (ok && data.result && typeof data.result === "object") serverResult = data.result;
     } catch (e) { ok = false; }
     setSubmitting(false);
     if (ok) {
       submittedOnce.current = true;
-      track("audit_submitted", { taskCategory: merged.taskCategory, readinessLevel: merged.readinessLevel, estimatedRange: merged.estimatedMonthlyRange });
+      // Server values are authoritative; fall back to the client estimate if absent.
+      const resultState = {
+        firstName: contact.firstName,
+        taskCategory: serverResult && serverResult.taskCategory ? serverResult.taskCategory : merged.taskCategory,
+        taskCategoryLabel: serverResult && serverResult.taskCategoryLabel ? serverResult.taskCategoryLabel : (merged.taskCategoryLabel || ""),
+        taskDescription: serverResult && typeof serverResult.taskDescription === "string" ? serverResult.taskDescription : (merged.taskDescription || ""),
+        readinessLevel: serverResult && serverResult.readinessLevel ? serverResult.readinessLevel : merged.readinessLevel,
+        estimatedWeeklyHours: serverResult && serverResult.estimatedWeeklyHours != null ? serverResult.estimatedWeeklyHours : merged.estimatedWeeklyHours,
+        estimatedMonthlyHours: serverResult && serverResult.estimatedMonthlyHours != null ? serverResult.estimatedMonthlyHours : merged.estimatedMonthlyHours,
+        estimatedWeeklyDisplay: serverResult && serverResult.estimatedWeeklyDisplay ? serverResult.estimatedWeeklyDisplay : merged.estimatedWeeklyDisplay,
+        estimatedMonthlyDisplay: serverResult && serverResult.estimatedMonthlyDisplay ? serverResult.estimatedMonthlyDisplay : merged.estimatedMonthlyDisplay,
+      };
+      setAnswers((p) => ({ ...p, ...resultState }));
+      saveResult(resultState); // persist synchronously before navigation
+      track("audit_submitted", { taskCategory: resultState.taskCategory, readinessLevel: resultState.readinessLevel });
       setPhase("analysing");
     } else {
       track("audit_submission_failed");
@@ -224,6 +260,7 @@ export default function AiTimeWasteAudit() {
   const retake = () => {
     if (!window.confirm("Retake the audit? This will clear your current result.")) return;
     clearSession();
+    clearResult();
     track("audit_retake_clicked");
     setAnswers({});
     setSubmitError(false);
