@@ -227,11 +227,11 @@ export function ceilHours(minutes) {
 }
 
 // Build the human-readable display string for a whole-hour figure.
-export function timeDisplay(hours, unit) {
-  const h = Number(hours);
+export function timeDisplay(minutes, unit) {
+  const m = Number(minutes);
   const period = unit === "week" ? "per week" : "per month";
-  if (!isFinite(h) || h < 1) return "Less than 1 hour " + period;
-  return h + "+ hours " + period;
+  if (!isFinite(m) || m < 60) return "Less than 1 hour " + period;
+  return Math.ceil(m / 60) + "+ hours " + period;
 }
 
 // Core calculation. Accepts occurrence counts + minutes-per-occurrence.
@@ -254,7 +254,7 @@ export function computeTimeEstimate(weeklyOccurrences, monthlyOccurrences, timeP
     estimatedMonthlyMinutes,
     estimatedWeeklyHours,
     estimatedMonthlyHours,
-    estimatedWeeklyDisplay: timeDisplay(estimatedWeeklyHours, "week"),
-    estimatedMonthlyDisplay: timeDisplay(estimatedMonthlyHours, "month"),
+    estimatedWeeklyDisplay: timeDisplay(estimatedWeeklyMinutes, "week"),
+    estimatedMonthlyDisplay: timeDisplay(estimatedMonthlyMinutes, "month"),
   };
 }
