@@ -28,11 +28,11 @@ function ceilHours(minutes) {
   if (!isFinite(m) || m <= 0) return 0;
   return Math.ceil(m / 60);
 }
-function timeDisplay(hours, unit) {
-  const h = Number(hours);
+function timeDisplay(minutes, unit) {
+  const m = Number(minutes);
   const period = unit === "week" ? "per week" : "per month";
-  if (!isFinite(h) || h < 1) return "Less than 1 hour " + period;
-  return h + "+ hours " + period;
+  if (!isFinite(m) || m < 60) return "Less than 1 hour " + period;
+  return Math.ceil(m / 60) + "+ hours " + period;
 }
 // Server-authoritative time calc. Weekly and monthly are independent; each rounds up.
 function computeTimeEstimate(weeklyOccurrences, monthlyOccurrences, timePerOccurrenceMinutes) {
@@ -45,8 +45,8 @@ function computeTimeEstimate(weeklyOccurrences, monthlyOccurrences, timePerOccur
   return {
     estimatedWeeklyMinutes, estimatedMonthlyMinutes,
     estimatedWeeklyHours, estimatedMonthlyHours,
-    estimatedWeeklyDisplay: timeDisplay(estimatedWeeklyHours, "week"),
-    estimatedMonthlyDisplay: timeDisplay(estimatedMonthlyHours, "month"),
+    estimatedWeeklyDisplay: timeDisplay(estimatedWeeklyMinutes, "week"),
+    estimatedMonthlyDisplay: timeDisplay(estimatedMonthlyMinutes, "month"),
   };
 }
 
