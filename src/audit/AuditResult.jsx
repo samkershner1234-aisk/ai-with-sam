@@ -275,3 +275,55 @@ export function FullResult({ answers, canonicalUrl, onRetake, onShare }) {
     </div>
   );
 }
+
+export function ThankYou({ answers, onRetake }) {
+  const firstName = (answers === undefined) ? "" : (answers.firstName || "");
+  const greeting = firstName ? esc(firstName) + ", you\u2019re all set." : "You\u2019re all set.";
+  const wrap = { maxWidth: "620px", margin: "0 auto", textAlign: "center" };
+  const card = { background: T.card, border: "1px solid " + T.border, borderRadius: "16px", padding: "28px 24px", marginTop: "26px", textAlign: "left" };
+  const stepRow = { display: "flex", gap: "12px", alignItems: "flex-start", marginBottom: "16px" };
+  const num = { flex: "0 0 auto", width: "26px", height: "26px", borderRadius: "50%", background: T.orange, color: "#0b0f14", fontWeight: 800, fontSize: "14px", display: "flex", alignItems: "center", justifyContent: "center" };
+  const stepText = { color: T.grey, fontSize: "15px", lineHeight: 1.6, margin: 0 };
+  return (
+    <div style={wrap}>
+      <Eyebrow>Audit complete</Eyebrow>
+      <h1 style={{ fontSize: "32px", fontWeight: 800, color: T.white, margin: "6px 0 14px", lineHeight: 1.2 }}>
+        {greeting}
+      </h1>
+      <p style={{ color: T.grey, fontSize: "17px", lineHeight: 1.7, margin: "0 0 6px" }}>
+        Thank you for completing the AI Time-Waste Audit.
+      </p>
+      <p style={{ color: T.grey, fontSize: "17px", lineHeight: 1.7, margin: 0 }}>
+        Your personalised result has just been sent to your inbox. Check your email in the next minute or two \u2014 if you don\u2019t see it, take a quick look in your spam or promotions folder.
+      </p>
+      <div style={card}>
+        <p style={{ color: T.white, fontWeight: 700, fontSize: "16px", margin: "0 0 18px" }}>What happens next</p>
+        <div style={stepRow}>
+          <div style={num}>1</div>
+          <p style={stepText}>Open the email and read through where AI could save you the most time.</p>
+        </div>
+        <div style={stepRow}>
+          <div style={num}>2</div>
+          <p style={stepText}>If you want help turning it into a real, working process, book a free 20-minute call below.</p>
+        </div>
+        <div style={{ ...stepRow, marginBottom: 0 }}>
+          <div style={num}>3</div>
+          <p style={stepText}>We\u2019ll map out one practical AI workflow around your task together \u2014 no pressure, no jargon.</p>
+        </div>
+      </div>
+      <div style={{ marginTop: "28px" }}>
+        <PrimaryButton onClick={() => { window.location.href = "https://calendly.com/samtheaicoach/free"; }}>
+          Book My Free 20-Minute Call
+        </PrimaryButton>
+        <p style={{ color: T.greyDim, fontSize: "13px", marginTop: "12px" }}>
+          Because every call is personally prepared, only a limited number are available each week.
+        </p>
+      </div>
+      <div style={{ marginTop: "26px" }}>
+        <button type="button" onClick={onRetake} style={{ background: "none", border: "none", color: T.greyDim, fontSize: "14px", textDecoration: "underline", cursor: "pointer" }}>
+          Retake the Audit
+        </button>
+      </div>
+    </div>
+  );
+}
