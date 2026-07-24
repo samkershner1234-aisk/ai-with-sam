@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 import {
   TASK_CATEGORIES, FREQUENCY_OPTIONS, TIME_OPTIONS, EXPERIENCE_OPTIONS,
-  computeMonthlyHours, mapMonthlyRange,
+  computeTimeEstimate,
 } from "./auditData";
 import { T, Card, ProgressBar, OptionCard, PrimaryButton, SecondaryButton, useReducedMotion } from "./ui";
 
@@ -30,13 +30,28 @@ function QuestionFrame({ step, heading, helper, children, onBack, onNext, nextDi
   );
 }
 
-function ValueCard({ range, onBack, onContinue, headingRef, reduced }) {
+function ValueCard({ estimate, onBack, onContinue, headingRef, reduced }) {
   return (
     <div>
       <ProgressBar current={3} total={TOTAL} reduced={reduced} />
       <Card>
-        <div style={{ color: T.greyDim, fontSize: "13px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "8px" }}>Based on your answers...</div>
-        <h2 ref={headingRef} tabIndex={-1} style={{ outline: "none", fontSize: "20px", fontWeight: 700, color: T.white, margin: "0 0 10px", lineHeight: 1.4 }}> This task may currently take approximately <span style={{ color: T.orange }}>{range}</span>. </h2>
+        <div style={{ color: T.greyDim, fontSize: "13px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "10px" }}>
+          Based on your answers
+        </div>
+        <div ref={headingRef} tabIndex={-1} style={{ outline: "none" }}>
+          <p style={{ color: T.white, fontSize: "18px", fontWeight: 600, lineHeight: 1.4, margin: "0 0 10px" }}>
+            This task may currently take approximately
+          </p>
+          <p style={{ color: T.orange, fontSize: "30px", fontWeight: 800, lineHeight: 1.2, margin: "0 0 4px" }}>
+            {estimate.estimatedWeeklyDisplay}
+          </p>
+          <p style={{ color: T.grey, fontSize: "18px", fontWeight: 600, lineHeight: 1.3, margin: "0 0 16px" }}>
+            ({estimate.estimatedMonthlyDisplay}).
+          </p>
+        </div>
+        <p style={{ color: T.grey, fontSize: "15px", lineHeight: 1.6, margin: 0 }}>
+          That makes it worth checking whether a clearer AI-assisted process could reduce some of the repeated effort.
+        </p>
       </Card>
       <div style={{ display: "flex", gap: "12px", marginTop: "22px" }}>
         <SecondaryButton onClick={onBack}>Back</SecondaryButton>
@@ -59,7 +74,10 @@ export default function AuditQuestions({ answers, setAnswers, onComplete, onBack
   const focusHeading = () => { if (headingRef.current) headingRef.current.focus(); };
   const scrollTop = () => { if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" }); };
 
-  const estimatedRange = useMemo(() => { const monthlyHoursRaw = computeMonthlyHours(answers.monthlyFrequency, answers.timePerOccurrenceHours); const WEEKS_PER_MONTH = 52 / 12; const MONTHLY_CAP = 40; const capped = monthlyHoursRaw > MONTHLY_CAP; const weeklyRaw = (capped ? MONTHLY_CAP : monthlyHoursRaw) / WEEKS_PER_MONTH; const weeklyDisplay = Math.round(weeklyRaw * 10) / 10; const monthlyDisplay = Math.round(monthlyHoursRaw); const weeklyPart = capped ? `${weeklyDisplay}+ hours per week` : `${weeklyDisplay} hours per week`; const monthlyPart = capped ? "40+ hours per month" : `around ${monthlyDisplay} hours per month`; return `${weeklyPart} (${monthlyPart})`; }, [answers.monthlyFrequency, answers.timePerOccurrenceHours]);
+  const estimate = useMemo(
+    () => computeTimeEstimate(answers.weeklyOccurrences, answers.monthlyOccurrences, answers.timePerOccurrenceMinutes),
+    [answers.weeklyOccurrences, answers.monthlyOccurrences, answers.timePerOccurrenceMinutes]
+  );
 
   const valid = useMemo(() => {
     switch (step) {
@@ -70,8 +88,8 @@ export default function AuditQuestions({ answers, setAnswers, onComplete, onBack
         }
         return true;
       }
-      case 2: return answers.monthlyFrequency != null;
-      case 3: return answers.timePerOccurrenceHours != null;
+      case 2: return answers.monthlyOccurrences != null;
+      case 3: return answers.timePerOccurrenceMinutes != null;
       case 4: return !!answers.readinessLevel;
       default: return false;
     }
@@ -108,15 +126,15 @@ export default function AuditQuestions({ answers, setAnswers, onComplete, onBack
   const attemptNext = () => { if (!valid) { setError("Please choose an answer to continue."); return; } goNext(); };
 
   const selectCategory = (opt) => { set({ taskCategory: opt.value, taskCategoryLabel: opt.label }); setError(""); };
-  const selectFrequency = (opt) => { set({ monthlyFrequency: opt.value, taskFrequencyLabel: opt.label }); setError(""); };
-  const selectTime = (opt) => { set({ timePerOccurrenceHours: opt.value, timePerOccurrenceLabel: opt.label }); setError(""); };
+  const selectFrequency = (opt) => { set({ weeklyOccurrences: opt.weeklyOccurrences, monthlyOccurrences: opt.monthlyOccurrences, taskFrequencyLabel: opt.label }); setError(""); };
+  const selectTime = (opt) => { set({ timePerOccurrenceMinutes: opt.minutes, timePerOccurrenceLabel: opt.label }); setError(""); };
   const selectExperience = (opt) => { set({ readinessLevel: opt.value, aiExperienceLabel: opt.label }); setError(""); };
 
   const descLen = (answers.taskDescription || "").length;
   const descRequired = answers.taskCategory === "other";
 
   if (showValue) {
-    return <ValueCard range={estimatedRange} onBack={goBack} onContinue={continueFromValue} headingRef={headingRef} reduced={reduced} />;
+    return <ValueCard estimate={estimate} onBack={goBack} onContinue={continueFromValue} headingRef={headingRef} reduced={reduced} />;
   }
 
   return (
@@ -155,7 +173,7 @@ export default function AuditQuestions({ answers, setAnswers, onComplete, onBack
         <QuestionFrame step={2} heading="How often do you usually do this task?" onBack={goBack} onNext={attemptNext} nextDisabled={!valid} headingRef={headingRef} reduced={reduced} error={error}>
           <div role="group" aria-label="Task frequency">
             {FREQUENCY_OPTIONS.map((opt) => (
-              <OptionCard key={opt.label} selected={answers.monthlyFrequency === opt.value} onClick={() => selectFrequency(opt)}>{opt.label}</OptionCard>
+              <OptionCard key={opt.label} selected={answers.monthlyOccurrences === opt.monthlyOccurrences} onClick={() => selectFrequency(opt)}>{opt.label}</OptionCard>
             ))}
           </div>
         </QuestionFrame>
@@ -165,7 +183,7 @@ export default function AuditQuestions({ answers, setAnswers, onComplete, onBack
         <QuestionFrame step={3} heading="How long does it normally take each time?" onBack={goBack} onNext={attemptNext} nextDisabled={!valid} headingRef={headingRef} reduced={reduced} error={error}>
           <div role="group" aria-label="Time per task">
             {TIME_OPTIONS.map((opt) => (
-              <OptionCard key={opt.label} selected={answers.timePerOccurrenceHours === opt.value} onClick={() => selectTime(opt)}>{opt.label}</OptionCard>
+              <OptionCard key={opt.label} selected={answers.timePerOccurrenceMinutes === opt.minutes} onClick={() => selectTime(opt)}>{opt.label}</OptionCard>
             ))}
           </div>
         </QuestionFrame>
