@@ -3,6 +3,9 @@
 
 const SCHEMA_VERSION = 2;
 
+// Allow slow-but-successful upstream (Notion) writes to finish instead of falsely reporting a save failure. Requires Fluid Compute (enabled).
+export const maxDuration = 60;
+
 const CATEGORY_VALUES = ["writing","research","organisation","meetings","content","analysis","administration","other"];
 const READINESS_VALUES = ["beginner","experimenting","developing","confident"];
 
@@ -150,7 +153,7 @@ export default async function handler(req, res) {
 
   try {
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 9000);
+    const timer = setTimeout(() => controller.abort(), 50000);
     const upstream = await fetch(APPS_SCRIPT_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
