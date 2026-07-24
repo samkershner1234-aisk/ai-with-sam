@@ -49,8 +49,7 @@ function ValueCard({ estimate, onBack, onContinue, headingRef, reduced }) {
             ({estimate.estimatedMonthlyDisplay}).
           </p>
         </div>
-        <p style={{ color: T.grey, fontSize: "15px", lineHeight: 1.6, margin: 0 }}>
-      </Card>
+        </Card>
       <div style={{ display: "flex", gap: "12px", marginTop: "22px" }}>
         <SecondaryButton onClick={onBack}>Back</SecondaryButton>
         <div style={{ flex: "1 1 auto" }}>
