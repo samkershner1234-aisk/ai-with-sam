@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useReducer, useRef, useState } from "react";
 import AuditHeader from "../audit/AuditHeader";
 import AuditQuestions from "../audit/AuditQuestions";
-import { PartialResult, FullResult } from "../audit/AuditResult";
+import { PartialResult, FullResult, ThankYou } from "../audit/AuditResult";
 import { Shell, Card, Eyebrow, PrimaryButton, SecondaryButton, T, useReducedMotion } from "../audit/ui";
 import { AUDIT_PATH, SCHEMA_VERSION, computeTimeEstimate } from "../audit/auditData";
 
@@ -307,8 +307,7 @@ export default function AiTimeWasteAudit() {
         {phase === "analysing" && (<Analysing reduced={reduced} onDone={onAnalysingDone} />)}
 
         {phase === "result" && (
-          <FullResult answers={answers} canonicalUrl={CANONICAL_URL} onRetake={retake}
-            onShare={(kind) => track(kind === "booking" ? "audit_booking_clicked" : "audit_shared", { method: kind })} />
+          <ThankYou answers={answers} onRetake={retake} />
         )}
       </Shell>
     </>
