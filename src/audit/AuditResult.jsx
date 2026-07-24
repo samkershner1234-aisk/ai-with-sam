@@ -3,57 +3,111 @@ import { RESULT_CONTENT, READINESS_LABELS, READINESS_COPY } from "./auditData";
 import { T, Card, Eyebrow, PrimaryButton, SecondaryButton } from "./ui";
 import { CTA_URL } from "../components/landing/constants";
 
-function List({ items }) {
+function esc(s) {
+  return String(s == null ? "" : s);
+}
+
+function CheckList({ items }) {
   return (
-    <ul style={{ margin: "10px 0 0", paddingLeft: "18px", color: T.grey, fontSize: "14px", lineHeight: 1.7 }}>
-      {items.map((x) => (<li key={x}>{x}</li>))}
+    <ul style={{ listStyle: "none", margin: "12px 0 0", padding: 0, color: T.grey, fontSize: "15px", lineHeight: 1.7 }}>
+      {items.map((x) => (
+        <li key={x} style={{ display: "flex", gap: "10px", marginBottom: "8px" }}>
+          <span aria-hidden="true" style={{ color: T.orange, fontWeight: 800 }}>&#10003;</span>
+          <span>{x}</span>
+        </li>
+      ))}
     </ul>
+  );
+}
+
+function TimeEstimate({ weeklyDisplay, monthlyDisplay }) {
+  return (
+    <div>
+      <p style={{ color: T.grey, fontSize: "15px", lineHeight: 1.5, margin: "0 0 8px" }}>
+        This task may currently take approximately
+      </p>
+      <p style={{ color: T.orange, fontSize: "26px", fontWeight: 800, lineHeight: 1.2, margin: "0 0 4px" }}>
+        {weeklyDisplay}
+      </p>
+      <p style={{ color: T.grey, fontSize: "17px", fontWeight: 600, lineHeight: 1.3, margin: 0 }}>
+        ({monthlyDisplay}).
+      </p>
+    </div>
   );
 }
 
 export function PartialResult({ answers, onContinue }) {
   const content = RESULT_CONTENT[answers.taskCategory] || RESULT_CONTENT.other;
   const desc = (answers.taskDescription || "").trim();
-  const shortTask = desc.slice(0, 160);
-  const readinessStart = {
-    beginner: "You are starting fresh with this task.",
-    experimenting: "You have already tested AI but need a clearer approach.",
-    developing: "You are using AI occasionally and may benefit from a repeatable process.",
-    confident: "You are ready to improve consistency and efficiency.",
-  }[answers.readinessLevel] || "You are starting fresh with this task.";
-  const labelStyle = { color: T.greyDim, fontSize: "13px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "6px" };
+  const categoryLabel = answers.taskCategoryLabel || content.title;
+  const startingPoint = {
+    beginner: "You have not yet tried AI for this task.",
+    experimenting: "You have tried AI, but the results have not been useful enough.",
+    developing: "You use AI occasionally but do not yet have a repeatable process.",
+    confident: "You already use AI and are ready to improve the system.",
+  }[answers.readinessLevel] || "You have not yet tried AI for this task.";
+
+  const item = { marginTop: "16px" };
+  const itemLabel = { color: T.greyDim, fontSize: "13px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "4px" };
+  const itemValue = { color: T.white, fontSize: "16px", lineHeight: 1.5 };
+
   return (
     <div>
       <Eyebrow>We found your strongest opportunity</Eyebrow>
-      <h1 style={{ fontSize: "28px", fontWeight: 800, color: T.white, margin: "0 0 20px", lineHeight: 1.25 }}> We've identified your strongest AI opportunity. See the full breakdown below. </h1> {desc && ( <Card style={{ marginBottom: "16px" }}> <div style={labelStyle}>The task you described</div> <div style={{ color: T.white, fontSize: "16px", lineHeight: 1.6 }}>{shortTask}</div> </Card> )}
-      <Card style={{ marginTop: "8px" }}>
-        <div style={{ color: T.white, fontWeight: 700, marginBottom: "10px" }}>Your full breakdown includes:</div>
-        <List items={[
-          "Why this task may be suitable for AI",
-          "What AI may help with",
-          "What should remain under your control",
-          "A recommendation based on your current experience",
-          "Three practical next steps",
-        ]} />
+      <h1 style={{ fontSize: "28px", fontWeight: 800, color: T.white, margin: "0 0 12px", lineHeight: 1.25 }}>
+        This task may be costing you more time than you realise.
+      </h1>
+      <p style={{ color: T.grey, fontSize: "16px", lineHeight: 1.7, marginBottom: "22px" }}>
+        Based on your answers, this looks like a strong opportunity to use AI more effectively without changing your entire way of working.
+      </p>
+
+      <Card>
+        <div style={item}>
+          <div style={itemLabel}>Your task area</div>
+          <div style={itemValue}>{esc(categoryLabel)}</div>
+        </div>
+        {desc && (
+          <div style={item}>
+            <div style={itemLabel}>The task you described</div>
+            <div style={itemValue}>{esc(desc)}</div>
+          </div>
+        )}
+        <div style={item}>
+          <div style={itemLabel}>Estimated time spent</div>
+          <div style={{ marginTop: "6px" }}>
+            <TimeEstimate weeklyDisplay={answers.estimatedWeeklyDisplay} monthlyDisplay={answers.estimatedMonthlyDisplay} />
+          </div>
+        </div>
+        <div style={item}>
+          <div style={itemLabel}>Your current AI starting point</div>
+          <div style={itemValue}>{startingPoint}</div>
+        </div>
       </Card>
-      <div style={{ marginTop: "22px" }}>
+
+      <div style={{ marginTop: "26px" }}>
+        <h2 style={{ fontSize: "18px", fontWeight: 700, color: T.white, margin: "0 0 6px" }}>
+          Your personalised breakdown will show you:
+        </h2>
+        <CheckList
+          items={[
+            "Why this task may be a strong AI opportunity",
+            "Where AI could help most",
+            "What should stay under your control",
+            "The best starting point for your current experience",
+            "Three practical steps to take next",
+          ]}
+        />
+      </div>
+
+      <div style={{ marginTop: "28px" }}>
+        <h2 style={{ fontSize: "20px", fontWeight: 800, color: T.white, margin: "0 0 6px" }}>
+          See Your Personalised Breakdown
+        </h2>
+        <p style={{ color: T.grey, fontSize: "15px", lineHeight: 1.6, marginBottom: "18px" }}>
+          Enter your details to view your complete result and recommended next steps.
+        </p>
         <PrimaryButton onClick={onContinue}>See My Personalised Next Steps</PrimaryButton>
       </div>
-    </div>
-  );
-}
-
-function ResponsibilityCards({ content }) {
-  return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "14px", marginTop: "10px" }}>
-      <Card>
-        <div style={{ color: T.orange, fontWeight: 700, marginBottom: "4px" }}>AI may help with</div>
-        <List items={content.aiHelp} />
-      </Card>
-      <Card>
-        <div style={{ color: T.white, fontWeight: 700, marginBottom: "4px" }}>You remain responsible for</div>
-        <List items={content.responsible} />
-      </Card>
     </div>
   );
 }
@@ -62,7 +116,8 @@ export function FullResult({ answers, canonicalUrl, onRetake, onShare }) {
   const content = RESULT_CONTENT[answers.taskCategory] || RESULT_CONTENT.other;
   const [copied, setCopied] = useState(false);
   const firstName = answers.firstName || "There";
-  const shortTask = (answers.taskDescription || "").trim().slice(0, 220) || (answers.taskCategoryLabel || content.title);
+  const desc = (answers.taskDescription || "").trim();
+  const identifiedTask = desc || (answers.taskCategoryLabel || content.title);
   const readinessLabel = READINESS_LABELS[answers.readinessLevel] || READINESS_LABELS.beginner;
   const readinessCopy = READINESS_COPY[answers.readinessLevel] || READINESS_COPY.beginner;
 
@@ -74,48 +129,108 @@ export function FullResult({ answers, canonicalUrl, onRetake, onShare }) {
   );
 
   const copyLink = async () => {
-    try { await navigator.clipboard.writeText(canonicalUrl); setCopied(true); setTimeout(() => setCopied(false), 2000); onShare && onShare("copy"); }
-    catch (e) { /* ignore */ }
+    try {
+      await navigator.clipboard.writeText(canonicalUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (e) { /* ignore */ }
   };
-  const shareNative = async () => {
-    const text = "I just completed this free AI Time-Waste Audit. It helps you identify which repetitive part of your job may be worth improving with AI: " + canonicalUrl;
-    if (navigator.share) { try { await navigator.share({ title: "AI Time-Waste Audit", text, url: canonicalUrl }); onShare && onShare("native"); } catch (e) {} }
-    else { copyLink(); }
-  };
-  const shareWhatsApp = () => {
-    const text = "I just completed this free AI Time-Waste Audit. It helps you identify which repetitive part of your job may be worth improving with AI: " + canonicalUrl;
-    window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank", "noopener,noreferrer");
-    onShare && onShare("whatsapp");
-  };
+
+  const cardText = { color: T.grey, fontSize: "15px", lineHeight: 1.7 };
 
   return (
     <div>
-      <div style={{ display: "inline-block", background: "rgba(249,115,22,0.12)", color: T.orange, fontWeight: 700, fontSize: "12px", letterSpacing: "1.2px", textTransform: "uppercase", padding: "6px 12px", borderRadius: "999px", marginBottom: "14px" }}>
-        Your strongest AI opportunity
+      <div ref={(el) => { if (el) el.focus(); }} tabIndex={-1} style={{ outline: "none" }}>
+        <div style={{ display: "inline-block", background: "rgba(255,116,23,0.12)", color: T.orange, fontSize: "12px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "1px", padding: "6px 12px", borderRadius: "999px", marginBottom: "14px" }}>
+          Your personalised breakdown
+        </div>
+        <h1 style={{ fontSize: "30px", fontWeight: 800, color: T.white, margin: "0 0 10px", lineHeight: 1.2 }}>
+          {esc(firstName)}, here is your strongest AI opportunity.
+        </h1>
+        <p style={{ color: T.grey, fontSize: "16px", lineHeight: 1.7, margin: 0 }}>
+          You have already identified the task. Now you can see where AI may help and what to do next.
+        </p>
       </div>
-      <h1 style={{ fontSize: "28px", fontWeight: 800, color: T.white, margin: "0 0 6px", lineHeight: 1.25 }}>
-        {firstName}, your strongest opportunity is {content.title}.
-      </h1>
 
-      {section("Why this may be a good AI opportunity", ( <Card> <div style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7 }}>{content.diagnosis}</div> </Card> ))} {section("What AI may and may not do here", ( <Card> <div style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7 }}>AI may help with {content.aiHelp.join(", ")}.</div> <div style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7, marginTop: "8px" }}>You remain responsible for {content.responsible.join(", ")}.</div> </Card> ))}
+      <div style={{ marginTop: "20px" }}>
+        <div style={{ color: T.greyDim, fontSize: "13px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "4px" }}>Your strongest AI opportunity</div>
+        <div style={{ fontSize: "22px", fontWeight: 800, color: T.orange }}>{content.title}</div>
+      </div>
 
-      {section("Your current AI readiness", (
+      {section("The task you identified", (
         <Card>
-          <div style={{ color: T.orange, fontWeight: 700, fontSize: "16px", marginBottom: "6px" }}>{readinessLabel}</div>
-          <div style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7 }}>{readinessCopy}</div>
+          <div style={cardText}>{esc(identifiedTask)}</div>
         </Card>
       ))}
 
-      {section("Your best next step", ( <Card> <div style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7 }}>Do not try to automate your entire job. Start with this one task, defining the information you start with, the steps you repeat, and the result you need.</div> </Card> ))} {section("Want Help Building the Actual Solution?", ( <Card> <div style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7 }}> During a free 20-minute call, we will review this task and decide whether a personalised session is the right next step for you. </div> <div style={{ color: T.white, fontSize: "15px", lineHeight: 1.7, marginTop: "10px", fontWeight: 600 }}> You have already identified the task. Now let us map out the actual solution together. </div>
-          <div style={{ marginTop: "16px" }}>
-            <a href={CTA_URL} target="_blank" rel="noopener noreferrer" onClick={() => onShare && onShare("booking")}
-               style={{ display: "block", textAlign: "center", background: T.orange, color: T.white, fontWeight: 700, fontSize: "16px", padding: "16px 24px", borderRadius: T.radiusPill, textDecoration: "none", minHeight: "48px", boxSizing: "border-box" }}>
-              Book My Free 20-Minute Call
-            </a>
-          </div>
-          <div style={{ color: T.greyDim, fontSize: "13px", marginTop: "12px" }}>
-            Because each session is personally prepared, only a limited number of new clients can be supported each week.
-          </div>
+      {section("This task may be taking more time than it appears", (
+        <Card>
+          <TimeEstimate weeklyDisplay={answers.estimatedWeeklyDisplay} monthlyDisplay={answers.estimatedMonthlyDisplay} />
+          <p style={{ color: T.greyDim, fontSize: "13px", lineHeight: 1.6, margin: "14px 0 0" }}>
+            This is an estimate based on your answers, not a guaranteed saving.
+          </p>
+        </Card>
+      ))}
+
+      {section("Why this may be a good AI opportunity", (
+        <Card>
+          <div style={cardText}>{content.diagnosis}</div>
+        </Card>
+      ))}
+
+      <div style={{ marginTop: "28px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "16px" }}>
+        <Card>
+          <h3 style={{ fontSize: "16px", fontWeight: 700, color: T.white, margin: "0 0 10px" }}>AI may help with</h3>
+          <ul style={{ margin: 0, paddingLeft: "18px", color: T.grey, fontSize: "14px", lineHeight: 1.7 }}>
+            {content.aiHelp.slice(0, 5).map((x) => (<li key={x}>{x}</li>))}
+          </ul>
+        </Card>
+        <Card>
+          <h3 style={{ fontSize: "16px", fontWeight: 700, color: T.white, margin: "0 0 10px" }}>You remain responsible for</h3>
+          <ul style={{ margin: 0, paddingLeft: "18px", color: T.grey, fontSize: "14px", lineHeight: 1.7 }}>
+            {content.responsible.slice(0, 5).map((x) => (<li key={x}>{x}</li>))}
+          </ul>
+        </Card>
+      </div>
+
+      {section("Your current starting point", (
+        <Card>
+          <div style={{ color: T.orange, fontWeight: 700, fontSize: "16px", marginBottom: "6px" }}>{readinessLabel}</div>
+          <div style={cardText}>{readinessCopy}</div>
+        </Card>
+      ))}
+
+      {section("Your next three steps", (
+        <Card>
+          <p style={{ color: T.grey, fontSize: "15px", lineHeight: 1.6, margin: "0 0 12px" }}>
+            Do not try to automate your entire job. Start with this one task.
+          </p>
+          <ol style={{ margin: 0, paddingLeft: "18px", color: T.grey, fontSize: "15px", lineHeight: 1.8 }}>
+            <li>Gather two or three examples of the work.</li>
+            <li>Identify the structure or decisions that repeat.</li>
+            <li>Define what a good final result should look like.</li>
+          </ol>
+        </Card>
+      ))}
+
+      {section("Want Help Building the Actual Process?", (
+        <Card>
+          <p style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7, margin: "0 0 12px" }}>
+            During a free 20-minute call, we&rsquo;ll review the task you identified and decide whether a personalised AI Clarity Session is the right next step.
+          </p>
+          <p style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7, margin: "0 0 12px" }}>
+            If it is a good fit, the paid 60-minute session focuses on turning one real task into a clear AI-powered process you can start using with confidence.
+          </p>
+          <p style={{ color: T.white, fontSize: "15px", fontWeight: 600, lineHeight: 1.7, margin: "0 0 16px" }}>
+            You have identified the opportunity. The next step is deciding what the solution should look like.
+          </p>
+          <a href={CTA_URL} target="_blank" rel="noopener noreferrer" onClick={() => onShare && onShare("booking")}
+            style={{ display: "inline-block", background: T.orange, color: "#fff", fontWeight: 700, fontSize: "16px", padding: "14px 24px", borderRadius: "999px", textDecoration: "none" }}>
+            Book My Free 20-Minute Call
+          </a>
+          <p style={{ color: T.greyDim, fontSize: "13px", lineHeight: 1.6, margin: "14px 0 0" }}>
+            Because every call is personally prepared, only a limited number are available each week.
+          </p>
         </Card>
       ))}
 
