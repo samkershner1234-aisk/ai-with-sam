@@ -136,6 +136,24 @@ export function FullResult({ answers, canonicalUrl, onRetake, onShare }) {
     } catch (e) { /* ignore */ }
   };
 
+  const shareMessage = "I just did this free 2-minute AI Time-Waste Audit and it showed where AI could save me time. Worth a look:";
+  const shareNative = async () => {
+    if (onShare) onShare("native");
+    try {
+      if (typeof navigator !== "undefined" && navigator.share) {
+        await navigator.share({ title: "AI Time-Waste Audit", text: shareMessage, url: canonicalUrl });
+      } else {
+        await copyLink();
+      }
+    } catch (e) { /* user cancelled or unsupported */ }
+  };
+  const shareWhatsApp = () => {
+    if (onShare) onShare("whatsapp");
+    if (typeof window !== "undefined") {
+      window.open("https://wa.me/?text=" + encodeURIComponent(shareMessage + " " + canonicalUrl), "_blank", "noopener,noreferrer");
+    }
+  };
+
   const cardText = { color: T.grey, fontSize: "15px", lineHeight: 1.7 };
 
   return (
