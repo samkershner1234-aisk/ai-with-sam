@@ -278,7 +278,7 @@ export function FullResult({ answers, canonicalUrl, onRetake, onShare }) {
 
 export function ThankYou({ answers, onRetake }) {
   const firstName = (answers === undefined) ? "" : (answers.firstName || "");
-  const greeting = firstName ? esc(firstName) + ", you\u2019re all set." : "You\u2019re all set.";
+  const greeting = firstName ? esc(firstName) + ", you’re all set." : "You’re all set.";
   const wrap = { maxWidth: "620px", margin: "0 auto", textAlign: "center" };
   const card = { background: T.card, border: "1px solid " + T.border, borderRadius: "16px", padding: "28px 24px", marginTop: "26px", textAlign: "left" };
   const stepRow = { display: "flex", gap: "12px", alignItems: "flex-start", marginBottom: "16px" };
@@ -294,7 +294,7 @@ export function ThankYou({ answers, onRetake }) {
         Thank you for completing the AI Time-Waste Audit.
       </p>
       <p style={{ color: T.grey, fontSize: "17px", lineHeight: 1.7, margin: 0 }}>
-        Your personalised result has just been sent to your inbox. Check your email in the next minute or two \u2014 if you don\u2019t see it, take a quick look in your spam or promotions folder.
+        Your personalised result has just been sent to your inbox. Check your email in the next minute or two — if you don’t see it, take a quick look in your spam or promotions folder.
       </p>
       <div style={card}>
         <p style={{ color: T.white, fontWeight: 700, fontSize: "16px", margin: "0 0 18px" }}>What happens next</p>
@@ -308,7 +308,7 @@ export function ThankYou({ answers, onRetake }) {
         </div>
         <div style={{ ...stepRow, marginBottom: 0 }}>
           <div style={num}>3</div>
-          <p style={stepText}>We\u2019ll map out one practical AI workflow around your task together \u2014 no pressure, no jargon.</p>
+          <p style={stepText}>We’ll map out one practical AI workflow around your task together — no pressure, no jargon.</p>
         </div>
       </div>
       <div style={{ marginTop: "28px" }}>
