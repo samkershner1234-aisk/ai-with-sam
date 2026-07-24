@@ -37,21 +37,21 @@ export const TASK_CATEGORIES = [
 ];
 
 export const FREQUENCY_OPTIONS = [
-  { label: "Several times a day", value: 60 },
-  { label: "About once a day", value: 20 },
-  { label: "Several times a week", value: 12 },
-  { label: "About once a week", value: 4 },
-  { label: "A few times a month", value: 2 },
-  { label: "Less than once a month", value: 0.5 },
+  { label: "Several times a day", weeklyOccurrences: 21, monthlyOccurrences: 84 },
+  { label: "About once a day", weeklyOccurrences: 7, monthlyOccurrences: 28 },
+  { label: "Several times a week", weeklyOccurrences: 3, monthlyOccurrences: 12 },
+  { label: "About once a week", weeklyOccurrences: 1, monthlyOccurrences: 4 },
+  { label: "A few times a month", weeklyOccurrences: 1.25, monthlyOccurrences: 5 },
+  { label: "Less than once a month", weeklyOccurrences: 0.125, monthlyOccurrences: 0.5 },
 ];
 
 export const TIME_OPTIONS = [
-  { label: "Less than 15 minutes", value: 0.17 },
-  { label: "15-30 minutes", value: 0.375 },
-  { label: "30-60 minutes", value: 0.75 },
-  { label: "1-2 hours", value: 1.5 },
-  { label: "2-4 hours", value: 3 },
-  { label: "More than 4 hours", value: 5 },
+  { label: "Less than 15 minutes", minutes: 5 },
+  { label: "15-30 minutes", minutes: 20 },
+  { label: "30-60 minutes", minutes: 45 },
+  { label: "1-2 hours", minutes: 90 },
+  { label: "2-4 hours", minutes: 180 },
+  { label: "More than 4 hours", minutes: 300 },
 ];
 
 export const FRUSTRATION_OPTIONS = [
@@ -207,18 +207,54 @@ export const RESULT_CONTENT = {
   },
 };
 
-export function computeMonthlyHours(monthlyFrequency, timePerOccurrenceHours) {
-  const f = Number(monthlyFrequency);
-  const t = Number(timePerOccurrenceHours);
-  if (!isFinite(f) || !isFinite(t) || f < 0 || t < 0) return 0;
-  return Math.round(f * t * 100) / 100;
+// ---------------------------------------------------------------------------
+// Shared time calculation (single source of truth).
+// Durations are stored in MINUTES. Weekly and monthly totals are calculated
+// independently from their own occurrence counts, then each is rounded UP to a
+// whole hour. No decimal hours are ever displayed. Never multiply a rounded
+// weekly figure by four (that compounds rounding error).
+// ---------------------------------------------------------------------------
+
+export const ALLOWED_WEEKLY_OCCURRENCES = [21, 7, 3, 1, 1.25, 0.125];
+export const ALLOWED_MONTHLY_OCCURRENCES = [84, 28, 12, 4, 5, 0.5];
+export const ALLOWED_TIME_MINUTES = [5, 20, 45, 90, 180, 300];
+
+// Round a minutes total up to whole hours.
+export function ceilHours(minutes) {
+  const m = Number(minutes);
+  if (!isFinite(m) || m <= 0) return 0;
+  return Math.ceil(m / 60);
 }
 
-export function mapMonthlyRange(hours) {
+// Build the human-readable display string for a whole-hour figure.
+export function timeDisplay(hours, unit) {
   const h = Number(hours);
-  if (!isFinite(h) || h < 1) return "Under 1 hour per month";
-  if (h < 3) return "Around 1-3 hours per month";
-  if (h < 5) return "Around 3-5 hours per month";
-  if (h < 10) return "Around 5-10 hours per month";
-  return "More than 10 hours per month";
+  const period = unit === "week" ? "per week" : "per month";
+  if (!isFinite(h) || h < 1) return "Less than 1 hour " + period;
+  return h + "+ hours " + period;
+}
+
+// Core calculation. Accepts occurrence counts + minutes-per-occurrence.
+export function computeTimeEstimate(weeklyOccurrences, monthlyOccurrences, timePerOccurrenceMinutes) {
+  const wOcc = Number(weeklyOccurrences);
+  const mOcc = Number(monthlyOccurrences);
+  const mins = Number(timePerOccurrenceMinutes);
+  const safe = (n) => (isFinite(n) && n >= 0 ? n : 0);
+
+  const estimatedWeeklyMinutes = safe(wOcc) * safe(mins);
+  const estimatedMonthlyMinutes = safe(mOcc) * safe(mins);
+  const estimatedWeeklyHours = ceilHours(estimatedWeeklyMinutes);
+  const estimatedMonthlyHours = ceilHours(estimatedMonthlyMinutes);
+
+  return {
+    weeklyOccurrences: safe(wOcc),
+    monthlyOccurrences: safe(mOcc),
+    timePerOccurrenceMinutes: safe(mins),
+    estimatedWeeklyMinutes,
+    estimatedMonthlyMinutes,
+    estimatedWeeklyHours,
+    estimatedMonthlyHours,
+    estimatedWeeklyDisplay: timeDisplay(estimatedWeeklyHours, "week"),
+    estimatedMonthlyDisplay: timeDisplay(estimatedMonthlyHours, "month"),
+  };
 }
