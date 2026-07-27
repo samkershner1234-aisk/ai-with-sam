@@ -136,7 +136,7 @@ export function FullResult({ answers, canonicalUrl, onRetake, onShare }) {
     } catch (e) { /* ignore */ }
   };
 
-  const shareMessage = "I just did this free 2-minute AI Time-Waste Audit and it showed where AI could save me time. Worth a look:";
+  const shareMessage = "I just did this free 60-second AI Time-Waste Audit and it showed where AI could save me time. Worth a look:";
   const shareNative = async () => {
     if (onShare) onShare("native");
     try {
