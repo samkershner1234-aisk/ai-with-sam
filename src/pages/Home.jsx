@@ -8,6 +8,7 @@ import PricingSection from "../components/landing/PricingSection";
 import GuaranteeSection from "../components/landing/GuaranteeSection";
 import BioSection from "../components/landing/BioSection";
 import FAQSection from "../components/landing/FAQSection";
+import FreeAuditPromo from "../components/landing/FreeAuditPromo";
 import ClosingCTA from "../components/landing/ClosingCTA";
 import Footer from "../components/landing/Footer";
 import MobileStickyBar from "../components/landing/MobileStickyBar";
@@ -37,6 +38,7 @@ export default function Home() {
       <Testimonials />
       <PricingSection />
       <GuaranteeSection />
+      <FreeAuditPromo />
       <FAQSection />
       <ClosingCTA />
       <Footer />
