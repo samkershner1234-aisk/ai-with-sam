@@ -21,7 +21,7 @@ export default function FreeAuditPromo() {
             Not Ready to Book? Find Your Biggest Time-Waster First.
           </h2>
           <p style={{ color: "#CBD5E1", fontSize: 17, lineHeight: 1.7, margin: "0 auto 28px", maxWidth: 520 }}>
-            Answer 4 quick questions. Get a personalised breakdown of where AI can save you the most hours every week, plus 3 ready-to-use prompts for your exact task. No call. No card. 60 seconds.
+            Answer 4 quick questions. Get a personalised breakdown of where AI can save you the most hours every week, plus 3 ready-to-use prompts for your exact task. No call. No Credit Card. 60 Seconds.
           </p>
           <Link
             to="/ai-time-waste-audit"
