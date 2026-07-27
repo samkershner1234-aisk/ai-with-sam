@@ -1,3 +1,4 @@
+// Home page layout
 import ScrollProgress from "../components/landing/ScrollProgress";
 import Navbar from "../components/landing/Navbar";
 import Hero from "../components/landing/Hero";
