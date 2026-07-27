@@ -281,7 +281,7 @@ export default function AiTimeWasteAudit() {
       <Shell>
         {phase === "intro" && (
           <div>
-            <Eyebrow>Free 2-minute audit</Eyebrow>
+            <Eyebrow>Free 60-Second AI Audit</Eyebrow>
             <h1 style={{ fontSize: "32px", fontWeight: 800, color: T.white, margin: "0 0 14px", lineHeight: 1.2 }}>
               Which Part of Your Job Should You Use AI For First?
             </h1>
@@ -289,7 +289,7 @@ export default function AiTimeWasteAudit() {
               Answer four quick questions and discover where AI may help you reduce unnecessary repetitive work.
             </p>
             <PrimaryButton onClick={startAudit}>Find My Best AI Opportunity</PrimaryButton>
-            <p style={{ color: T.greyDim, fontSize: "13px", marginTop: "14px", textAlign: "center" }}>Takes about 2 minutes. No complicated AI questions.</p>
+            <p style={{ color: T.greyDim, fontSize: "13px", marginTop: "14px", textAlign: "center" }}>Takes about 60 seconds. No complicated AI questions.</p>
             <p style={{ color: T.greyDim, fontSize: "13px", marginTop: "4px", textAlign: "center" }}>Built for professionals in every role and industry.</p>
           </div>
         )}
