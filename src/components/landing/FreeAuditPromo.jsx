@@ -21,13 +21,13 @@ export default function FreeAuditPromo() {
             Not Ready to Book? Find Your Biggest Time-Waster First.
           </h2>
           <p style={{ color: "#CBD5E1", fontSize: 17, lineHeight: 1.7, margin: "0 auto 28px", maxWidth: 520 }}>
-            Answer 4 quick questions. Get a personalised breakdown of where AI can save you the most hours every week &mdash; plus 3 ready-to-use prompts for your exact task. No call. No card. 60 seconds.
+            Answer 4 quick questions. Get a personalised breakdown of where AI can save you the most hours every week, plus 3 ready-to-use prompts for your exact task. No call. No card. 60 seconds.
           </p>
           <Link
             to="/ai-time-waste-audit"
-            style={{ display: "inline-block", background: "#F97316", color: "#fff", fontWeight: 700, fontSize: 16, padding: "16px 32px", borderRadius: 10, textDecoration: "none", transition: "opacity 0.2s" }}
+            style={{ display: "inline-block", whiteSpace: "nowrap", background: "#F97316", color: "#fff", fontWeight: 700, fontSize: 16, padding: "16px 32px", borderRadius: 10, textDecoration: "none", transition: "opacity 0.2s" }}
           >
-            Get My Free AI Audit &rarr;
+            Get My Free AI Audit →
           </Link>
         </div>
       </div>
