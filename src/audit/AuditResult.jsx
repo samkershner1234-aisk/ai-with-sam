@@ -312,7 +312,7 @@ export function ThankYou({ answers, onRetake }) {
         </div>
       </div>
       <div style={{ marginTop: "28px" }}>
-        <PrimaryButton onClick={() => { window.location.href = "https://calendly.com/samtheaicoach/free"; }}>
+        <PrimaryButton onClick={() => { window.location.href = "https://calendly.com/aiforeveryrole/free"; }}>
           Book My Free 20-Minute Call
         </PrimaryButton>
         <p style={{ color: T.greyDim, fontSize: "13px", marginTop: "12px" }}>
