@@ -94,7 +94,6 @@ export default function PainSection() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
             {cards.map((c, i) => (
               <div key={i} style={{ background: "#1E293B", borderRadius: 18, padding: "32px 28px", border: "1px solid rgba(255,255,255,0.06)" }}>
-                <div style={{ fontSize: 36, marginBottom: 18 }}>{c.icon}</div>
                 <h3 style={{ fontWeight: 800, fontSize: 20, color: "#fff", marginBottom: 12, lineHeight: 1.3 }}>{c.title}</h3>
                 <p style={{ color: "#94A3B8", fontSize: 15, lineHeight: 1.7 }}>{c.body}</p>
               </div>
@@ -110,7 +109,6 @@ export default function PainSection() {
             style={{ userSelect: "none" }}
           >
             <div style={{ background: "#1E293B", borderRadius: 18, padding: "32px 24px", border: "1px solid rgba(255,255,255,0.06)", minHeight: 220 }}>
-              <div style={{ fontSize: 36, marginBottom: 18 }}>{cards[current].icon}</div>
               <h3 style={{ fontWeight: 800, fontSize: 21, color: "#fff", marginBottom: 12, lineHeight: 1.3 }}>{cards[current].title}</h3>
               <p style={{ color: "#94A3B8", fontSize: 16, lineHeight: 1.7 }}>{cards[current].body}</p>
             </div>
