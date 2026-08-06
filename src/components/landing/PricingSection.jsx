@@ -81,11 +81,11 @@ function CurrencyPickerPopup({ onClose, onILS }) {
           </button>
           <a href="https://www.paypal.com/ncp/payment/FJRZD966GUUWW" target="_blank" rel="noopener noreferrer"
             style={{ padding: "14px 20px", borderRadius: 10, border: "2px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.04)", fontWeight: 700, fontSize: 16, color: "#CBD5E1", cursor: "pointer", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", textDecoration: "none" }}>
-            <span>$135 USD</span><span style={{ fontSize: 13, color: "#64748B", fontWeight: 400 }}>PayPal</span>
+            <span>$129 USD</span><span style={{ fontSize: 13, color: "#64748B", fontWeight: 400 }}>PayPal</span>
           </a>
           <a href="https://www.paypal.com/ncp/payment/YTA8589KBMZVS" target="_blank" rel="noopener noreferrer"
             style={{ padding: "14px 20px", borderRadius: 10, border: "2px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.04)", fontWeight: 700, fontSize: 16, color: "#CBD5E1", cursor: "pointer", textAlign: "left", display: "flex", justifyContent: "space-between", alignItems: "center", textDecoration: "none" }}>
-            <span>£100 GBP</span><span style={{ fontSize: 13, color: "#64748B", fontWeight: 400 }}>PayPal</span>
+            <span>£99 GBP</span><span style={{ fontSize: 13, color: "#64748B", fontWeight: 400 }}>PayPal</span>
           </a>
         </div>
       </div>
@@ -135,7 +135,7 @@ export default function PricingSection() {
           </div>
 
           <p style={{ color: "#FFFFFF", fontWeight: 700, fontSize: 15, marginBottom: 16 }}>
-            400₪ / $135 USD / £100 GBP for your 60-minute session.
+            400₪ / $129 USD / £99 GBP for your 60-minute session.
           </p>
 
           {/* What's included toggle */}
