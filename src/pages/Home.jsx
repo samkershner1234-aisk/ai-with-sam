@@ -20,7 +20,11 @@ export default function Home() {
     <div style={{ fontFamily: "'Inter', sans-serif", background: "#0F172A" }}>
       <ScrollProgress />
       <Navbar />
+      {/* 1. Hero: primary individual offer */}
       <Hero />
+      {/* 2. Strongest proof: real client results */}
+      <Testimonials />
+      {/* 3. Problem and desired outcome */}
       <PainSection />
       {/* "The problem isn't you" highlight box */}
       <section style={{ background: "#0F172A", padding: "0 24px 40px" }}>
@@ -34,14 +38,21 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <BioSection />
-      <HowItWorks />
-      <Testimonials />
+      {/* 4. Individual offer and price */}
       <PricingSection />
+      {/* 5. How it works */}
+      <HowItWorks />
+      {/* 6. Guarantee / risk reversal */}
       <GuaranteeSection />
+      {/* 7. About Sam and credibility */}
+      <BioSection />
+      {/* 8. Free resource for visitors not ready to book */}
       <FreeAuditPromo />
-      <FAQSection />
+      {/* 9. Enterprise teaser (secondary employer path) */}
       <TeamsPromo />
+      {/* 10. FAQ */}
+      <FAQSection />
+      {/* 11. Final individual CTA */}
       <ClosingCTA />
       <Footer />
       <MobileStickyBar />
