@@ -669,6 +669,8 @@ const STYLES = [
   ".acc[open] .acc-plus { transform: rotate(45deg); }",
   ".acc .acc-plus { transition: transform 0.2s ease; display: inline-block; }",
   ".rail:focus-visible { outline: 2px solid " + T.orange + "; outline-offset: 4px; }",
+  ".sticky-cta { display: none; }",
+  "@media (max-width: 760px) { .sticky-cta { display: block; } }",
   "@media (max-width: 760px) {",
   "  .rail { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 82%; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 10px; scrollbar-width: none; }",
   "  .rail::-webkit-scrollbar { display: none; }",
