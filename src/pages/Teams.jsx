@@ -262,7 +262,7 @@ function PilotOffer() {
       <Panel style={{ marginTop: "28px", maxWidth: "640px" }}>
         <div style={{ color: T.white, fontWeight: 800, fontSize: "22px", marginBottom: "6px" }}>5 Person AI Productivity Pilot</div>
         <div style={{ color: T.orange, fontWeight: 800, fontSize: "26px", marginBottom: "10px" }}>{PRICE}</div>
-        <div style={{ color: T.greyDim, fontSize: "14px", marginBottom: "20px" }}>One time 30 day pilot \u00B7 No long term contract required</div>
+        <div style={{ color: T.greyDim, fontSize: "14px", marginBottom: "20px" }}>{"One time 30 day pilot \u00B7 No long term contract required"}</div>
         <TickList items={includes} />
         <div style={{ marginTop: "18px" }}>
           <PrimaryPill onClick={() => { track("teams_primary_cta_click", { location: "pilot" }); scrollToId("qualify"); }}>Discuss a 5 Person Pilot</PrimaryPill>
@@ -337,11 +337,11 @@ function Measurement() {
       <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", marginBottom: "10px" }}>
         <div style={cell}>
           <div style={{ color: T.greyDim, fontSize: "13px", marginBottom: "6px" }}>Recurring task</div>
-          <div style={{ color: T.white, fontWeight: 700 }}>45 minutes \u00D7 4 times per week</div>
+          <div style={{ color: T.white, fontWeight: 700 }}>{"45 minutes \u00D7 4 times per week"}</div>
         </div>
         <div style={cell}>
           <div style={{ color: T.greyDim, fontSize: "13px", marginBottom: "6px" }}>AI assisted workflow</div>
-          <div style={{ color: T.white, fontWeight: 700 }}>15 minutes \u00D7 4 times per week</div>
+          <div style={{ color: T.white, fontWeight: 700 }}>{"15 minutes \u00D7 4 times per week"}</div>
         </div>
         <div style={{ ...cell, borderColor: T.orange }}>
           <div style={{ color: T.greyDim, fontSize: "13px", marginBottom: "6px" }}>Potential time recovered</div>
@@ -440,9 +440,9 @@ function QualificationForm() {
   const [company, setCompany] = useState("");
   const [companySize, setCompanySize] = useState("");
   const [participantCount, setParticipantCount] = useState("");
-  const [teams, setTeams] = useState([]); // array of numeric indexes
+  const [teams, setTeams] = useState([]);
   const [mainGoal, setMainGoal] = useState("");
-  const [website, setWebsite] = useState(""); // honeypot
+  const [website, setWebsite] = useState("");
   const [touched, setTouched] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [redirectError, setRedirectError] = useState(false);
@@ -477,10 +477,10 @@ function QualificationForm() {
     setRedirectError(false);
     if (!valid) {
       const firstErr = document.querySelector("[data-invalid=\"true\"]");
-      if (firstErr) firstErr.focus();
+      if (firstErr && firstErr.focus) firstErr.focus();
       return;
     }
-    if (website) return; // honeypot tripped: silently ignore
+    if (website) return;
     setSubmitting(true);
     track("teams_form_complete");
     const url = buildTeamBookingUrl({
@@ -583,7 +583,7 @@ function Faq() {
     { q: "What happens during each employee session?", a: "Each participant brings real work from their role. We identify a useful AI opportunity, build or improve a practical workflow together and test it during the 60 minute session." },
     { q: "Do employees need to be technical?", a: "No. The service is designed for non technical professionals." },
     { q: "Does everyone receive the same training?", a: "No. Different employees can work on completely different tasks according to their role and responsibilities." },
-    { q: "What does the 5 person pilot cost?", a: "5,000\u20AA / $1,500 / \u00A31,250. It covers the 30 day pilot for five employees and does not require a long term contract." },
+    { q: "What does the 5 person pilot cost?", a: PRICE + ". It covers the 30 day pilot for five employees and does not require a long term contract." },
     { q: "What happens after the pilot?", a: "If useful adoption and outcomes are achieved, the company can discuss reserving implementation capacity for additional employees, teams and workflows." },
     { q: "Can we start with more than five employees?", a: "Yes. Five employees is the recommended starting point so the company can test the approach before committing to a larger rollout." },
     { q: "What AI tools do employees use?", a: "Sessions work within the tools and AI policies approved by the employer. Employees should not put confidential, sensitive or restricted company information into AI systems unless their organisation explicitly permits it." },
@@ -603,7 +603,7 @@ function Faq() {
               <button type="button" onClick={() => setOpen(isOpen ? -1 : i)} aria-expanded={isOpen}
                 style={{ width: "100%", textAlign: "left", background: "none", border: "none", cursor: "pointer", color: T.white, fontWeight: 700, fontSize: "17px", padding: "18px 0", display: "flex", justifyContent: "space-between", gap: "16px" }}>
                 <span>{it.q}</span>
-                <span aria-hidden="true" style={{ color: T.orange, flex: "0 0 auto" }}>{isOpen ? "\u2212" : "+"}</span>
+                <span aria-hidden="true" style={{ color: T.orange, flex: "0 0 auto", display: "inline-block", transition: "transform 0.15s ease", transform: isOpen ? "rotate(45deg)" : "none" }}>+</span>
               </button>
               {isOpen && <p style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7, margin: "0 0 18px" }}>{it.a}</p>}
             </div>
