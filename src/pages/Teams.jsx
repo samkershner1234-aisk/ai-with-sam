@@ -228,7 +228,7 @@ function Hero() {
         <p style={{ color: T.grey, fontSize: "clamp(17px,2.4vw,19px)", lineHeight: 1.55, margin: "0 auto 18px", maxWidth: 560 }}>
           Give five employees personalised one to one AI sessions built around their real work. Start with a 30 day pilot and measure what changes.
         </p>
-        <div style={{ color: T.greyDim, fontWeight: 700, fontSize: "15px", marginBottom: "6px" }}>5 employees \u00B7 30 days</div>
+        <div style={{ color: T.greyDim, fontWeight: 700, fontSize: "15px", marginBottom: "6px" }}>5 employees · 30 days</div>
         <div style={{ marginBottom: "22px" }}><PriceBlock /></div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
           <PrimaryButton onClick={() => goToQualify("hero")}>Discuss a Team Pilot</PrimaryButton>
@@ -261,7 +261,7 @@ function WhatYouGet() {
         ))}
       </Rail>
       <div style={{ textAlign: "center", marginTop: "28px" }}>
-        <div style={{ color: T.greyDim, fontSize: "14px", fontWeight: 600, marginBottom: "8px" }}>One time 30 day pilot \u00B7 no long term contract</div>
+        <div style={{ color: T.greyDim, fontSize: "14px", fontWeight: 600, marginBottom: "8px" }}>One time 30 day pilot · no long term contract</div>
         <div style={{ marginBottom: "18px" }}><PriceBlock small /></div>
         <PrimaryButton onClick={() => goToQualify("pilot")}>Discuss a Team Pilot</PrimaryButton>
       </div>
@@ -348,11 +348,11 @@ function Measurement() {
         <Panel style={{ textAlign: "center", background: T.card }}>
           <div style={{ color: T.greyDim, fontSize: "12px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "1px", marginBottom: "18px" }}>Illustrative example</div>
           <div style={{ color: T.greyDim, fontSize: "13px", fontWeight: 700, marginBottom: "4px" }}>Before</div>
-          <div style={{ color: T.white, fontWeight: 800, fontSize: "clamp(18px,3vw,22px)" }}>45 minutes \u00D7 4 times per week</div>
-          <div aria-hidden="true" style={{ color: T.orange, fontSize: "24px", margin: "6px 0" }}>\u2193</div>
+          <div style={{ color: T.white, fontWeight: 800, fontSize: "clamp(18px,3vw,22px)" }}>45 minutes × 4 times per week</div>
+          <div aria-hidden="true" style={{ color: T.orange, fontSize: "24px", margin: "6px 0" }}>↓</div>
           <div style={{ color: T.greyDim, fontSize: "13px", fontWeight: 700, marginBottom: "4px" }}>After</div>
-          <div style={{ color: T.white, fontWeight: 800, fontSize: "clamp(18px,3vw,22px)" }}>15 minutes \u00D7 4 times per week</div>
-          <div aria-hidden="true" style={{ color: T.orange, fontSize: "24px", margin: "6px 0" }}>\u2193</div>
+          <div style={{ color: T.white, fontWeight: 800, fontSize: "clamp(18px,3vw,22px)" }}>15 minutes × 4 times per week</div>
+          <div aria-hidden="true" style={{ color: T.orange, fontSize: "24px", margin: "6px 0" }}>↓</div>
           <div style={{ color: T.greyDim, fontSize: "13px", fontWeight: 700, marginTop: "6px" }}>Potential time recovered</div>
           <div style={{ color: T.orange, fontWeight: 900, fontSize: "clamp(26px,5vw,36px)", letterSpacing: "-0.5px" }}>2 hours per week</div>
         </Panel>
