@@ -113,13 +113,11 @@ export default function HowItWorks() {
 
             {/* Arrows + dots */}
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20, marginTop: 24 }}>
-              <button onClick={prev} style={{ background: "rgba(249,115,22,0.12)", border: "1.5px solid rgba(249,115,22,0.35)", borderRadius: "50%", width: 40, height: 40, cursor: "pointer", color: "#F97316", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center" }}>‹</button>
               <div style={{ display: "flex", gap: 8 }}>
                 {steps.map((_, i) => (
                   <button key={i} onClick={() => goTo(i)} style={{ width: i === current ? 22 : 8, height: 8, borderRadius: 4, background: i === current ? "#F97316" : "rgba(249,115,22,0.25)", border: "none", cursor: "pointer", transition: "all 0.3s" }} />
                 ))}
               </div>
-              <button onClick={next} style={{ background: "rgba(249,115,22,0.12)", border: "1.5px solid rgba(249,115,22,0.35)", borderRadius: "50%", width: 40, height: 40, cursor: "pointer", color: "#F97316", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center" }}>›</button>
             </div>
           </div>
         )}
