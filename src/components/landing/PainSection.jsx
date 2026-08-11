@@ -2,17 +2,17 @@ import { useState, useEffect, useRef } from "react";
 
 const cards = [
   {
-    icon: "â°",
+    icon: "⏰",
     title: "The Same Tasks Eat Your Time Every Week",
     body: "The same repetitive, time-consuming tasks come back again and again. You know AI could help, but generic tutorials never fit your specific job or the way you actually work.",
   },
   {
-    icon: "âï¸",
+    icon: "✖️",
     title: "Nothing You Try Actually Sticks",
     body: "You've tried ChatGPT, Copilot, Gemini, Perplexity, Claude. You played around. You got nowhere. Nothing turned into a workflow you actually use for your real, recurring tasks.",
   },
   {
-    icon: "ð",
+    icon: "📉",
     title: "You're Falling Behind at Work",
     body: "Everyone around you is talking about AI. You're nodding along in meetings, but secretly you have no idea how to turn it into something that saves you time on your specific tasks.",
   },
