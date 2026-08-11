@@ -2,17 +2,17 @@ import { useState, useEffect, useRef } from "react";
 
 const cards = [
   {
-    icon: "⏰",
+    icon: "â°",
     title: "The Same Tasks Eat Your Time Every Week",
     body: "The same repetitive, time-consuming tasks come back again and again. You know AI could help, but generic tutorials never fit your specific job or the way you actually work.",
   },
   {
-    icon: "✖️",
+    icon: "âï¸",
     title: "Nothing You Try Actually Sticks",
     body: "You've tried ChatGPT, Copilot, Gemini, Perplexity, Claude. You played around. You got nowhere. Nothing turned into a workflow you actually use for your real, recurring tasks.",
   },
   {
-    icon: "📉",
+    icon: "ð",
     title: "You're Falling Behind at Work",
     body: "Everyone around you is talking about AI. You're nodding along in meetings, but secretly you have no idea how to turn it into something that saves you time on your specific tasks.",
   },
@@ -77,7 +77,7 @@ export default function PainSection() {
   };
 
   return (
-    <section style={{ background: "#0F172A", padding: "40px 0 72px" }}>
+    <section style={{ background: "#0F172A", padding: "40px 0 clamp(32px,7vw,72px)" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
         <p style={{ color: "#F97316", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", fontSize: 13, textAlign: "center", marginBottom: 12 }}>
           SOUND FAMILIAR?
@@ -115,13 +115,11 @@ export default function PainSection() {
 
             {/* Arrows */}
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20, marginTop: 24 }}>
-              <button onClick={prev} style={{ background: "rgba(249,115,22,0.12)", border: "1.5px solid rgba(249,115,22,0.35)", borderRadius: "50%", width: 40, height: 40, cursor: "pointer", color: "#F97316", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center" }}>‹</button>
               <div style={{ display: "flex", gap: 8 }}>
                 {cards.map((_, i) => (
                   <button key={i} onClick={() => goTo(i)} style={{ width: i === current ? 22 : 8, height: 8, borderRadius: 4, background: i === current ? "#F97316" : "rgba(249,115,22,0.25)", border: "none", cursor: "pointer", transition: "all 0.3s" }} />
                 ))}
               </div>
-              <button onClick={next} style={{ background: "rgba(249,115,22,0.12)", border: "1.5px solid rgba(249,115,22,0.35)", borderRadius: "50%", width: 40, height: 40, cursor: "pointer", color: "#F97316", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center" }}>›</button>
             </div>
           </div>
         )}
