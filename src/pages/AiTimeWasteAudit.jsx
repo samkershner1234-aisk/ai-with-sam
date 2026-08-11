@@ -281,7 +281,7 @@ export default function AiTimeWasteAudit() {
       <Shell>
         {phase === "intro" && (
           <div>
-            <Eyebrow>Free 60-Second AI Audit</Eyebrow>
+            <Eyebrow>Free 60 Second AI Audit</Eyebrow>
             <h1 style={{ fontSize: "32px", fontWeight: 800, color: T.white, margin: "0 0 14px", lineHeight: 1.2 }}>
               Which Part of Your Job Should You Use AI For First?
             </h1>
