@@ -1,7 +1,17 @@
 import { Link } from "react-router-dom";
 
-// Focused header for the audit route. No full site navigation.
+// Focused header for the audit route. Two explicit destinations (Individuals,
+// Teams) replace the previous vague "back to website" action so a visitor
+// always knows exactly where each option leads. No full site navigation.
 export default function AuditHeader() {
+  const navLinkStyle = {
+    color: "#CBD5E1",
+    fontSize: "clamp(13px,3.2vw,15px)",
+    fontWeight: 700,
+    textDecoration: "none",
+    whiteSpace: "nowrap",
+  };
+
   return (
     <header
       style={{
@@ -13,20 +23,17 @@ export default function AuditHeader() {
         borderBottom: "1px solid #1E293B",
       }}
     >
-      <div style={{ maxWidth: "720px", margin: "0 auto", padding: "0 20px", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <Link to="/" aria-label="AI With Sam home" style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
-          <img src="/logo.png" alt="AI With Sam Logo" style={{ height: "34px", width: "34px", objectFit: "contain" }} />
-          <span style={{ fontWeight: 800, color: "#FFFFFF", fontSize: "19px" }}>
+      <div style={{ maxWidth: "720px", margin: "0 auto", padding: "0 16px", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "10px" }}>
+        <Link to="/" aria-label="AI With Sam home" style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", minWidth: 0, flex: "0 1 auto", overflow: "hidden" }}>
+          <img src="/logo.png" alt="AI With Sam Logo" style={{ height: "30px", width: "30px", objectFit: "contain", flex: "0 0 auto" }} />
+          <span style={{ fontWeight: 800, color: "#FFFFFF", fontSize: "clamp(14px,3.6vw,19px)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
             <span style={{ color: "#F97316" }}>AI</span> With Sam
           </span>
         </Link>
-        <Link to="/" aria-label="Back to website" style={{ color: "#CBD5E1", fontSize: "14px", fontWeight: 600, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "6px", minHeight: "44px" }}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-            <line x1="19" y1="12" x2="5" y2="12" />
-            <polyline points="12 19 5 12 12 5" />
-          </svg>
-          <span className="audit-back-label">Back to website</span>
-        </Link>
+        <nav aria-label="Choose your path" style={{ display: "flex", alignItems: "center", gap: "clamp(12px,3vw,20px)", flex: "0 0 auto" }}>
+          <Link to="/" style={navLinkStyle}>Individuals</Link>
+          <Link to="/teams" style={{ ...navLinkStyle, color: "#F97316" }}>Teams</Link>
+        </nav>
       </div>
     </header>
   );
