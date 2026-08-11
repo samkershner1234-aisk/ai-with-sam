@@ -254,11 +254,11 @@ function Hero() {
         <p style={{ color: T.grey, fontSize: "clamp(18px,2.4vw,20px)", lineHeight: 1.5, margin: "0 auto 18px", maxWidth: 560 }}>
           I work one to one with five employees for 30 days, building AI around the work they already do. You see what works before deciding whether to expand.
         </p>
-        <div style={{ color: T.greyDim, fontWeight: 700, fontSize: "15px", marginBottom: "6px" }}>5 employees • 30 days • No long term commitment</div>
+        <div style={{ color: T.greyDim, fontWeight: 700, fontSize: "15px", marginBottom: "6px" }}>5 employees â¢ 30 days â¢ No long term commitment</div>
         <div style={{ marginBottom: "22px" }}><PriceBlock /></div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
           <PrimaryButton onClick={() => goToQualify("hero")}>Discuss the 5 Person Pilot</PrimaryButton>
-          <SecondaryLink onClick={() => scrollToId("how")}>See how it works ↓</SecondaryLink>
+          <SecondaryLink onClick={() => scrollToId("how")}>See how it works â</SecondaryLink>
         </div>
       </div>
     </section>
@@ -287,7 +287,7 @@ function WhatYouGet() {
         ))}
       </Rail>
       <div style={{ textAlign: "center", marginTop: "28px" }}>
-        <div style={{ color: T.greyDim, fontSize: "14px", fontWeight: 600, marginBottom: "8px" }}>One time 30 day pilot · no long term contract</div>
+        <div style={{ color: T.greyDim, fontSize: "14px", fontWeight: 600, marginBottom: "8px" }}>One time 30 day pilot Â· no long term contract</div>
         <div style={{ marginBottom: "18px" }}><PriceBlock small /></div>
         <PrimaryButton onClick={() => goToQualify("pilot")}>Discuss the 5 Person Pilot</PrimaryButton>
       </div>
@@ -505,6 +505,28 @@ function QualificationForm() {
       mainGoal: mainGoal.trim(),
     });
     track("teams_booking_opened");
+    // Capture the questionnaire answers in the existing Notion CRM (same backend as the
+    // Free Audit) before continuing. Fire-and-forget: a CRM hiccup must never block
+    // a qualified prospect from reaching the existing Team Calendly booking page.
+    try {
+      const teamsLabel = TEAM_OPTIONS.filter((opt) => teams.includes(opt.index)).map((opt) => opt.label).join(", ");
+      fetch("/api/teams-questionnaire", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          company: company.trim(),
+          companySize,
+          participantCount,
+          teamsLabel,
+          mainGoal: mainGoal.trim(),
+          pageSource: "/teams",
+          website,
+        }),
+        keepalive: true,
+      }).catch(() => { /* never block booking on a CRM error */ });
+    } catch (crmErr) { /* never block booking on a CRM error */ }
     try {
       window.location.assign(url);
     } catch (err) {
@@ -730,12 +752,12 @@ function WhoYouAreWorkingWith() {
         <div style={{ fontWeight: 800, fontSize: "22px", color: T.white, marginBottom: "3px", textAlign: "center" }}>Sam Kershner</div>
         <div style={{ color: T.greyDim, fontSize: "14px", marginBottom: "14px", textAlign: "center" }}>AI Systems Builder, Tel Aviv</div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", justifyContent: "center", marginBottom: "22px" }}>
-          <a href="https://www.linkedin.com/in/sam-kershner/" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(255,255,255,0.08)", color: "#CBD5E1", borderRadius: 8, padding: "8px 16px", fontSize: 13, fontWeight: 600, textDecoration: "none", border: "1px solid rgba(255,255,255,0.1)" }}>💼 LinkedIn</a>
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#22C55E", color: "#fff", borderRadius: 8, padding: "8px 16px", fontSize: 13, fontWeight: 600, textDecoration: "none" }}>💬 WhatsApp</a>
+          <a href="https://www.linkedin.com/in/sam-kershner/" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(255,255,255,0.08)", color: "#CBD5E1", borderRadius: 8, padding: "8px 16px", fontSize: 13, fontWeight: 600, textDecoration: "none", border: "1px solid rgba(255,255,255,0.1)" }}>ð¼ LinkedIn</a>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#22C55E", color: "#fff", borderRadius: 8, padding: "8px 16px", fontSize: 13, fontWeight: 600, textDecoration: "none" }}>ð¬ WhatsApp</a>
         </div>
         <div style={{ width: "100%", height: 1, background: T.border, marginBottom: "20px" }} />
         <h3 style={{ fontSize: "clamp(18px,3vw,22px)", fontWeight: 800, color: T.white, margin: "0 0 12px", lineHeight: 1.3, textAlign: "center" }}>I Build Job Specific AI Systems Around Your Real Work.</h3>
-        <p style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7, margin: 0, textAlign: "center", maxWidth: 520 }}>I have spent 4+ years as an AI native marketer across fintech, media and gaming industries. I don't just talk about AI tools, I build with them. Every client leaves with a practical workflow built around one real task from their job.</p>
+        <p style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7, margin: 0, textAlign: "center", maxWidth: 520 }}>I have spent 4+ years as an AI native marketer across fintech, media and gaming industries. I don't just talk about AI tools, I build with them. Every employee leaves with a practical AI workflow built around real work they already do.</p>
       </div>
     </Section>
   );
