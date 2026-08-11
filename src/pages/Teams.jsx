@@ -7,6 +7,7 @@ import {
   PARTICIPANT_OPTIONS,
   buildTeamBookingUrl,
 } from "../teams/teamsBooking";
+import { SAM_PHOTO, WHATSAPP_URL } from "../components/landing/constants";
 
 const PROD_ORIGIN = "https://www.aiforeveryrole.com";
 const TEAMS_PATH = "/teams";
@@ -674,6 +675,86 @@ const STYLES = [
   "}",
 ].join("\n");
 
+/* ----- Proof: real client results (individual clients, not team pilot) ----- */
+const PROOF = [
+  {
+    initials: "GK",
+    color: "#7C3AED",
+    name: "Gideon K.",
+    role: "Senior Growth Marketing Manager, Tel Aviv",
+    quote: "In one session Sam built me a prompt system that now writes my first draft for every brief. I save at least 4 hours a week.",
+  },
+  {
+    initials: "MR",
+    color: "#0D9488",
+    name: "Michal R.",
+    role: "Marketing Manager, Tel Aviv",
+    quote: "Within one hour, Sam built me a system that now handles all my client follow-ups automatically. I got back at least 5 hours in the first week alone.",
+  },
+];
+
+function Testimonials() {
+  return (
+    <Section id="proof" bg={T.navy} style={{ paddingTop: "clamp(24px,4vw,44px)" }}>
+      <div style={{ textAlign: "center", marginBottom: "24px" }}>
+        <Eyebrow>Proof</Eyebrow>
+        <H2 style={{ margin: "0 auto" }}>Real Work. Real Results.</H2>
+      </div>
+      <div className="rail" role="group" aria-label="Client results" style={{ ["--cols"]: 2, maxWidth: 900, margin: "0 auto" }}>
+        {PROOF.map((p, i) => (
+          <div key={i} className="rail-card" style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+            <p style={{ color: T.white, fontSize: "16px", lineHeight: 1.55, margin: 0, fontWeight: 500 }}>{"\u201C" + p.quote + "\u201D"}</p>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "auto" }}>
+              <div style={{ width: 42, height: 42, borderRadius: "50%", background: p.color, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 700, fontSize: 15, flexShrink: 0 }}>{p.initials}</div>
+              <div>
+                <div style={{ color: T.white, fontWeight: 700, fontSize: "15px" }}>{p.name}</div>
+                <div style={{ color: T.greyDim, fontSize: "13px" }}>{p.role}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+/* ----- Who You're Working With (Teams variant, no individual CTA) ----- */
+function WhoYouAreWorkingWith() {
+  return (
+    <Section id="about" bg={T.navy}>
+      <div style={{ textAlign: "center", marginBottom: "8px" }}>
+        <Eyebrow>Who You're Working With</Eyebrow>
+      </div>
+      <div style={{ maxWidth: 640, margin: "0 auto", background: T.panel, borderRadius: 20, padding: "clamp(24px,4vw,36px) clamp(20px,4vw,32px)", border: "1.5px solid " + T.border, display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <img src={SAM_PHOTO} alt="Sam Kershner" style={{ width: 120, height: 120, borderRadius: "50%", objectFit: "cover", border: "4px solid " + T.orange, display: "block", marginBottom: "14px" }} />
+        <div style={{ fontWeight: 800, fontSize: "22px", color: T.white, marginBottom: "3px", textAlign: "center" }}>Sam Kershner</div>
+        <div style={{ color: T.greyDim, fontSize: "14px", marginBottom: "14px", textAlign: "center" }}>AI Systems Builder, Tel Aviv</div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", justifyContent: "center", marginBottom: "22px" }}>
+          <a href="https://www.linkedin.com/in/sam-kershner/" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(255,255,255,0.08)", color: "#CBD5E1", borderRadius: 8, padding: "8px 16px", fontSize: 13, fontWeight: 600, textDecoration: "none", border: "1px solid rgba(255,255,255,0.1)" }}>💼 LinkedIn</a>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#22C55E", color: "#fff", borderRadius: 8, padding: "8px 16px", fontSize: 13, fontWeight: 600, textDecoration: "none" }}>💬 WhatsApp</a>
+        </div>
+        <div style={{ width: "100%", height: 1, background: T.border, marginBottom: "20px" }} />
+        <h3 style={{ fontSize: "clamp(18px,3vw,22px)", fontWeight: 800, color: T.white, margin: "0 0 12px", lineHeight: 1.3, textAlign: "center" }}>I Build Job Specific AI Systems Around Your Real Work.</h3>
+        <p style={{ color: T.grey, fontSize: "15px", lineHeight: 1.7, margin: 0, textAlign: "center", maxWidth: 520 }}>I have spent 4+ years as an AI native marketer across fintech, media and gaming industries. I don't just talk about AI tools, I build with them. Every client leaves with a practical workflow built around one real task from their job.</p>
+      </div>
+    </Section>
+  );
+}
+
+/* ----- Free 60 Second AI Audit (secondary fallback, after final paid CTA) ----- */
+function FreeAuditTeams() {
+  return (
+    <Section id="free-audit" bg={T.navy}>
+      <div style={{ maxWidth: 640, margin: "0 auto", background: "linear-gradient(135deg, rgba(249,115,22,0.12), rgba(249,115,22,0.04))", border: "1.5px solid rgba(249,115,22,0.35)", borderRadius: 18, padding: "clamp(28px,4vw,40px) clamp(20px,4vw,36px)", textAlign: "center", boxShadow: "0 0 40px rgba(249,115,22,0.08)" }}>
+        <div style={{ color: T.orange, fontWeight: 800, fontSize: "13px", letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "12px" }}>Free 60 Second AI Audit</div>
+        <h3 style={{ color: T.white, fontWeight: 800, fontSize: "clamp(22px,3.5vw,30px)", lineHeight: 1.25, margin: "0 auto 14px", maxWidth: 480 }}>Not Ready to Discuss the Pilot?</h3>
+        <p style={{ color: T.grey, fontSize: "16px", lineHeight: 1.6, margin: "0 auto 24px", maxWidth: 500 }}>Answer 4 quick questions. See where AI could save you the most time and get 3 prompts for a real task. No call. No credit card. 60 seconds.</p>
+        <Link to="/ai-time-waste-audit" style={{ display: "inline-block", whiteSpace: "nowrap", background: "none", color: T.orange, fontWeight: 700, fontSize: "16px", padding: "13px 28px", borderRadius: 12, textDecoration: "none", border: "2px solid " + T.orange }}>Get My Free AI Audit</Link>
+      </div>
+    </Section>
+  );
+}
+
 /* ----- Page ----- */
 export default function Teams() {
   useEffect(() => {
@@ -697,6 +778,7 @@ export default function Teams() {
       <style>{STYLES}</style>
       <SiteHeader />
       <Hero />
+      <Testimonials />
       <WhatYouGet />
       <BuiltAroundRealWork />
       <HowItWorks />
@@ -704,8 +786,10 @@ export default function Teams() {
       <PilotResults />
       <FitSection />
       <QualificationForm />
+      <WhoYouAreWorkingWith />
       <FAQ />
       <FinalCTA />
+      <FreeAuditTeams />
       <StickyCTA />
     </div>
   );
