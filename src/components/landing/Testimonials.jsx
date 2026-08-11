@@ -90,7 +90,8 @@ export default function Testimonials() {
   }, [paused, next]);
 
   return (
-    <section style={{ background: "#0F172A", padding: "40px 0 72px" }}>
+    <section style={{ background: "#0F172A", padding: "40px 0 clamp(32px,7vw,72px)" }}>
+      <style>{"@media (max-width: 767px) { .carousel-arrow-btn { display: none !important; } .carousel-nav-row { justify-content: center !important; } }"}</style>
       <div style={{ maxWidth: 700, margin: "0 auto", padding: "0 24px" }}>
         {/* Header */}
         <p style={{ color: "#F97316", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", fontSize: 13, textAlign: "center", marginBottom: 12 }}>
@@ -110,8 +111,9 @@ export default function Testimonials() {
           style={{ userSelect: "none" }}
         >
           {/* Arrows + dots above the card */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14, padding: "0 2px" }}>
+          <div className="carousel-nav-row" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14, padding: "0 2px" }}>
             <button
+              className="carousel-arrow-btn"
               onClick={() => handleArrow("prev")}
               aria-label="Previous testimonial"
               style={{ width: 44, height: 44, borderRadius: "50%", border: "2px solid #F97316", background: "rgba(249,115,22,0.12)", color: "#F97316", fontSize: 20, cursor: "pointer", fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s" }}
@@ -127,6 +129,7 @@ export default function Testimonials() {
               ))}
             </div>
             <button
+              className="carousel-arrow-btn"
               onClick={() => handleArrow("next")}
               aria-label="Next testimonial"
               style={{ width: 44, height: 44, borderRadius: "50%", border: "2px solid #F97316", background: "rgba(249,115,22,0.12)", color: "#F97316", fontSize: 20, cursor: "pointer", fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s" }}
