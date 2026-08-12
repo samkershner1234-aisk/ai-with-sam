@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
 
 const testimonials = [
   {
@@ -42,9 +42,11 @@ function Avatar({ t }) {
 export default function Testimonials() {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [cardHeight, setCardHeight] = useState(null);
   const intervalRef = useRef(null);
   const touchStartX = useRef(null);
   const swiped = useRef(false);
+  const cardRefs = useRef([]);
 
   const next = useCallback(() => setCurrent(p => (p + 1) % testimonials.length), []);
   const prev = useCallback(() => setCurrent(p => (p - 1 + testimonials.length) % testimonials.length), []);
@@ -88,6 +90,25 @@ export default function Testimonials() {
     }
     return () => clearInterval(intervalRef.current);
   }, [paused, next]);
+
+  // Measure every slide's natural height and size the card container to the
+  // tallest one, so the carousel never overlaps the section below it,
+  // regardless of which testimonial (or how much quote text) is active.
+  const measureCardHeight = useCallback(() => {
+    const heights = cardRefs.current.map((el) => (el ? el.offsetHeight : 0));
+    const max = Math.max(0, ...heights);
+    if (max > 0) setCardHeight(max);
+  }, []);
+
+  useLayoutEffect(() => {
+    measureCardHeight();
+    window.addEventListener("resize", measureCardHeight);
+    window.addEventListener("orientationchange", measureCardHeight);
+    return () => {
+      window.removeEventListener("resize", measureCardHeight);
+      window.removeEventListener("orientationchange", measureCardHeight);
+    };
+  }, [measureCardHeight]);
 
   return (
     <section style={{ background: "#0F172A", padding: "40px 0 clamp(32px,7vw,72px)" }}>
@@ -137,10 +158,11 @@ export default function Testimonials() {
           </div>
 
           {/* Card */}
-          <div style={{ position: "relative", minHeight: 280 }}>
+          <div style={{ position: "relative", minHeight: cardHeight || 280 }}>
             {testimonials.map((item, i) => (
               <div
                 key={i}
+                ref={(el) => { cardRefs.current[i] = el; }}
                 style={{
                   position: "absolute", top: 0, left: 0, right: 0,
                   transition: "opacity 0.5s ease, transform 0.5s ease",
