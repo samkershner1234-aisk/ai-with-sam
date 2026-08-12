@@ -111,8 +111,8 @@ export default function Testimonials() {
   }, [measureCardHeight]);
 
   return (
-    <section style={{ background: "#0F172A", padding: "40px 0 clamp(32px,7vw,72px)" }}>
-      <style>{"@media (max-width: 767px) { .carousel-arrow-btn { display: none !important; } .carousel-nav-row { justify-content: center !important; } }"}</style>
+    <section className="testimonials-section" style={{ background: "#0F172A", padding: "40px 0 clamp(32px,7vw,72px)" }}>
+      <style>{"@media (max-width: 767px) { .carousel-arrow-btn { display: none !important; } .carousel-nav-row { justify-content: center !important; } .testimonials-section { padding-bottom: 0px !important; } }"}</style>
       <div style={{ maxWidth: 700, margin: "0 auto", padding: "0 24px" }}>
         {/* Header */}
         <p style={{ color: "#F97316", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", fontSize: 13, textAlign: "center", marginBottom: 12 }}>
