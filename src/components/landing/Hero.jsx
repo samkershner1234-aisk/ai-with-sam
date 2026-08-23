@@ -17,8 +17,8 @@ export default function Hero() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const clockSize = isMobile ? 200 : 440;
-  const tickRadius = isMobile ? 88 : 196;
+  const clockSize = isMobile ? 200 : 380;
+  const tickRadius = isMobile ? 88 : 170;
 
   const ClockGraphic = (
     <div className="relative flex items-center justify-center"
