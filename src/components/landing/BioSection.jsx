@@ -2,7 +2,7 @@ import { CTA_URL, WHATSAPP_URL, SAM_PHOTO } from "./constants";
 
 export default function BioSection() {
   return (
-    <section style={{ background: "#0F172A", padding: "40px 0" }}>
+    <section id="about" style={{ background: "#0F172A", padding: "40px 0", scrollMarginTop: "88px" }}>
       <div style={{ maxWidth: 700, margin: "0 auto", padding: "0 24px" }}>
         <p style={{ color: "#F97316", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", fontSize: 13, textAlign: "center", marginBottom: 10 }}>
           WHO YOU'RE WORKING WITH
@@ -15,15 +15,15 @@ export default function BioSection() {
             </div>
             <div style={{ textAlign: "center" }}>
               <div style={{ fontWeight: 800, fontSize: 22, color: "#fff", marginBottom: 3 }}>Sam Kershner</div>
-              <div style={{ color: "#94A3B8", fontSize: 14, marginBottom: 12 }}>AI Systems Builder · Tel Aviv</div>
+              <div style={{ color: "#94A3B8", fontSize: 14, marginBottom: 12 }}>AI Systems Builder \u00B7 Tel Aviv</div>
               <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
                 <a href="https://www.linkedin.com/in/sam-kershner/" target="_blank" rel="noopener noreferrer"
                   style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(255,255,255,0.08)", color: "#CBD5E1", borderRadius: 8, padding: "7px 14px", fontSize: 13, fontWeight: 600, textDecoration: "none", border: "1px solid rgba(255,255,255,0.1)" }}>
-                  💼 LinkedIn
+                  \uD83D\uDCBC LinkedIn
                 </a>
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
                   style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#22C55E", color: "#fff", borderRadius: 8, padding: "7px 14px", fontSize: 13, fontWeight: 600, textDecoration: "none" }}>
-                  💬 WhatsApp
+                  \uD83D\uDCAC WhatsApp
                 </a>
               </div>
             </div>
