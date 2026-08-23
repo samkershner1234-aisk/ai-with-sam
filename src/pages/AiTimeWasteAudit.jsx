@@ -20,6 +20,30 @@ function track(event, props) {
   } catch (e) { /* never block on analytics */ }
 }
 
+function upsertNamedMeta(name, content) {
+  try {
+    let el = document.head.querySelector('meta[name="' + name + '"]');
+    if (!el) { el = document.createElement("meta"); el.setAttribute("name", name); document.head.appendChild(el); }
+    el.setAttribute("content", content);
+  } catch (e) { /* ignore */ }
+}
+
+function upsertPropertyMeta(prop, content) {
+  try {
+    let el = document.head.querySelector('meta[property="' + prop + '"]');
+    if (!el) { el = document.createElement("meta"); el.setAttribute("property", prop); document.head.appendChild(el); }
+    el.setAttribute("content", content);
+  } catch (e) { /* ignore */ }
+}
+
+function upsertCanonical(href) {
+  try {
+    let el = document.head.querySelector('link[rel="canonical"]');
+    if (!el) { el = document.createElement("link"); el.setAttribute("rel", "canonical"); document.head.appendChild(el); }
+    el.setAttribute("href", href);
+  } catch (e) { /* ignore */ }
+}
+
 function loadSession() {
   try {
     const raw = sessionStorage.getItem(STORAGE_KEY);
@@ -68,7 +92,6 @@ function getUtm() {
 }
 
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 function ContactForm({ answers, onSubmit, submitting, submitError, onRetry }) {
   const [firstName, setFirstName] = useState(answers.firstName || "");
   const [email, setEmail] = useState(answers.email || "");
@@ -143,7 +166,6 @@ function ContactForm({ answers, onSubmit, submitting, submitError, onRetry }) {
     </form>
   );
 }
-
 function Analysing({ reduced, onDone }) {
   const msgs = ["Analysing your task...", "Identifying your strongest AI opportunity...", "Preparing your next step..."];
   const [i, setI] = useState(0);
@@ -173,10 +195,19 @@ export default function AiTimeWasteAudit() {
 
   useEffect(() => {
     document.title = "Free AI Time-Waste Audit | AI With Sam";
+    upsertNamedMeta("description", "Find the repetitive work costing you the most time and get personalised ideas for where AI could help. Free and takes about 60 seconds.");
+    upsertNamedMeta("robots", "index, follow");
+    upsertCanonical(CANONICAL_URL);
+    upsertPropertyMeta("og:title", "Free AI Time-Waste Audit | AI With Sam");
+    upsertPropertyMeta("og:description", "Find the repetitive work costing you the most time and get personalised ideas for where AI could help. Free and takes about 60 seconds.");
+    upsertPropertyMeta("og:type", "website");
+    upsertPropertyMeta("og:url", CANONICAL_URL);
+    upsertNamedMeta("twitter:card", "summary_large_image");
+    upsertNamedMeta("twitter:title", "Free AI Time-Waste Audit | AI With Sam");
+    upsertNamedMeta("twitter:description", "Find the repetitive work costing you the most time and get personalised ideas for where AI could help. Free and takes about 60 seconds.");
     track("audit_viewed");
     window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
-
   useEffect(() => { saveSession(answers); }, [answers]);
 
   const withComputed = (a) => {
@@ -252,7 +283,6 @@ export default function AiTimeWasteAudit() {
       setSubmitError(true);
     }
   };
-
   const forceViewResult = () => { setSubmitError(false); setPhase("analysing"); };
 
   const onAnalysingDone = () => { track("audit_result_viewed", { taskCategory: answers.taskCategory }); setPhase("result"); window.scrollTo({ top: 0, behavior: "auto" }); };
