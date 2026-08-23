@@ -20,7 +20,7 @@ export default function Footer() {
         </div>
         <div>
           <p style={{fontWeight:700,color:"#CBD5E1",fontSize:"14px",letterSpacing:"0.05em",textTransform:"uppercase",marginBottom:"16px"}}>Quick Links</p>
-          <Link to="/teams" style={{display:"block",color:"#94A3B8",fontSize:"14px",lineHeight:2.2,textDecoration:"none"}}>Enterprise</Link>
+          <Link to="/teams" style={{display:"block",color:"#94A3B8",fontSize:"14px",lineHeight:2.2,textDecoration:"none"}}>For Teams</Link>
           {[{label:"How It Works",href:"#how-it-works"},{label:"The Offer",href:"#offer"},{label:"Guarantee",href:"#guarantee"},{label:"FAQ",href:"#faq"}].map(l=><a key={l.href} href={l.href} style={{display:"block",color:"#94A3B8",fontSize:"14px",lineHeight:2.2,textDecoration:"none"}}>{l.label}</a>)}
         </div>
       </div>

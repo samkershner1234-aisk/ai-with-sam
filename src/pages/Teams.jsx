@@ -8,11 +8,12 @@ import {
   buildTeamBookingUrl,
 } from "../teams/teamsBooking";
 import { SAM_PHOTO, WHATSAPP_URL } from "../components/landing/constants";
+import Navbar from "../components/landing/Navbar";
 
 const PROD_ORIGIN = "https://www.aiforeveryrole.com";
 const TEAMS_PATH = "/teams";
 const CANONICAL_URL = PROD_ORIGIN + TEAMS_PATH;
-const PRICE = "5,000\u20AA / $1,500 / \u00A31,250";
+const PRICE = "5,000₪ / $1,500 / £1,250";
 
 function track(event, props) {
   try {
@@ -96,7 +97,7 @@ function Panel({ children, style }) {
 }
 
 function TickList({ items, positive }) {
-  const mark = positive ? "\u2713" : "\u00B7";
+  const mark = positive ? "✓" : "·";
   const color = positive ? T.orange : T.greyDim;
   return (
     <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: "10px" }}>
@@ -149,17 +150,16 @@ function Rail({ children, cols, label }) {
 function RailCard({ children }) {
   return <div className="rail-card">{children}</div>;
 }
-
 /* ----- Content data (zero authored dashes) ----- */
 const WHAT_YOU_GET = [
-  { title: "One to One Sessions", body: "Five employees each get a session built around the real work they already do.", tags: ["Real tasks", "Practical workflows"] },
-  { title: "Prompt Kit and Support", body: "Each participant gets a personalised Prompt Kit, session resources and 30 days of WhatsApp implementation support.", tags: [] },
-  { title: "Pilot Results Summary", body: "After 30 days you receive a clear summary of what was built and what worked.", tags: [] },
+  { title: "One to One Session", body: "Each employee gets a personalised 60 minute session built around a real recurring task from their role.", tags: ["Real tasks", "Practical workflows"] },
+  { title: "Prompt Kit and Resources", body: "A personalised Prompt Kit, session resources and 30 days of WhatsApp implementation support.", tags: [] },
+  { title: "A Workflow They Can Use", body: "Employees leave with a practical AI workflow built around how they already work, ready to put into practice.", tags: [] },
 ];
 
 const FULL_INCLUSIONS = [
   "Five personalised 60 minute one to one sessions",
-  "Sessions built around each employee\u2019s real recurring work",
+  "Sessions built around each employee’s real recurring work",
   "A personalised Prompt Kit for every participant",
   "Session resources and saved outputs",
   "30 days of WhatsApp implementation support per participant",
@@ -169,26 +169,27 @@ const FULL_INCLUSIONS = [
 ];
 
 const HOW_STEPS = [
-  { n: "1", title: "Pick 5 Employees", body: "Choose five people with repetitive knowledge work." },
-  { n: "2", title: "Build Their Workflows", body: "I work one to one with each person to build AI around real tasks." },
-  { n: "3", title: "Review the Results", body: "You receive a clear summary of what worked and where a wider rollout may make sense." },
+  { n: "1", title: "Understand", body: "A short manager kickoff to find where the team loses time and which workflows are worth improving." },
+  { n: "2", title: "Implement", body: "Each participating employee gets personalised one to one help building AI around a real recurring task from their role." },
+  { n: "3", title: "Apply", body: "Employees use the workflow during the pilot, with the support already included and refinement where it is needed." },
+  { n: "4", title: "Measure", body: "We review what was built, what people actually used and what may be worth expanding." },
 ];
 
 const USE_CASES = [
-  { title: "Research and Reporting", body: "Research, briefs, summaries, recurring reports and structured updates." },
-  { title: "Writing and Communication", body: "Emails, documents, proposals, editing and internal communication." },
-  { title: "Meetings and Admin", body: "Preparation, notes, actions, follow up and repetitive administration." },
-  { title: "Marketing and Sales", body: "Content workflows, research, account preparation, briefs and follow up." },
-  { title: "HR and Customer Success", body: "Recruiting tasks, documentation, customer communication and preparation." },
-  { title: "Operations and Leadership", body: "Processes, synthesis, planning, documentation and decision preparation." },
+  { title: "Marketing", body: "Research, briefs, campaign drafts and reporting." },
+  { title: "Sales", body: "Prospect research, meeting preparation and follow-up." },
+  { title: "Partnerships", body: "Partner research, personalised outreach and relationship follow-up." },
+  { title: "Managers", body: "Meeting preparation, summaries, actions and recurring updates." },
+  { title: "Operations", body: "Reporting, admin and recurring information handoffs." },
+  { title: "Recruitment / People", body: "Candidate research, interview preparation and structured notes." },
 ];
 
 const RESULTS_SUMMARY = [
-  "The five workflows created",
+  "The workflows created across the team",
   "What each employee used AI for",
   "Where AI created the most value",
   "What worked and what did not",
-  "Opportunities for the wider team",
+  "Opportunities worth expanding across the team",
 ];
 
 const STRONG_FIT = ["Employees do knowledge work", "Repetitive tasks consume time", "AI use is allowed", "Leadership wants practical implementation"];
@@ -215,63 +216,89 @@ function Accordion({ summary, children, defaultOpen }) {
     </details>
   );
 }
-
-/* ----- Compact site header (mobile + desktop) ----- */
-function SiteHeader() {
-  return (
-    <header style={{
-      position: "sticky", top: 0, zIndex: 50,
-      background: "rgba(15,23,42,0.96)", borderBottom: "1px solid " + T.border,
-      backdropFilter: "blur(8px)",
-    }}>
-      <div style={{
-        maxWidth: 1100, margin: "0 auto", height: 58,
-        padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "space-between",
-      }}>
-        <button type="button" onClick={() => scrollToId("top")} style={{
-          background: "none", border: "none", cursor: "pointer", padding: 0,
-          color: T.white, fontWeight: 800, fontSize: "18px", letterSpacing: "-0.3px",
-          whiteSpace: "nowrap", fontFamily: T.font,
-        }}>AI With Sam</button>
-        <button type="button" onClick={() => goToQualify("header")} style={{
-          background: T.orange, color: "#0B1220", fontWeight: 800, fontSize: "14px",
-          border: "none", borderRadius: 999, padding: "9px 16px", cursor: "pointer",
-          whiteSpace: "nowrap", fontFamily: T.font,
-        }}>Team Pilot</button>
-      </div>
-    </header>
-  );
-}
-
 /* ----- 1. Compact Hero ----- */
 function Hero() {
   return (
     <section id="top" style={{ background: T.navy, padding: "clamp(28px,6vw,64px) 20px clamp(32px,6vw,56px)" }}>
       <div style={{ maxWidth: 720, margin: "0 auto", textAlign: "center" }}>
+        <div style={{ display: "flex", justifyContent: "center" }}><Eyebrow>AI For Teams</Eyebrow></div>
         <h1 style={{ color: T.white, fontWeight: 900, fontSize: "clamp(38px,9vw,46px)", lineHeight: 1.1, letterSpacing: "-1px", margin: "0 0 16px" }}>
-          Give Your Team Hours Back Every Week
+          Make AI Useful Across Your Team.
         </h1>
         <p style={{ color: T.grey, fontSize: "clamp(18px,2.4vw,20px)", lineHeight: 1.5, margin: "0 auto 18px", maxWidth: 560 }}>
-          I work one to one with five employees for 30 days, building AI around the work they already do. You see what works before deciding whether to expand.
+          Start with a 30-day implementation pilot for 5 employees. We identify useful workflows, build them around each person's actual work, support adoption and measure what gets used.
         </p>
-        <div style={{ color: T.greyDim, fontWeight: 700, fontSize: "15px", marginBottom: "6px" }}>5 employees • 30 days • No long term commitment</div>
+        <div style={{ color: T.greyDim, fontWeight: 700, fontSize: "15px", marginBottom: "6px" }}>5 Employees · 30 Days · No Long-Term Commitment</div>
         <div style={{ marginBottom: "22px" }}><PriceBlock /></div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
-          <PrimaryButton onClick={() => goToQualify("hero")}>Discuss the 5 Person Pilot</PrimaryButton>
-          <SecondaryLink onClick={() => scrollToId("how")}>See how it works ↓</SecondaryLink>
+          <PrimaryButton onClick={() => goToQualify("hero")}>Discuss a 30-Day Pilot</PrimaryButton>
+          <SecondaryLink onClick={() => scrollToId("how")}>See How the Pilot Works ↓</SecondaryLink>
         </div>
       </div>
     </section>
   );
 }
 
-/* ----- 2. What Your Team Gets ----- */
+/* ----- 2. The Problem ----- */
+function BuiltAroundRealWork() {
+  return (
+    <Section id="problem" bg={T.panel}>
+      <div style={{ maxWidth: 720 }}>
+        <Eyebrow>The Problem</Eyebrow>
+        <H2>Your Team Has AI Tools. That Doesn't Mean the Work Has Changed.</H2>
+        <Lead>Employees are experimenting with ChatGPT, Claude, Copilot and other tools, but generic training rarely shows each person how AI fits into their actual role.</Lead>
+        <Lead>The pilot focuses on real recurring work and turns useful opportunities into workflows employees can actually use.</Lead>
+      </div>
+    </Section>
+  );
+}
+
+/* ----- 3. What AI Could Look Like Across the Team ----- */
+function UseCases() {
+  return (
+    <Section id="usecases" bg={T.navy}>
+      <Eyebrow>Across the Team</Eyebrow>
+      <H2>What AI Could Look Like Across Your Team</H2>
+      <Lead>These are illustrative examples. Not every workflow can necessarily be automated.</Lead>
+      <div style={{ height: 8 }} />
+      <Rail cols={3} label="What AI could look like across the team">
+        {USE_CASES.map((c, i) => (
+          <RailCard key={i}>
+            <div style={{ color: T.white, fontWeight: 800, fontSize: "16px", marginBottom: "8px" }}>{c.title}</div>
+            <div style={{ color: T.grey, fontSize: "14px", lineHeight: 1.5 }}>{c.body}</div>
+          </RailCard>
+        ))}
+      </Rail>
+    </Section>
+  );
+}
+
+/* ----- 4. How the 30-Day Pilot Works ----- */
+function HowItWorks() {
+  return (
+    <Section id="how" bg={T.panel}>
+      <Eyebrow>How It Works</Eyebrow>
+      <H2>How the 30-Day Pilot Works</H2>
+      <Rail cols={4} label="How the 30 day pilot works">
+        {HOW_STEPS.map((s, i) => (
+          <RailCard key={i}>
+            <div style={{ width: 36, height: 36, borderRadius: 999, background: T.orange, color: "#0B1220", fontWeight: 900, fontSize: "17px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "12px" }}>{s.n}</div>
+            <div style={{ color: T.white, fontWeight: 800, fontSize: "16px", marginBottom: "8px" }}>{s.title}</div>
+            <div style={{ color: T.grey, fontSize: "14px", lineHeight: 1.5 }}>{s.body}</div>
+          </RailCard>
+        ))}
+      </Rail>
+    </Section>
+  );
+}
+
+/* ----- 5. What Each Employee Gets ----- */
 function WhatYouGet() {
   return (
     <Section id="pilot" bg={T.navy}>
       <Eyebrow>The Pilot</Eyebrow>
-      <H2>What Your Team Gets</H2>
-      <Rail cols={3} label="What your team gets">
+      <H2>What Each Employee Gets</H2>
+      <Rail cols={3} label="What each employee gets">
         {WHAT_YOU_GET.map((c, i) => (
           <RailCard key={i}>
             <div style={{ color: T.white, fontWeight: 800, fontSize: "18px", marginBottom: "10px" }}>{c.title}</div>
@@ -286,92 +313,70 @@ function WhatYouGet() {
           </RailCard>
         ))}
       </Rail>
-      <div style={{ textAlign: "center", marginTop: "28px" }}>
-        <div style={{ color: T.greyDim, fontSize: "14px", fontWeight: 600, marginBottom: "8px" }}>One time 30 day pilot · no long term contract</div>
-        <div style={{ marginBottom: "18px" }}><PriceBlock small /></div>
-        <PrimaryButton onClick={() => goToQualify("pilot")}>Discuss the 5 Person Pilot</PrimaryButton>
-      </div>
-      <div style={{ maxWidth: 640, margin: "26px auto 0" }}>
-        <Accordion summary="See everything included">
-          <TickList items={FULL_INCLUSIONS} positive />
-        </Accordion>
-      </div>
     </Section>
   );
 }
-
-/* ----- 3. Built Around Real Work ----- */
-function BuiltAroundRealWork() {
+/* ----- 6. What You Get as the Team Lead ----- */
+function ManagerGets() {
   return (
-    <Section id="problem" bg={T.panel}>
-      <div style={{ maxWidth: 720 }}>
-        <Eyebrow>Why This Is Different</Eyebrow>
-        <H2>Built Around Real Work. Not Generic AI Training.</H2>
-        <Lead>Each session starts with work the employee already does. We identify repetitive tasks, build practical AI workflows and help them put those workflows into use.</Lead>
-      </div>
-    </Section>
-  );
-}
-
-/* ----- 4. How It Works ----- */
-function HowItWorks() {
-  return (
-    <Section id="how" bg={T.navy}>
-      <Eyebrow>How It Works</Eyebrow>
-      <H2>How the Pilot Works</H2>
-      <Rail cols={3} label="How the pilot works">
-        {HOW_STEPS.map((s, i) => (
-          <RailCard key={i}>
-            <div style={{ width: 36, height: 36, borderRadius: 999, background: T.orange, color: "#0B1220", fontWeight: 900, fontSize: "17px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "12px" }}>{s.n}</div>
-            <div style={{ color: T.white, fontWeight: 800, fontSize: "16px", marginBottom: "8px" }}>{s.title}</div>
-            <div style={{ color: T.grey, fontSize: "14px", lineHeight: 1.5 }}>{s.body}</div>
-          </RailCard>
-        ))}
-      </Rail>
-    </Section>
-  );
-}
-
-/* ----- 5. Employee Use Cases ----- */
-function UseCases() {
-  return (
-    <Section id="usecases" bg={T.panel}>
-      <Eyebrow>Employee Use Cases</Eyebrow>
-      <H2>What Can Employees Work On?</H2>
-      <Rail cols={3} label="Employee use cases">
-        {USE_CASES.map((c, i) => (
-          <RailCard key={i}>
-            <div style={{ color: T.white, fontWeight: 800, fontSize: "16px", marginBottom: "8px" }}>{c.title}</div>
-            <div style={{ color: T.grey, fontSize: "14px", lineHeight: 1.5 }}>{c.body}</div>
-          </RailCard>
-        ))}
-      </Rail>
-    </Section>
-  );
-}
-
-/* ----- 6. Pilot Results Summary ----- */
-function PilotResults() {
-  return (
-    <Section id="measure" bg={T.navy}>
+    <Section id="manager" bg={T.panel}>
       <div style={{ maxWidth: 640 }}>
-        <Eyebrow>The Deliverable</Eyebrow>
-        <H2>Pilot Results Summary</H2>
-        <Lead>At the end of the 30 days, you receive a clear summary of what was built, what worked and where a wider rollout may make sense.</Lead>
+        <Eyebrow>For the Team Lead</Eyebrow>
+        <H2>What You Get as the Team Lead</H2>
+        <Lead>Beyond the employee sessions, you receive a clear view of what was built and what may be worth doing next.</Lead>
       </div>
       <div style={{ maxWidth: 640, margin: "22px 0 0" }}>
         <Panel style={{ background: T.card }}>
+          <div style={{ color: T.white, fontWeight: 800, fontSize: "16px", marginBottom: "14px" }}>AI Pilot Results Summary</div>
           <TickList items={RESULTS_SUMMARY} positive />
         </Panel>
+        <div style={{ color: T.greyDim, fontSize: "13px", marginTop: "12px" }}>Example of what could be measured. We do not guarantee a specific amount of time saved or financial return.</div>
       </div>
     </Section>
   );
 }
 
-/* ----- 7. Fit / Commitment / After ----- */
+/* ----- 7. Pricing ----- */
+function PricingSection() {
+  return (
+    <Section id="pricing" bg={T.navy}>
+      <div style={{ textAlign: "center" }}>
+        <Eyebrow>Pricing</Eyebrow>
+        <H2 style={{ margin: "0 auto 14px" }}>Simple, Transparent Pricing</H2>
+        <div style={{ color: T.greyDim, fontSize: "14px", fontWeight: 600, marginBottom: "18px" }}>One time 30 day pilot for 5 employees · no long term contract</div>
+        <div style={{ marginBottom: "24px" }}><PriceBlock /></div>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <PrimaryButton onClick={() => goToQualify("pricing")}>Discuss a 30-Day Pilot</PrimaryButton>
+        </div>
+      </div>
+      <div style={{ maxWidth: 640, margin: "32px auto 0" }}>
+        <div style={{ border: "1.5px solid " + T.border, borderRadius: 14, overflow: "hidden", background: T.card }}>
+          <Accordion summary="See everything included">
+            <TickList items={FULL_INCLUSIONS} positive />
+          </Accordion>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+/* ----- 8. Responsible AI / Trust ----- */
+function ResponsibleAI() {
+  return (
+    <Section id="trust" bg={T.panel}>
+      <div style={{ maxWidth: 720 }}>
+        <Eyebrow>Responsible AI</Eyebrow>
+        <H2>Built for Real Work. With Human Review.</H2>
+        <Lead>Every workflow respects the AI tools and platforms your company already allows. We discuss what information should and should not be shared, where human review remains important, and how employees can use AI responsibly in day to day work.</Lead>
+        <div style={{ color: T.greyDim, fontSize: "13px", lineHeight: 1.6, marginTop: "12px" }}>Company policies and legal, compliance, IT and security requirements always take precedence. This pilot does not provide legal, compliance or cybersecurity advice.</div>
+      </div>
+    </Section>
+  );
+}
+/* ----- 9. Fit / Commitment ----- */
 function FitSection() {
   return (
-    <Section id="fit" bg={T.panel}>
+    <Section id="fit" bg={T.navy}>
       <Eyebrow>Fit</Eyebrow>
       <H2>Is This Right for Your Team?</H2>
       <Rail cols={2} label="Team fit">
@@ -396,10 +401,10 @@ function FitSection() {
   );
 }
 
-/* ----- 9. FAQ ----- */
+/* ----- FAQ ----- */
 function FAQ() {
   return (
-    <Section id="faq" bg={T.navy}>
+    <Section id="faq" bg={T.panel}>
       <Eyebrow>FAQ</Eyebrow>
       <H2>Common Questions</H2>
       <div style={{ maxWidth: 720, margin: "20px auto 0", display: "grid", gap: "12px" }}>
@@ -413,23 +418,22 @@ function FAQ() {
   );
 }
 
-/* ----- 10. Final CTA ----- */
+/* ----- Final CTA ----- */
 function FinalCTA() {
   return (
-    <Section id="final" bg={T.panel}>
+    <Section id="final" bg={T.navy}>
       <div style={{ maxWidth: 560, margin: "0 auto", textAlign: "center" }}>
         <H2 style={{ marginBottom: "12px" }}>Start With Five People</H2>
         <p style={{ color: T.grey, fontSize: "clamp(16px,2.2vw,18px)", lineHeight: 1.6, margin: "0 0 18px" }}>
           Test the approach with a small group, measure what happens and decide what comes next.
         </p>
         <div style={{ marginBottom: "20px" }}><PriceBlock /></div>
-        <PrimaryButton onClick={() => goToQualify("final")}>Discuss the 5 Person Pilot</PrimaryButton>
+        <PrimaryButton onClick={() => goToQualify("final")}>Discuss a 30-Day Pilot</PrimaryButton>
       </div>
     </Section>
   );
 }
-
-/* ----- 8. Qualification Form (two step) ----- */
+/* ----- Qualification Form (two step) ----- */
 function QualificationForm() {
   const [step, setStep] = useState(1);
   const [name, setName] = useState("");
@@ -481,7 +485,6 @@ function QualificationForm() {
     setStep(2);
     scrollToId("qualify");
   };
-
   const submit = (e) => {
     e.preventDefault();
     setTouched(true);
@@ -534,7 +537,6 @@ function QualificationForm() {
       setRedirectError(true);
     }
   };
-
   return (
     <Section id="qualify" bg={T.navy}>
       <div style={{ maxWidth: 620, margin: "0 auto" }}>
@@ -631,7 +633,7 @@ function QualificationForm() {
                   flex: 1, background: T.orange, color: "#0B1220", fontWeight: 800, fontSize: "16px",
                   border: "none", borderRadius: 12, padding: "15px", cursor: submitting ? "default" : "pointer",
                   opacity: submitting ? 0.7 : 1, fontFamily: T.font,
-                }}>{submitting ? "Opening booking\u2026" : "Book My Team Call"}</button>
+                }}>{submitting ? "Opening booking…" : "Book My Team Call"}</button>
               </div>
               {redirectError && (
                 <div style={{ ...errStyle, marginTop: "12px" }}>Something went wrong opening the booking page. Please try again.</div>
@@ -643,7 +645,6 @@ function QualificationForm() {
     </Section>
   );
 }
-
 /* ----- Mobile sticky CTA (hides at the form) ----- */
 function StickyCTA() {
   const [show, setShow] = useState(false);
@@ -673,7 +674,7 @@ function StickyCTA() {
       <button type="button" onClick={() => goToQualify("sticky")} style={{
         width: "100%", background: T.orange, color: "#0B1220", fontWeight: 800, fontSize: "16px",
         border: "none", borderRadius: 12, padding: "14px", cursor: "pointer", fontFamily: T.font,
-      }}>Discuss the 5 Person Pilot</button>
+      }}>Discuss a 30-Day Pilot</button>
     </div>
   );
 }
@@ -696,7 +697,6 @@ const STYLES = [
   "  .sticky-cta { transition: none !important; }",
   "}",
 ].join("\n");
-
 /* ----- Proof: real client results (individual clients, not team pilot) ----- */
 const PROOF = [
   {
@@ -725,7 +725,7 @@ function Testimonials() {
       <div className="rail" role="group" aria-label="Client results" style={{ ["--cols"]: 2, maxWidth: 900, margin: "0 auto" }}>
         {PROOF.map((p, i) => (
           <div key={i} className="rail-card" style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-            <p style={{ color: T.white, fontSize: "16px", lineHeight: 1.55, margin: 0, fontWeight: 500 }}>{"\u201C" + p.quote + "\u201D"}</p>
+            <p style={{ color: T.white, fontSize: "16px", lineHeight: 1.55, margin: 0, fontWeight: 500 }}>{"“" + p.quote + "”"}</p>
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "auto" }}>
               <div style={{ width: 42, height: 42, borderRadius: "50%", background: p.color, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 700, fontSize: 15, flexShrink: 0 }}>{p.initials}</div>
               <div>
@@ -739,7 +739,6 @@ function Testimonials() {
     </Section>
   );
 }
-
 /* ----- Who You're Working With (Teams variant, no individual CTA) ----- */
 function WhoYouAreWorkingWith() {
   return (
@@ -776,44 +775,55 @@ function FreeAuditTeams() {
     </Section>
   );
 }
-
 /* ----- Page ----- */
 export default function Teams() {
   useEffect(() => {
-    document.title = "AI With Sam | 30 Day AI Pilot for Teams";
-    upsertNamedMeta("description", "A 30 day pilot for five employees. Build practical AI workflows around real work, support implementation and see what is worth expanding across your team.");
+    document.title = "AI Training & Implementation for Teams | AI With Sam";
+    upsertNamedMeta("description", "A practical AI implementation pilot for employees. Build role-specific workflows around real work, support adoption and measure what actually gets used.");
     upsertNamedMeta("robots", "index, follow");
     upsertCanonical(CANONICAL_URL);
-    upsertPropertyMeta("og:title", "AI With Sam | 30 Day AI Pilot for Teams");
-    upsertPropertyMeta("og:description", "Personalised one to one AI workflow sessions for your team. Start with a 5 person, 30 day pilot.");
+    upsertPropertyMeta("og:title", "AI Training & Implementation for Teams | AI With Sam");
+    upsertPropertyMeta("og:description", "A practical AI implementation pilot for employees. Build role-specific workflows around real work, support adoption and measure what actually gets used.");
     upsertPropertyMeta("og:type", "website");
     upsertPropertyMeta("og:url", CANONICAL_URL);
     upsertPropertyMeta("og:image", PROD_ORIGIN + "/logo.png");
     upsertNamedMeta("twitter:card", "summary_large_image");
-    upsertNamedMeta("twitter:title", "AI With Sam | 30 Day AI Pilot for Teams");
-    upsertNamedMeta("twitter:description", "Personalised one to one AI workflow sessions for your team. Start with a 5 person, 30 day pilot.");
+    upsertNamedMeta("twitter:title", "AI Training & Implementation for Teams | AI With Sam");
+    upsertNamedMeta("twitter:description", "A practical AI implementation pilot for employees. Build role-specific workflows around real work, support adoption and measure what actually gets used.");
     track("teams_page_view");
   }, []);
 
   return (
     <div style={{ fontFamily: T.font, background: T.navy, minHeight: "100vh" }}>
       <style>{STYLES}</style>
-      <SiteHeader />
+      <Navbar variant="teams" />
       <Hero />
-      <Testimonials />
-      <WhatYouGet />
+      {/* 2. The problem */}
       <BuiltAroundRealWork />
-      <HowItWorks />
+      {/* 3. What AI could look like across the team */}
       <UseCases />
-      <PilotResults />
+      {/* 4. The 30-day pilot */}
+      <HowItWorks />
+      {/* 5. What each employee gets */}
+      <WhatYouGet />
+      {/* 6. What the manager gets */}
+      <ManagerGets />
+      {/* 7. Pricing */}
+      <PricingSection />
+      {/* 8. Responsible AI / privacy / human review */}
+      <ResponsibleAI />
+      {/* 9. Proof */}
+      <Testimonials />
       <FitSection />
       <QualificationForm />
+      {/* 10. Who you're working with */}
       <WhoYouAreWorkingWith />
+      {/* 11. FAQ */}
       <FAQ />
+      {/* 12. Final CTA */}
       <FinalCTA />
       <FreeAuditTeams />
       <StickyCTA />
     </div>
   );
 }
-

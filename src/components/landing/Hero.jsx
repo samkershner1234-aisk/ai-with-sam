@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { CTA_URL, SAM_PHOTO } from "./constants";
 
 const badges = [
-  { icon: "💬", text: "14 Days of WhatsApp Support" },
-  { icon: "🛡", text: "Results Guaranteed" },
+  { icon: "\uD83D\uDCAC", text: "14 Days of WhatsApp Support" },
+  { icon: "\uD83D\uDEE1", text: "Results Guaranteed" },
 ];
 
 export default function Hero() {
@@ -17,8 +17,8 @@ export default function Hero() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const clockSize = isMobile ? 200 : 440;
-  const tickRadius = isMobile ? 88 : 196;
+  const clockSize = isMobile ? 200 : 340;
+  const tickRadius = isMobile ? 88 : 152;
 
   const ClockGraphic = (
     <div className="relative flex items-center justify-center"
@@ -150,7 +150,7 @@ export default function Hero() {
         <div className="grid w-full grid-cols-[1.05fr_0.95fr] items-center gap-10">
 
           <div className="z-10 max-w-3xl">
-            <h1 className="max-w-2xl text-[clamp(52px,7.6vw,116px)] font-black leading-[0.92] tracking-[-0.07em]">
+            <h1 className="max-w-2xl text-[clamp(56px,4.8vw,84px)] font-black leading-[0.98] tracking-[-0.03em]">
               <span className="block text-white">Stop Wasting Time</span>
               <span className="block text-white">on <span className="text-[#F97316]">Repetitive Work.</span></span>
             </h1>
@@ -174,9 +174,9 @@ export default function Hero() {
                 </div>
               ))}
             </div>
-              </div>
+          </div>
 
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center -mt-14">
             {ClockGraphic}
           </div>
 
