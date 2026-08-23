@@ -202,6 +202,9 @@ const FAQS = [
   { q: "How do you handle sensitive company information?", a: "We work inside the tools you already approve, following your company guidelines." },
   { q: "What happens after the 30 days?", a: "You get the Pilot Results Summary, then decide if a wider rollout makes sense." },
   { q: "Can we expand beyond five employees?", a: "Yes, once the pilot shows what works. The pilot itself stays focused on five." },
+  { q: "How is this different from a general AI workshop?", a: "A workshop teaches concepts to everyone at once. This pilot builds a working AI process around each employee's real task, specific to their role." },
+  { q: "How do you measure whether it worked?", a: "Through the Pilot Results Summary: what was built, what people actually used and where it created value." },
+  { q: "Is it really personalised per employee?", a: "Yes. Each employee works on their own real task, so everyone leaves with a different, relevant workflow." },
 ];
 /* Accessible accordion (details/summary based) */
 function Accordion({ summary, children, defaultOpen }) {
@@ -247,6 +250,7 @@ function BuiltAroundRealWork() {
         <H2>Your Team Has AI Tools. That Doesn't Mean the Work Has Changed.</H2>
         <Lead>Employees are experimenting with AI, but generic training rarely shows each person how to apply it to their actual role.</Lead>
         <Lead>This pilot focuses on real recurring work and builds practical workflows employees can actually use.</Lead>
+        <p style={{ color: T.greyDim, fontSize: "14px", margin: "14px 0 0" }}>Working solo rather than leading a team? See our <Link to="/" style={{ color: T.orange, fontWeight: 700 }}>1-to-1 AI coaching for professionals</Link> instead.</p>
       </div>
     </Section>
   );
