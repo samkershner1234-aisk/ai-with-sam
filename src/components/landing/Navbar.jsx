@@ -4,7 +4,10 @@ import { CTA_URL, TEAM_BOOKING_URL } from "./constants";
 
 // Shared site navigation used on both the Home (individual) page and the
 // Teams page. The middle links and destinations stay constant; only the
-// primary call-to-action changes by page context via the `variant` prop.
+// primary call-to-action and the About Sam anchor change by page context
+// via the `variant` prop, so About Sam always scrolls within the current
+// page rather than navigating away from a page that already has its own
+// About section.
 export default function Navbar({ variant = "home" }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -22,7 +25,7 @@ export default function Navbar({ variant = "home" }) {
     { label: "For Individuals", to: "/" },
     { label: "For Teams", to: "/teams" },
     { label: "Free AI Audit", to: "/ai-time-waste-audit" },
-    { label: "About Sam", to: "/#about" },
+    { label: "About Sam", to: isTeams ? "/teams#about" : "/#about" },
   ];
 
   return (
