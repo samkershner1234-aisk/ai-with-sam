@@ -203,6 +203,9 @@ const FAQS = [
   { q: "How do you handle sensitive company information?", a: "We build inside the tools you already approve and follow your company guidelines. Nothing needs to move outside them." },
   { q: "What happens after the 30 days?", a: "You get the Pilot Results Summary. You then decide whether a wider rollout makes sense, using the real results." },
   { q: "Can we expand beyond five employees?", a: "Yes, once the pilot shows what works. The pilot itself stays focused on five." },
+  { q: "How is role-based AI training different from a general AI workshop?", a: "A workshop teaches AI concepts to everyone at once. This pilot builds a working AI process around each employee's actual recurring task, so the outcome is specific to their role rather than generic." },
+  { q: "How do you measure whether the training worked?", a: "Each employee's workflow is tracked through the Pilot Results Summary, which shows what was built, what people actually used, and where it created the most value." },
+  { q: "Can the training be personalised for different employees?", a: "Yes. Each employee works on a real task from their own role, so a marketer, a recruiter and an operations lead each leave with a different, relevant workflow." },
 ];
 /* Accessible accordion (details/summary based) */
 function Accordion({ summary, children, defaultOpen }) {
@@ -389,6 +392,9 @@ function FitSection() {
           <TickList items={NOT_FIT} />
         </RailCard>
       </Rail>
+      <p style={{ textAlign: "center", color: T.greyDim, fontSize: "14px", margin: "20px auto 0", maxWidth: 640 }}>
+        Working solo rather than leading a team? See our <Link to="/" style={{ color: T.orange, fontWeight: 700 }}>1-to-1 AI coaching for professionals</Link> instead.
+      </p>
       <div style={{ display: "grid", gap: "12px", maxWidth: 640, margin: "24px auto 0" }}>
         <div style={{ border: "1.5px solid " + T.border, borderRadius: 14, overflow: "hidden", background: T.card }}>
           <Accordion summary="Our Commitment">
