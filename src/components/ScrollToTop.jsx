@@ -7,6 +7,11 @@ import { useLocation } from "react-router-dom";
 //
 // Exception: if the destination includes an intentional #anchor (e.g.
 // "/#about"), that anchor is scrolled into view instead of the page top.
+//
+// The site sets "html { scroll-behavior: smooth }" globally, which means a
+// plain window.scrollTo(0, 0) would animate instead of jumping instantly.
+// We explicitly request "instant" behavior here so a page-to-page route
+// change always lands at the top immediately and reliably.
 export default function ScrollToTop() {
   const { pathname, hash } = useLocation();
 
@@ -22,7 +27,7 @@ export default function ScrollToTop() {
         return;
       }
     }
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [pathname, hash]);
 
   return null;
