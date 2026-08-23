@@ -1,8 +1,10 @@
 // Home page layout
+import { useEffect } from "react";
 import ScrollProgress from "../components/landing/ScrollProgress";
 import Navbar from "../components/landing/Navbar";
 import Hero from "../components/landing/Hero";
 import PainSection from "../components/landing/PainSection";
+import RoleExamples from "../components/landing/RoleExamples";
 import HowItWorks from "../components/landing/HowItWorks";
 import Testimonials from "../components/landing/Testimonials";
 import PricingSection from "../components/landing/PricingSection";
@@ -15,7 +17,47 @@ import ClosingCTA from "../components/landing/ClosingCTA";
 import Footer from "../components/landing/Footer";
 import MobileStickyBar from "../components/landing/MobileStickyBar";
 
+const PROD_ORIGIN = "https://www.aiforeveryrole.com";
+
+function upsertNamedMeta(name, content) {
+  try {
+    let el = document.head.querySelector('meta[name="' + name + '"]');
+    if (!el) { el = document.createElement("meta"); el.setAttribute("name", name); document.head.appendChild(el); }
+    el.setAttribute("content", content);
+  } catch (e) { /* ignore */ }
+}
+
+function upsertPropertyMeta(prop, content) {
+  try {
+    let el = document.head.querySelector('meta[property="' + prop + '"]');
+    if (!el) { el = document.createElement("meta"); el.setAttribute("property", prop); document.head.appendChild(el); }
+    el.setAttribute("content", content);
+  } catch (e) { /* ignore */ }
+}
+
+function upsertCanonical(href) {
+  try {
+    let el = document.head.querySelector('link[rel="canonical"]');
+    if (!el) { el = document.createElement("link"); el.setAttribute("rel", "canonical"); document.head.appendChild(el); }
+    el.setAttribute("href", href);
+  } catch (e) { /* ignore */ }
+}
+
 export default function Home() {
+  useEffect(() => {
+    document.title = "1-to-1 AI Coaching for Professionals | AI With Sam";
+    upsertNamedMeta("description", "Personalised 1-to-1 AI help built around your actual job. Bring one real task and build a practical AI workflow you can start using immediately.");
+    upsertNamedMeta("robots", "index, follow");
+    upsertCanonical(PROD_ORIGIN + "/");
+    upsertPropertyMeta("og:title", "1-to-1 AI Coaching for Professionals | AI With Sam");
+    upsertPropertyMeta("og:description", "Personalised 1-to-1 AI help built around your actual job. Bring one real task and build a practical AI workflow you can start using immediately.");
+    upsertPropertyMeta("og:type", "website");
+    upsertPropertyMeta("og:url", PROD_ORIGIN + "/");
+    upsertNamedMeta("twitter:card", "summary_large_image");
+    upsertNamedMeta("twitter:title", "1-to-1 AI Coaching for Professionals | AI With Sam");
+    upsertNamedMeta("twitter:description", "Personalised 1-to-1 AI help built around your actual job. Bring one real task and build a practical AI workflow you can start using immediately.");
+  }, []);
+
   return (
     <div style={{ fontFamily: "'Inter', sans-serif", background: "#0F172A" }}>
       <ScrollProgress />
@@ -40,19 +82,21 @@ export default function Home() {
       </section>
       {/* 4. Individual offer and price */}
       <PricingSection />
-      {/* 5. How it works */}
+      {/* 5. Role-specific examples */}
+      <RoleExamples />
+      {/* 6. How it works */}
       <HowItWorks />
-      {/* 6. Guarantee / risk reversal */}
+      {/* 7. Guarantee / risk reversal */}
       <GuaranteeSection />
-      {/* 7. About Sam and credibility */}
+      {/* 8. About Sam and credibility */}
       <BioSection />
-      {/* 8. Free resource for visitors not ready to book */}
+      {/* 9. Free resource for visitors not ready to book */}
       <FreeAuditPromo />
-      {/* 9. Enterprise teaser (secondary employer path) */}
+      {/* 10. Teams teaser (secondary employer path) */}
       <TeamsPromo />
-      {/* 10. FAQ */}
+      {/* 11. FAQ */}
       <FAQSection />
-      {/* 11. Final individual CTA */}
+      {/* 12. Final individual CTA */}
       <ClosingCTA />
       <Footer />
       <MobileStickyBar />
