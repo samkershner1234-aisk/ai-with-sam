@@ -13,7 +13,7 @@ import Navbar from "../components/landing/Navbar";
 const PROD_ORIGIN = "https://www.aiforeveryrole.com";
 const TEAMS_PATH = "/teams";
 const CANONICAL_URL = PROD_ORIGIN + TEAMS_PATH;
-const PRICE = "5,000\u20AA / $1,500 / \u00A31,250";
+const PRICE = "5,000₪ / $1,500 / £1,250";
 
 function track(event, props) {
   try {
@@ -97,7 +97,7 @@ function Panel({ children, style }) {
 }
 
 function TickList({ items, positive }) {
-  const mark = positive ? "\u2713" : "\u00B7";
+  const mark = positive ? "✓" : "·";
   const color = positive ? T.orange : T.greyDim;
   return (
     <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: "10px" }}>
@@ -159,7 +159,7 @@ const WHAT_YOU_GET = [
 
 const FULL_INCLUSIONS = [
   "Five personalised 60 minute one to one sessions",
-  "Sessions built around each employee\u2019s real recurring work",
+  "Sessions built around each employee’s real recurring work",
   "A personalised Prompt Kit for every participant",
   "Session resources and saved outputs",
   "30 days of WhatsApp implementation support per participant",
@@ -228,11 +228,11 @@ function Hero() {
         <p style={{ color: T.grey, fontSize: "clamp(18px,2.4vw,20px)", lineHeight: 1.5, margin: "0 auto 18px", maxWidth: 560 }}>
           Start with a 30-day implementation pilot for 5 employees. We identify useful workflows, build them around each person's actual work, support adoption and measure what gets used.
         </p>
-        <div style={{ color: T.greyDim, fontWeight: 700, fontSize: "15px", marginBottom: "6px" }}>5 Employees \u00B7 30 Days \u00B7 No Long-Term Commitment</div>
+        <div style={{ color: T.greyDim, fontWeight: 700, fontSize: "15px", marginBottom: "6px" }}>5 Employees · 30 Days · No Long-Term Commitment</div>
         <div style={{ marginBottom: "22px" }}><PriceBlock /></div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
           <PrimaryButton onClick={() => goToQualify("hero")}>Discuss a 30-Day Pilot</PrimaryButton>
-          <SecondaryLink onClick={() => scrollToId("how")}>See How the Pilot Works \u2193</SecondaryLink>
+          <SecondaryLink onClick={() => scrollToId("how")}>See How the Pilot Works ↓</SecondaryLink>
         </div>
       </div>
     </section>
@@ -343,7 +343,7 @@ function PricingSection() {
       <div style={{ textAlign: "center" }}>
         <Eyebrow>Pricing</Eyebrow>
         <H2 style={{ margin: "0 auto 14px" }}>Simple, Transparent Pricing</H2>
-        <div style={{ color: T.greyDim, fontSize: "14px", fontWeight: 600, marginBottom: "18px" }}>One time 30 day pilot for 5 employees \u00B7 no long term contract</div>
+        <div style={{ color: T.greyDim, fontSize: "14px", fontWeight: 600, marginBottom: "18px" }}>One time 30 day pilot for 5 employees · no long term contract</div>
         <div style={{ marginBottom: "24px" }}><PriceBlock /></div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <PrimaryButton onClick={() => goToQualify("pricing")}>Discuss a 30-Day Pilot</PrimaryButton>
@@ -633,7 +633,7 @@ function QualificationForm() {
                   flex: 1, background: T.orange, color: "#0B1220", fontWeight: 800, fontSize: "16px",
                   border: "none", borderRadius: 12, padding: "15px", cursor: submitting ? "default" : "pointer",
                   opacity: submitting ? 0.7 : 1, fontFamily: T.font,
-                }}>{submitting ? "Opening booking\u2026" : "Book My Team Call"}</button>
+                }}>{submitting ? "Opening booking…" : "Book My Team Call"}</button>
               </div>
               {redirectError && (
                 <div style={{ ...errStyle, marginTop: "12px" }}>Something went wrong opening the booking page. Please try again.</div>
@@ -725,7 +725,7 @@ function Testimonials() {
       <div className="rail" role="group" aria-label="Client results" style={{ ["--cols"]: 2, maxWidth: 900, margin: "0 auto" }}>
         {PROOF.map((p, i) => (
           <div key={i} className="rail-card" style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-            <p style={{ color: T.white, fontSize: "16px", lineHeight: 1.55, margin: 0, fontWeight: 500 }}>{"\u201C" + p.quote + "\u201D"}</p>
+            <p style={{ color: T.white, fontSize: "16px", lineHeight: 1.55, margin: 0, fontWeight: 500 }}>{"“" + p.quote + "”"}</p>
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "auto" }}>
               <div style={{ width: 42, height: 42, borderRadius: "50%", background: p.color, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 700, fontSize: 15, flexShrink: 0 }}>{p.initials}</div>
               <div>
@@ -751,8 +751,8 @@ function WhoYouAreWorkingWith() {
         <div style={{ fontWeight: 800, fontSize: "22px", color: T.white, marginBottom: "3px", textAlign: "center" }}>Sam Kershner</div>
         <div style={{ color: T.greyDim, fontSize: "14px", marginBottom: "14px", textAlign: "center" }}>AI Systems Builder, Tel Aviv</div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", justifyContent: "center", marginBottom: "22px" }}>
-          <a href="https://www.linkedin.com/in/sam-kershner/" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(255,255,255,0.08)", color: "#CBD5E1", borderRadius: 8, padding: "8px 16px", fontSize: 13, fontWeight: 600, textDecoration: "none", border: "1px solid rgba(255,255,255,0.1)" }}>\uD83D\uDCBC LinkedIn</a>
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#22C55E", color: "#fff", borderRadius: 8, padding: "8px 16px", fontSize: 13, fontWeight: 600, textDecoration: "none" }}>\uD83D\uDCAC WhatsApp</a>
+          <a href="https://www.linkedin.com/in/sam-kershner/" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(255,255,255,0.08)", color: "#CBD5E1", borderRadius: 8, padding: "8px 16px", fontSize: 13, fontWeight: 600, textDecoration: "none", border: "1px solid rgba(255,255,255,0.1)" }}>💼 LinkedIn</a>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#22C55E", color: "#fff", borderRadius: 8, padding: "8px 16px", fontSize: 13, fontWeight: 600, textDecoration: "none" }}>💬 WhatsApp</a>
         </div>
         <div style={{ width: "100%", height: 1, background: T.border, marginBottom: "20px" }} />
         <h3 style={{ fontSize: "clamp(18px,3vw,22px)", fontWeight: 800, color: T.white, margin: "0 0 12px", lineHeight: 1.3, textAlign: "center" }}>I Build Job Specific AI Systems Around Your Real Work.</h3>
