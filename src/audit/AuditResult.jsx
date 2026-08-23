@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { RESULT_CONTENT, READINESS_LABELS, READINESS_COPY } from "./auditData";
 import { T, Card, Eyebrow, PrimaryButton, SecondaryButton } from "./ui";
 import { CTA_URL } from "../components/landing/constants";
@@ -248,6 +249,9 @@ export function FullResult({ answers, canonicalUrl, onRetake, onShare }) {
           </a>
           <p style={{ color: T.greyDim, fontSize: "13px", lineHeight: 1.6, margin: "14px 0 0" }}>
             Because every call is personally prepared, only a limited number are available each week.
+          </p>
+          <p style={{ color: T.greyDim, fontSize: "13px", lineHeight: 1.6, margin: "8px 0 0" }}>
+            Leading a team rather than exploring this on your own? See how <Link to="/teams" style={{ color: T.orange, fontWeight: 600 }}>AI training for teams</Link> works.
           </p>
         </Card>
       ))}

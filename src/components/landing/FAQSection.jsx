@@ -13,6 +13,9 @@ const faqs=[
   {q:"What happens after the session?",a:"You receive a full recording of the session, a written recap document with all your prompts and next steps, and 14 days of direct WhatsApp access to me. Got a prompt that's not working, or a new task to work on? Message me directly. Not a ticket system. Direct access."},
   {q:"What if I want more support after the 14 days?",a:"Just message me on WhatsApp. Most clients find that 14 days is more than enough, but if you need more time or a follow-up session, we can arrange that."},
   {q:"How do I book?",a:"Click any 'Book Your Free 20-Minute Call' button on this page. You'll land on a short booking form. Pick a time that works for you. I'll send a confirmation and a few questions about your role beforehand."},
+  {q:"What is one-to-one AI coaching?",a:"It is a live, personalised session where we take one real, recurring task from your job and build a working AI-powered process around it, rather than teaching AI concepts in the abstract or running a generic course."},
+  {q:"What's the difference between this and hiring an AI consultant?",a:"A consultant usually scopes and delivers a project for you over days or weeks. This is faster and more hands-on: you sit with me for one session and leave already knowing how to run the workflow yourself."},
+  {q:"Do you work with teams as well as individuals?",a:"Yes. Alongside 1-to-1 sessions, we also run a small pilot program for teams who want to test AI adoption together before rolling it out further."},
 ];
 
 export default function FAQSection() {
