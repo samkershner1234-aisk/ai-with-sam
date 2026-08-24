@@ -19,7 +19,7 @@ export default function Navbar({ variant = "home" }) {
 
   const isTeams = variant === "teams";
   const ctaHref = isTeams ? TEAM_BOOKING_URL : CTA_URL;
-  const ctaLabel = isTeams ? "Discuss a Team Pilot" : "Book a Free 20-Min Call";
+  const ctaLabel = isTeams ? "See If a Pilot Makes Sense" : "Book a Free 20-Min Call";
 
   const links = [
     { label: "For Individuals", to: "/" },
