@@ -170,11 +170,12 @@ const FULL_INCLUSIONS = [
 ];
 
 const HOW_STEPS = [
-  { n: "1", title: "Understand", body: "Identify the best employees, tasks and opportunities." },
-  { n: "2", title: "Implement", body: "Build one useful AI workflow around each person's actual work." },
-  { n: "3", title: "Apply", body: "Employees use it during the pilot, with support." },
-  { n: "4", title: "Measure", body: "Review what was used, what improved and what is worth expanding." },
-];
+  { n: "1", title: "Diagnose", body: "Identify repetitive or time-consuming work where AI could genuinely help each employee." },
+  { n: "2", title: "Build", body: "Create practical AI workflows around their real day-to-day work." },
+  { n: "3", title: "Implement", body: "Employees start using the workflows during their normal work with implementation support available." },
+  { n: "4", title: "Measure", body: "Review what was adopted, what worked and where meaningful time savings or efficiency improvements appeared." },
+  { n: "5", title: "Decide", body: "At the end of the 30 days, provide the company with a clear view of what worked and whether a wider rollout makes sense." },
+  ];
 
 const USE_CASES = [
   { title: "Marketing", body: "Research · briefs · campaign drafts · reporting" },
@@ -227,13 +228,16 @@ function Hero() {
         <h1 style={{ color: T.white, fontWeight: 900, fontSize: "clamp(38px,9vw,46px)", lineHeight: 1.1, letterSpacing: "-1px", margin: "0 0 16px" }}>
           Make AI Useful Across Your Team.
         </h1>
-        <p style={{ color: T.grey, fontSize: "clamp(18px,2.4vw,20px)", lineHeight: 1.5, margin: "0 auto 18px", maxWidth: 560 }}>
-          A 30-day pilot for 5 employees. We build practical AI workflows around their actual work, help them use them, and measure what works.
-        </p>
+        <p style={{ color: T.grey, fontSize: "clamp(18px,2.4vw,20px)", lineHeight: 1.5, margin: "0 auto 10px", maxWidth: 560 }}>
+            Turn AI from something your employees experiment with into something they actually use in their day-to-day work.
+          </p>
+          <p style={{ color: T.grey, fontSize: "clamp(18px,2.4vw,20px)", lineHeight: 1.5, margin: "0 auto 18px", maxWidth: 560 }}>
+            Start with a 30-day pilot for 5 employees.
+          </p>
         <div style={{ color: T.greyDim, fontWeight: 700, fontSize: "15px", marginBottom: "6px" }}>5 Employees · 30 Days · No Long-Term Commitment</div>
         <div style={{ marginBottom: "22px" }}><PriceBlock /></div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
-          <PrimaryButton onClick={() => goToQualify("hero")}>Discuss a 30-Day Pilot</PrimaryButton>
+          <PrimaryButton onClick={() => goToQualify("hero")}>See If a Pilot Makes Sense</PrimaryButton>
           <SecondaryLink onClick={() => scrollToId("how")}>See How the Pilot Works ↓</SecondaryLink>
         </div>
       </div>
@@ -282,7 +286,7 @@ function HowItWorks() {
     <Section id="how" bg={T.panel}>
       <Eyebrow>How It Works</Eyebrow>
       <H2>How the 30-Day Pilot Works</H2>
-      <Rail cols={4} label="How the 30 day pilot works">
+      <Rail cols={5} label="How the 30 day pilot works">
         {HOW_STEPS.map((s, i) => (
           <RailCard key={i}>
             <div style={{ width: 36, height: 36, borderRadius: 999, background: T.orange, color: "#0B1220", fontWeight: 900, fontSize: "17px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "12px" }}>{s.n}</div>
@@ -326,7 +330,7 @@ function PricingSection() {
         <div style={{ color: T.greyDim, fontSize: "14px", fontWeight: 600, marginBottom: "18px" }}>One time 30 day pilot for 5 employees · no long term contract</div>
         <div style={{ marginBottom: "24px" }}><PriceBlock /></div>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <PrimaryButton onClick={() => goToQualify("pricing")}>Discuss a 30-Day Pilot</PrimaryButton>
+          <PrimaryButton onClick={() => goToQualify("pricing")}>See If a Pilot Makes Sense</PrimaryButton>
         </div>
       </div>
       <div style={{ maxWidth: 640, margin: "32px auto 0" }}>
@@ -381,7 +385,7 @@ function FinalCTA() {
         <p style={{ color: T.grey, fontSize: "clamp(16px,2.2vw,18px)", lineHeight: 1.6, margin: "0 0 22px" }}>
           Start with a small 30-day pilot for 5 employees.
         </p>
-        <PrimaryButton onClick={() => goToQualify("final")}>Discuss a 30-Day Pilot</PrimaryButton>
+        <PrimaryButton onClick={() => goToQualify("final")}>See If a Pilot Makes Sense</PrimaryButton>
       </div>
     </Section>
   );
@@ -627,7 +631,7 @@ function StickyCTA() {
       <button type="button" onClick={() => goToQualify("sticky")} style={{
         width: "100%", background: T.orange, color: "#0B1220", fontWeight: 800, fontSize: "16px",
         border: "none", borderRadius: 12, padding: "14px", cursor: "pointer", fontFamily: T.font,
-      }}>Discuss a 30-Day Pilot</button>
+      }}>See If a Pilot Makes Sense</button>
     </div>
   );
 }
