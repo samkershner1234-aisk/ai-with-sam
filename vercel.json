@@ -1,14 +1,16 @@
 {
-    "redirects": [
-          { "source": "/AITime-WasteAudit", "destination": "/ai-time-waste-audit", "permanent": true },
-          { "source": "/ai-time-waste", "destination": "/ai-time-waste-audit", "permanent": true },
-          { "source": "/ai-audit", "destination": "/ai-time-waste-audit", "permanent": true }
-    ],
-    "rewrites": [
-          { "source": "/teams", "destination": "/teams/index.html" },
-          { "source": "/teams/", "destination": "/teams/index.html" },
-          { "source": "/ai-time-waste-audit", "destination": "/ai-time-waste-audit/index.html" },
-          { "source": "/ai-time-waste-audit/", "destination": "/ai-time-waste-audit/index.html" },
-          { "source": "/((?!api/).*)", "destination": "/index.html" }
-    ]
+  "redirects": [
+    { "source": "/AITime-WasteAudit", "destination": "/ai-time-waste-audit", "permanent": true },
+    { "source": "/ai-time-waste", "destination": "/ai-time-waste-audit", "permanent": true },
+    { "source": "/ai-audit", "destination": "/ai-time-waste-audit", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/teams", "destination": "/teams/index.html" },
+    { "source": "/teams/", "destination": "/teams/index.html" },
+    { "source": "/ai-time-waste-audit", "destination": "/ai-time-waste-audit/index.html" },
+    { "source": "/ai-time-waste-audit/", "destination": "/ai-time-waste-audit/index.html" },
+    { "source": "/privacy", "destination": "/privacy/index.html" },
+    { "source": "/privacy/", "destination": "/privacy/index.html" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
 }
