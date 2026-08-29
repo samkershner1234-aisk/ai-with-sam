@@ -1,6 +1,6 @@
 // Post-build step: creates lightweight static HTML snapshots for the public
-// marketing routes (/teams and /ai-time-waste-audit) so crawlers and other
-// tools that do not execute JavaScript see correct, unique titles, meta
+// marketing routes (/teams, /ai-time-waste-audit and /privacy) so crawlers and
+// other tools that do not execute JavaScript see correct, unique titles, meta
 // descriptions, canonical tags and real page content for each route.
 //
 // This does not change how the app works for real visitors. React still
@@ -41,6 +41,18 @@ const ROUTES = [
     content: [
       "<h1>Which Part of Your Job Should You Use AI For First?</h1>",
       "<p>Answer four quick questions and discover where AI may help you reduce unnecessary repetitive work. Free, and takes about 60 seconds.</p>"
+    ].join("")
+  },
+  {
+    urlPath: "/privacy",
+    dir: "privacy",
+    title: "Privacy Policy | AI With Sam",
+    description: "Privacy notice explaining how AI With Sam collects and uses limited professional contact information for business-to-business communications.",
+    content: [
+      "<h1>Privacy Notice</h1>",
+      "<p>AI For Every Role uses limited professional contact information, such as your name, job title, company and business email address, to contact relevant professionals about our services.</p>",
+      "<p>We only use this information for relevant business-to-business communications and do not sell your personal information.</p>",
+      "<p>You have the right to object to your information being used for direct marketing at any time. To opt out, reply to any email asking not to be contacted.</p>"
     ].join("")
   }
 ];
